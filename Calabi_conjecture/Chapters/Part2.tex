@@ -1,0 +1,229 @@
+% !TeX root = ../main.tex
+% 
+\lhead{\emph{Lecture 2}}
+\section{Lecture 2} % (fold)
+\label{sec:lecture_2}
+% 
+\subsection{Line Bundles} % (fold)
+\label{sub:line_bundles}
+% 
+% 
+In the real case, we find examples of smooth compact manifold by taking the locus of functions. But as we have seen, an interesting way to construct compact  complex submanifold is to take $\mathbb{C}P^n$ as the domain of said functions. But holomorphic functions on $\mathbb{C}^n$ are not necessarily holomorphic on $\mathbb{C}P^n$.
+% 
+\example{
+    Consider the functions coordinate functions $X^i$, from which we have homogeneous coordinates $ [X^i] \in \mathbb{C}P^n$ (i.e: $X^i \sim \lambda X^i$ by the usual relation). These functions are $NOT$ holomorphic on $\mathbb{C}P^n$. One must choose an appropriate atlas and have holomorphic transition functions which we introduce now.
+}
+
+\definition{
+    We define \textit{inhomogeneous coordinates} on chart $U_i \subset \mathbb{C}P^n$ by
+    \begin{equation}
+        Z^a_i = \frac{X^a}{X^i} \quad \mathrm{ on } \quad U_i = \{ X^i \neq 0 \} 
+    \end{equation}
+    We readily see that on $U_i \cap U_j$, 
+    \begin{equation}
+        Z^a_i =  \frac{Z^a_j}{Z^j_i}
+    \end{equation}
+    Therefore, the holomorphic transition functions are given by
+    \begin{align*}
+        \varphi : U_i \cap U_j &\rightarrow U_i \cap U_j\\
+        \varphi (Z^a_j) &\mapsto Z^a_i =  \frac{Z^a_j}{Z^j_i}.
+    \end{align*}
+    
+}
+
+Coming back to homogeneous coordinates, $X^i$ are \textbf{not} holomorphic maps from $\mathbb{C}P^n$ to $\mathbb{C}$ but they are holomorphic maps of another manifold called $\mathcal{O}(1)$. We first introduce some line bundles.
+
+\definition{
+    We define the holomorphic line bundle $\mathcal{O}(1)$ as the rank 1 vector bundle over $\mathbb{C}P^n$ such that on patch $U_i \cap U_J \subset \mathbb{C}P^n$ we have:
+    \begin{equation}
+        \mathcal{O}(1) = \frac{\sqcup_i U_i \times \mathbb{C}}{[(p,v^i) \sim (p, g_{ij}v^j)]}.
+    \end{equation}
+    The transition functions are given by $g_{ij} = \frac{X_j}{X_i}$, which a holomorphic matrix-valued function.
+    Here $X^i \in \mathrm{Hom}(\mathbb{C}P^n, \mathcal{O}(1))$, or in another words it is a  section of $\mathcal{O}(1)$. 
+    This bundle can be thought of as a line bundle $\mathbb{C}$ with inhomogeneous transition function over the disjoin union of charts $X^i = 0$.
+    Can also be thought of the vector space spanned by the differential 1-forms on $\mathbb{C}P^n$ (right?)
+    (this is abuse of notation actually, sheaves)
+}
+
+\definition{
+    Dually, the \textit{tautological line bundle} $\mathcal{O}(-1)$ (sometimes called \textit{universal line bundle}) is defined as the subset of $\mathbb{C}P^n \times \mathbb{C}^{n+1}$ consisting of $([X^0: \ldots ], v_0, \ldots, v_n)$, such that $\mathbf{v} = \lambda \mathbf{X}$. 
+    Meaning, that the fibre at point $\mathbf{X} \in \mathbb{C}P^n$ represents the line in $\mathbb{C}^{n+1}$. It is called tautological because it is the most obvious holomorphic vector bundle representing $\mathbb{C}P^n$ and its lines.
+}
+
+It turns out that are no global holomorphic sections of $\mathcal{O}(-1)$ ??
+
+\definition{
+    The $\mathcal{O}(k)$ line bundle by $\mathcal{O}(k) = \bigotimes^k \mathcal{O}(1)$, with transition function given by product of transition functions. 
+    We define similarly $\mathcal{O}(-k)$. Note that these are also line bundles as $\mathrm{dim}(A \otimes B) = \mathrm{dim}(A) \times \mathrm{dim}(B)$.
+}
+
+\fact{
+    Given $U,V$ finite dimensional vector spaces over a field $K$, we have
+    \begin{equation}
+        U^* \otimes V \cong \mathrm{Hom}(U,V),
+    \end{equation}
+    and tensor product is a left-adjoint functor of $\mathrm{Hom}$.
+}
+
+\remark{
+    Given a holomorphic section $S$ of $\mathcal{O}(1)$, then $S$ is necessarily a degree-$1$ function in $[\mathbf{X}]$.
+    Consider the bilinear paring between sections of $\mathcal{O}(1)$ and fibre coordinates $v \in \mathbb{C}^{n+1}$ from the tautological bundle $\mathcal{O}(-1)$.
+    \begin{align}
+        F_\mathbf{X} : &\mathcal{O}(1) \times \mathcal{O}(-1) \rightarrow \mathbb{C}^{n+1} \\
+        &(S, \mathbf{v})  \mapsto \langle S[X], \mathbf{v}\rangle
+    \end{align}
+    This function has homogeneous degree $1$ for the homogeneous fibre coordinate $\mathbf{v} \sim \lambda \mathbf{X}$ for $\lambda \in \mathbb{C} \setminus \{ 0 \} $.
+    Given $S$ and $\mathbf{v}$, $F$ defines a homogeneous degree-$1$ holomorphic function on $\mathbb{C}^{n+1}\setminus \{ 0 \} $. 
+    But by Hartog, it extends to \textbf{all} of $\mathbb{C}^{n+1}$ and its quotient is defined on all of $\mathbb{C}P^n$. \\
+    We note that $\frac{\partial F}{\partial X^i}$ are degree 0 holomorphic homogeneous function on a compact space, so they are constant.
+    Therefore $F$ is a degree $1$ holomorphic homogeneous \textbf{polynomial} to $\mathbb{C}^{n+1}$.
+}\label{holo_section1}
+
+So we have shown that sections of $\mathcal{O}(1)$ are spanned by homogeneous degree-$1$ polynomials on $\mathbb{C}^{n+1}$. But what about higher line bundles?
+
+\remark{
+    Let $k \geq 0$ and consider the section $S : \mathbb{C}P^n \rightarrow \mathcal{O}(k)$. 
+    Since the transition function of $\mathcal{O}(k)$ are a product of $\mathcal{O}(1)$ transition function, sections must have homogeneous degree-$k$, and $\mathcal{O}(k)$ is the line bundle of homogeneous degree-k holomorphic functions.
+    By analogy with \cref{holo_section1}, we construct a function
+    \begin{align*}
+        F_\mathbf{X} : &\mathcal{O}(k) \times \mathcal{O}(-k) \rightarrow \mathbb{C}^{n+1} \\
+        &(S, \mathbf{v})  \mapsto \prod_{i=1}^k \langle s_i[X], \mathbf{v}^i\rangle.
+    \end{align*}
+    But the maps $\frac{\partial^k F}{\partial (X^0)^{i_0} \ldots \partial (X^n)^{i_n}}$ with $\sum_n i_n = k$ are degree-$0$ homogeneous holomorphic functions on compact space $\mathbb{C}P^n$, so they are constant. 
+    Therefore by the same argument as before, sections of $\mathcal{O}(k)$ are spanned by homogeneous degree-$k$ polynomials on $\mathbb{C}P^n$.
+}
+
+It can be shown that these are the \textbf{only} sections of $\mathcal{O}(k)$, meaning that the space of sections is finite dimensional. This is completely \textbf{untrue} for smooth manifold. The space of sections of smooth line bundles over smooth manifold has infinite dimensions. (hard to prove, needs PDE theory).
+This highlights the importance of Hartogs phenomenon in holomorphic functions of several variables.
+
+Finally, we state without proof that the tangent bundle to $\mathbb{C}P^n$ is related to the `top' line bundle and forms the short exact sequence (see\citep{Hori}):
+\begin{equation}
+    0 \rightarrow \mathbb{C} \rightarrow \mathcal{O}(n+1) \rightarrow T \mathbb{C}P^n \rightarrow0.
+\end{equation}
+% subsection line_bundles (end)
+% 
+\subsection{Almost Complex Structures} % (fold)
+\label{sub:almost_complex_structures}
+How do we identify if an even dimensional real manifold is a complex manifold?
+\example{
+    We can turn $\mathbb{R}^2$ into $\mathbb{C}$ by appropriate definitions of $\sqrt{-1}$. This is governed by knowing \textit{how} $\sqrt{-1}$ acts on vectors of $\mathbb{R}^2$.
+}
+
+\definition{
+    An almost complex structure (a.c.s) on vector space $V$ is an endomorphism $J: V \rightarrow V$ such that $J^2 = -1$.
+    This implies that $V$ is even-dimensional.
+}
+\example{
+    In the case of $\mathbb{R}^2$, the almost complex structure \textit{rotates} everything by $90$ degrees.
+}
+\remark{
+    One can always find a basis of $V$ such that the almost complex structure is given by
+    \begin{equation}
+        \begin{pmatrix}
+            0& -I\\
+            I&0
+        \end{pmatrix}
+    \end{equation}
+}
+An almost complex manifold $(M,J)$ is a manifold with an a.c.s on every tangent space and varies smoothly. Not every even-dimensional manifold admits an a.c.s.
+
+\remark{
+    On a complex manifold $M$, one can trivially the a.c.s locally as
+    \begin{align*}
+    J(\partial_{x^i}) &= \partial_{y^i}\\
+    J(\partial_{y^i}) &= -\partial_{x^i}
+    \end{align*}
+    Using holomorphicity of transition function, we can globalise this result.
+}
+\remark{
+    Not all almost complex manifolds are complex manifold. (Newlander and Nirenberg theorem)
+}
+But the real question is, given a manifold, can I find a complex structure? (not almost, relates to integrability)
+% subsection almost_complex_structures (end)
+% 
+\subsection{Metrics on Complex manifolds} % (fold)
+\label{sub:metrics_on_complex_manifolds}
+Consider the complexified tangent bundle over even-dimensional manifold $T_{\mathbb{C}}M$, this decomposes into $T^{(1,0)}M \oplus T^{(0,1)}M$ as the $\pm i$ eigenspace of $J$.
+Likewise, this has duals $\Omega^{1,0}(M)$ and $\Omega^{0,1}(M)$, with the more general $\Omega^{p,q}(M)$.
+\remark{
+    There is a natural isomorphism $(T_{\mathbb{R}}M, J)$ to $(T^{1,0}M, i)$
+    via
+    \begin{equation}
+        v \mapsto \frac{v - iJv}{2}
+    \end{equation}
+    and similarly for the anti-holomorphic tangent bundle
+    \begin{equation}
+        v \mapsto \frac{v + iJv}{2}
+    \end{equation}
+    In general, we can decompose real $2n$-dimensional real components in holomorphic/anti-holomorphic components by identifying
+    \begin{equation}
+        \tensor{J}{^a_b} = i \tensor{\delta}{^\alpha_\beta} - i \tensor{\delta}{^{\overline{\alpha}}_{\overline{\beta}}}
+    \end{equation}
+}
+
+\example{
+    On $T^{1,0}\mathbb{C}$, the standard hermitian metric is 
+    \begin{equation}
+        g = dz \otimes d \overline{z} = g_{\mathbb{R}^2} - i dx \wedge dy
+    \end{equation}
+    So the real part is a Riemannian metric while the imaginary part is a $2$-form. Further we note:
+    \begin{equation}
+        \omega(X,Y) = g(JX,Y)
+    \end{equation}
+}
+\definition{
+    A compatible Riemannian (or \textbf{hermitian}) metric $g\in \bigotimes^2 T^*M$, is a metric such that, for $X,Y \in \mathrm{T}_\mathbb{C}M$ we have
+    \begin{align}
+        g(J(X), J(Y)) &= g(X,Y).
+    \end{align}
+    or equivalently
+    \begin{equation}
+        \omega(X,Y) = \frac{1}{2} \left( g(JX,Y) + g(Y,JX)\right)
+    \end{equation}
+}
+\definition{
+    Given a hermitian Riemannian metric $g$ on $M$, we define a compatible $2$-form as 
+    \begin{equation}
+        \omega(X,Y) = g(JX,Y)
+    \end{equation}
+    In fact upon the decomposition of $T_\mathbb{C}M$ into holomorphic and anti-holomorphic bundles, we see that $\omega \in \Omega^{(1,1)}(M)$.
+}\label{def:form}
+\example{
+    Back to our example above, we see that the standard hermitian metric $g$ on $\mathrm{T}^{1,0} \mathbb{C}$ is recovered by:
+    \begin{equation}
+        g = g_{\mathbb{R}^2} - i \omega.
+    \end{equation}
+}
+
+The upshot is, given a Riemannian metric on a complex manifold that is compatible with an almost complex structure, then there is a \textbf{natural} hermitian metric on $(TM, J)$. 
+% There are potential mistakes up to factors of $2^n$ in this notes.
+
+\proposition{
+    All complex manifolds are orientable with the orientation $\{ \partial_{x^1}, \partial_{y^1}, \ldots \} $.   
+    This is proved considering an holomorphic map $\phi: M \rightarrow M$ and show that orientation lie in same equivalence class.
+}
+\definition{
+    Given a compatible Riemannian metric $g$, there is a \textit{volume form}
+    \begin{equation}
+        \mathrm{vol}_g = \sqrt{\det(g)} dx^1 \wedge dy^1 \wedge dx^2 \wedge dy^2\ldots
+    \end{equation}
+We can always go to Darboux chart around point $p$ such that $g, \omega$ are standard (done by diagonalising g). So locally,
+\begin{equation}
+    w = \sum_i dx^i \wedge dy^i
+\end{equation} 
+By antisymmetry, the volume form of a complex manifold is
+\begin{equation}
+    \mathrm{vol}_g = \frac{\omega^n}{n!}.
+\end{equation}
+}
+
+Given a complex submanifold $S \subset M$ of dimension k, the induced $2$-form is simply the pullback
+\begin{equation}
+    \omega_S = \iota^* \omega.
+\end{equation}
+So the volume form of S is given by $\mathrm{vol}_{g_S} = \frac{\omega_S^k}{k!}$, meaning that the volume form of a complex submanifold is given by the restriction of a globally defined bulk volume form. (this is definitely true for symplectic manifold but not sure when $\omega$ not closed)
+expand on this a bit
+% subsection metrics_on_complex_manifolds (end)
+% section lecture_2 (end)
+% -------------------------------------------------------------------------------------------
+% -------------------------------------------------------------------------------------------

@@ -1,0 +1,246 @@
+% !TeX root = ../main.tex
+% 
+\lhead{\emph{Lecture 3}}
+\section{Lecture 3} % (fold)
+\label{sec:lecture_3}
+Let's explore how to construct Kähler metrics on compact spaces. In the following lecture, we are being a bit loose with $J \leftrightarrow i$. When using the complex structure, we think of real components while using the $i$ prescription is thinking in terms of complex components.
+\subsection{Kähler metrics} % (fold)
+\label{sub:kähler_metrics}
+% 
+\example{
+    Consider $\mathbb{C}^n$, as an even-dimensional real manifold with complex structure $i$. The usual flat euclidean metric can be written in terms of potential 
+    \begin{align}
+        g &= \partial \overline{\partial} |\mathbf{z}|^2 \\
+        &=\sum dz^i \vee d \overline{z}^i
+    \end{align}
+    By taking quotient with lattice $\Lambda$, we induce a metric on compact complex tori $\faktor{\mathbb{C}^m}{\Lambda}$.
+}
+
+But in general, how do we find Riemannian metrics on $\mathbb{C}^n$? Actually how do we do in $\mathbb{R}^n$?
+A metric on $\mathbb{R}^n$ is positive definite $(0,2)$-tensor, so it can be locally given by taking the Hessian of a convex function at point $p$.
+
+\example{
+    Given $\phi: \mathbb{C}^n \rightarrow \mathbb{R}$ a convex function, we can construct a Hermitian metric on $\mathbb{C}^n$ similarly,
+    \begin{equation}
+        g_{i \overline{j}} = \frac{\partial^2 \phi}{\partial z^i  \partial \overline{z}^j}.
+    \end{equation} 
+        
+    Such smooth metrics are called \textit{plurisubharmonic} ( i.e: $\mathrm{tr}(g_{i \overline{j}}) \propto \Delta \phi >0$ is subharmonic). 
+    However, not all hermitian metrics on $\mathbb{C}^n$ of this form as these are highly over-determined constraints.   
+}
+
+\definition{
+    Given a hermitian metric $g$ of the Kähler form, the induced $2$-form as defined in \cref{def:form} is simply $\omega = \Im(g)$. 
+}
+\proposition{
+    The induced $2$-form $\omega$ is $d$-closed if and only if it is $\partial \overline{\partial}$-closed a a $(1,1)$-form.
+ % = h_{i \overline{j}}dz^i \wedge d \overline{z}^j$  use formula above to get \w
+    \begin{proof}
+        This is easily seen under the decomposition $\mathrm{T}_\mathbb{C}M \cong T^{(1,0)}M \oplus T^{(0,1)}M$, giving
+        \begin{equation}
+            d = \partial + \overline{\partial}. 
+        \end{equation}
+        But using $d^2 = 0$ and $\partial^2 = \overline{\partial}^2 = 0$, we find
+        \begin{equation}
+            \partial \overline{\partial} + \overline{\partial} \partial = 0,
+        \end{equation}
+        thus proving our claim.
+    \end{proof}
+}
+% 
+There is an equivalent Poincaré lemma for holomorphic manifold in the following.    
+\theorem[The $\partial \overline{\partial}$-lemma]{
+    For any $d$-closed real $(1,1)$-form $\omega$ on an open ball $B \subset \mathbb{C}^n$, there exists a function $\phi: B \rightarrow \mathbb{R}$ such that
+    \begin{equation}
+        \omega = i \partial \overline{ \partial} \phi.
+    \end{equation}
+}
+% 
+\definition{
+    A Riemannian manifold $(M,g)$ is \textit{Kähler} if g is a metric compatible with complex structure $J$ and the induced $(1,1)$-form $\omega$ is $d$-closed.
+}
+
+We sometimes interchange the names $\omega$ and $g$ as the Kähler metric in the literature, but they are related by the complex structure so it doesn't matter.
+\remark{
+    Not every complex manifold admits a Kähler metric! As a counterexample, the Hopf surface!
+}
+
+We recall that in Riemannian geometry manifold are locally flat, that is there exists a local coordinates chart such that the metric takes the form $g \sim g_{\mathbb{R}^n} + O(g'')$. Can we have a similar setup in complex geometry?
+
+\proposition{
+    A complex manifold $(M,g)$, with compatible complex structure $J$ admits a locally flat metric $g$ if $M$ is Kähler.
+    % For Complex manifold, with complex structure, if we can find a chart on which the metric is flat is equivalent to finding holomorphic coordinates z such that $g,h,\omega$ euclidean up to 2nd order.
+}\label{prop:local_kahler}
+\begin{proof}
+    We follow \citep{Bouchard2007} here.
+    If $(M,g)$ is Kähler, then $(\partial + \overline{\partial}) \omega = 0$, but it is easy to show that in terms of holomorphic/anti-holomorphic components,
+    \begin{equation}
+        \omega_{a b} = i g_{\alpha \overline{\beta}} - i g_{\overline{\alpha} \beta}.
+    \end{equation}
+    but the holomorphic/anti-holomorphic derivative acts trivially on the second and first terms respectively, so we have
+    \begin{align}
+        \partial_{[\mu} g_{\alpha] \overline{\beta}} &= 0\\
+        \overline{\partial}_{[\overline{\mu}} g_{\overline{\alpha}] \beta} &= 0
+    \end{align}
+    It turns out this is sufficient (and necessary but not proved here), to find a local chart where g is flat.
+    % Consider a convex function $\phi: \mathbb{C}^n \rightarrow \mathbb{R}$, then as a real manifold there exists a chart $\tilde{z}$ around $p$ such that $\omega = i \partial \overline{ \partial} |\mathbf{z}|^2 + O(z)$.\\
+    % Let $z^i = \tilde{z}^i + b^{i}_{jk} \tilde{z}^j \tilde{z}^k$, not necessarily invertible but locally is fine, and actually biholomorphic.
+    % Choose b appropriately such that first order term is cancelled. turns out this calculation requires the Kähler condition. $\rightarrow $ exercise!
+\end{proof}
+% --------------------------------------------------------------------------------------------
+% subsection kähler_metrics (end)
+\subsection{Cohomology} % (fold)
+\label{sub:cohomology}
+For compact manifold, we recall the de Rham cohomology groups $\mathrm{H}_{\mathrm{dR}}^k(M) = \faktor{\mathrm{ker}(d)}{\mathrm{im}(d)}$ which are finite-dimensional with \textit{betti numbers}
+\begin{equation}
+    b^k(M) = \mathrm{dim}_\mathbb{R}(\mathrm{H}_{\mathrm{dR}}^k(M))
+\end{equation}
+Likewise, the Dolbeault cohomology groups $\mathcal{H}^{p,q}(M)$ for complex manifold defined using $\partial$ and $\overline{\partial}$, with associated hodge numbers:
+\begin{equation}
+    h^{p,q} = \mathrm{dim}_\mathbb{C} \mathcal{H}^{p,q}(M)
+\end{equation}
+We can use Hodge theory and harmonic analysis to prove the following theorem. \citep{Maddock2009}
+% 
+\theorem{
+    If $(M,g)$ is a compact Kähler manifold, then the Dolbeault cohomology and de Rham cohomology have the isomorphism:
+    \begin{equation}
+        \mathrm{H}^k(M) \cong \bigoplus_{p+q = k} \mathrm{H}^{p,q}(M)
+    \end{equation}
+}\label{thm:coho_equiv}
+% 
+% There is a global $\partial \overline{\partial}$-lemma. If $\omega$ is a d-closed $(1,1)$-form then it is d-exact iff it is $\partial \overline{\partial}$-exact.
+% Moreover if $\omega$ is relan and d-exact, then $\omega = i \partial \overline{\partial} \phi$ for real $\phi$.
+\remark{
+    If $\omega$ Kähler form on a compact Kähler manifold, then its de Rham class $[\omega]$
+    cannot be trivial. THis is because the volume form $\omega^n$ would otherwise integrate to $0$ on the boundary of the compact manifold.
+    % Observe that it is never $[0]$ on compact manifold, because the of the volume form would give you a $0$ volume by integration on compact manifold.
+}\label{rem:non_zero_volume}
+% 
+\example{ Let's consider some examples of Kähler manifold: 
+    \begin{itemize}
+        \item submanifold of Kähler manifold are Kähler by pulling back the Kähler metric.
+        \item complex torus with euclidean metric.  
+        \item $\mathbb{C}P^n$ has a nice Kähler metric, called the Fubini-Study metric. 
+        This is found by using the metric on $\faktor{S^{2n+1}}{S^1}$ which is isomorphic to $\mathbb{C}P^n$.\\
+        On the chart $X^0 \neq 0$, we will show that the FS metric is given by:
+        \begin{equation}
+            \omega_{FS} = i \partial \overline{\partial} \ln(1 + \sum_{i=1}^n |z^i|^2).
+        \end{equation}
+        Implicitly, we have normalised $X^0 \rightarrow 1$.
+        \item Any smooth projective variety is Kähler. 
+    \end{itemize}
+}
+% subsection cohomology (end)
+% -----------------------------------------------------------------------------------------
+\subsection{Chern connection and class} % (fold)
+\label{sub:chern}
+A methodology to derive metrics for Kähler manifold is to take line bundles and compute the curvature of the connections.
+\definition{
+    Let $(E,h)$ be a hermitian holomorphic vector bundle over $M$ (not necessarily flat). 
+    There exists a unique connection $\nabla : \Omega^{0,0}(M,E) \rightarrow \Omega^{0,1}(M,E) $, called the \textit{Chern connection}, that is compatible with the metric on the bundle (metric preserving) and compatible with product structure,
+    \begin{align}
+        d \langle s,t \rangle &= \langle \nabla s,t \rangle + \langle s, \nabla t \rangle\\
+        \nabla^{0,1} &= \overline{\partial} %\pi_{0,1} \nabla
+    \end{align}
+    for sections $s,t \in \Gamma(E)$. 
+    The second equation defines compatibility with the product structure, because given a holomorphic local trivialisation of the bundle, the connection acts on sections to given an $E$-valued $(0,1)$-form.
+% 
+    Locally, the takes the form
+    \begin{equation}
+        \nabla = d + A,
+    \end{equation}
+    for $A \in \Omega^{1,0}(M,E)$ an $E$-valued \textit{connection form}.
+}\label{def:chern_connection}
+
+\remark{
+    Locally, we can express $A$ using the following argument. 
+    Consider a holomorphic frame $\{ e_i, \ldots, e_n \} $ of $E$, this defines a metric on $E$ as $h_{ij} = \langle e_i, e_j \rangle$.
+    \begin{align*}
+        d h_{ij} &= \partial h_{ij} + \overline{\partial} h_{ij}\\
+        &= \langle A_i^k e_k,e_j \rangle + \langle e_i, \overline{A}_j^k e_k \rangle
+    \end{align*}
+    Identifying the holomorphic $(1,0)$-form part, we have
+    \begin{equation}
+        A = h^{-1} \partial h
+    \end{equation}
+}\label{rem:connection_local}
+% 
+\definition{
+    Given connection form $A \in \Omega^{1,0}(M,E)$, we define the \textit{curvature $2$-form}
+    $\Theta \in \Omega^{1,1}(M,E)$ as 
+    \begin{equation}
+        \Theta = dA + A \wedge A,
+    \end{equation}
+    which reduces to $\Theta = \overline{\partial} A$ here.
+    All of these are local 2-forms but it turns out that they agree on overlap and therefore are globally defined. 
+}\label{def:curvature_form}
+
+\remark{
+    Now if we consider a line bundle, the metric on the line is just a scalar and the curvature $(1,1)$-form has the simple expression
+    \begin{equation}
+        \Theta = \overline{\partial} \partial \ln h \label{curvature_line}
+    \end{equation} 
+    If we change metric on the line $h \rightarrow h e^{-f}$, then curvature changes by $\partial \overline{\partial} f$.
+    In other words, $\frac{i}{2 \pi} \Theta$ is globally \textit{real} $(1,1)$-form that is d-closed and with de Rham cohomology class independent of the metric on the line bundle!
+    This real class is called the first Chern class $c_1(L)$ of the line bundle.
+}\label{rem:curvature_line_bundle}
+
+\definition{
+    More generally, given $E \rightarrow M$ a holomorphic vector bundle over $M$ with curvature $(1,1)$-form $\Theta$. The \textbf{Total Chern class} $c(E)$ of $E$ is 
+    \begin{equation}
+        c(E) = \det\left(1 + \frac{i}{2 \pi}\Theta\right)
+    \end{equation}
+    Since $\Theta$ is a $2$-form, the total Chern class is a direct sum of even degree forms $c_{k}(E) \in H_\mathrm{dR}^{2k}(M)$. By expanding, we recover the first Chern class
+    \begin{equation}
+        c_1(E) = \frac{i}{2 \pi} \mathrm{Tr}(\Theta)
+    \end{equation}
+}\label{def:total_chern_class}
+% 
+\remark{
+    Since $\det(E)$ is the top exterior power of E, it is a line bundle. So for line bundle $E \rightarrow M$, $c_1(E) = c_1(\det(E))$. 
+}\label{rem:det_line_bundle}
+% 
+We now have the background to derive the Fubini-Study metric.
+\example{
+    Consider the tautological line bundle $\mathcal{O}(-1) \subset \mathbb{C}P^n \times \mathbb{C}^{n+1}$ with the flat metric $h$ on the fibres. That is, for $\mathbf{v} \in \mathbb{C}^{n+1}$
+    \begin{equation}
+        \Vert\mathbf{v}\Vert^2 = \sum_{i=0}^{n}|v^i|^2
+    \end{equation}
+    Then using the flat metric, we construct the associated curvature $2$-form $\Theta$ from eq. \eqref{curvature_line}, which in a chart $X^0 \neq 0$ is as before
+    \begin{align}
+        \Theta &= \overline{\partial} \partial\ln(1 + \sum_{i=1}^n |z^i|^2)\\
+        &= -i \omega_{FS}.
+    \end{align}
+    Note that given the curvature for $\mathcal{O}(-1)$, we extrapolate the curvature of $\mathcal{O}(1)$ by the simple fact that the dual metric of a line bundle is $\frac{1}{h}$.
+    Inverse metric will lead simply to \textit{negative} the curvature form, giving
+    \begin{equation}
+        c_1(\mathcal{O}(1)) = \frac{\omega_{FS}}{2\pi}
+    \end{equation}
+}\label{ex:fubini}
+
+\definition{
+    A holomorphic line bundle $(E,h)$ is said to be positively curved is $i \Theta$ is of Kähler form.   
+}
+
+\theorem[Kodaira embedding theorem]{
+    A compact complex manifold $M$ is projective if and only if it admits a positively curved holomorphic line bundle (L,h)
+}
+
+\proposition[Calabi volume conjecture]{
+    Given a Kähler class $[\omega]$ and $(n,n)$-positive form $\eta$, there exists a unique Kähler metric $\omega'$ in $[\omega]$ such that $\omega'^n = \eta$.   
+}
+
+In other words, \textbf{every} metric in $[\omega]$, there is a unique function $\phi$ such that
+\begin{equation}
+    \omega_\phi = \omega + i \partial \overline{\partial} \phi
+\end{equation}
+where $\omega_\phi^n = \eta$. Find that $\phi \sim \phi' + cte$. This requires PDE theory.
+
+Locally, this means the determinant of $\omega_\phi$ is given. Such equations are called complex Monge-Ampère equations in which just given the Hessian of a function.
+This conjecture was proved by Yau in the $80s$ and by now more general results about PDEs are known.
+
+% subsection metrics (end)
+% section lecture_3 (end)
+% ------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------

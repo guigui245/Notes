@@ -1,0 +1,19 @@
+# Compiled source #
+###################
+*.aux
+*.bbl
+*.blg
+# required file
+# *.cls
+# 
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.out
+*.synctex.gz
+*.toc
+# required file
+# *.sty
+output/
