@@ -1,0 +1,231 @@
+% !TeX root = ../main.tex
+% 
+\lhead{\emph{Lecture 4}}
+\section{Lecture 4} % (fold)
+\label{sec:lecture_4}
+talk abt other calabi conjectures, no proofs for that.
+last time we defined kahler mfd as compact complex with compatible riemanian metric, closed $1,1$ form
+or holomorphic normal coordinates around every points. not every complex mfd have kahler metric
+More general, if have holomorphic line bundle, we can define kahler metric, using chern connection and chern class. closed globally from $\Theta$. defines a well-defined cohomology class 
+\question{given a positive top form, is it a volume? 1st calabi conjecture. Gives pde}
+
+\definition{
+    Cananical bundle of $\mathbb{C}P^n$. if M complex manifold, then holomorphic kine bundle $\Omega^{n,0}$ is canonical $K_M$ the top exterior forms is the determinant.
+    Its dual is called the anti-canonical bundle.
+}
+\remark{
+if $dim_\mathbb{C}(M) = 1$ these are riemann surfaces, they are all projective and $K_M$ is the cotangent bundle.
+    
+}
+Since we hace explicit formula for fubini-study form
+\begin{equation}
+    \omega_{FS} = i \partial \overline{\partial} \ln(1 + \ldots)
+\end{equation}
+
+compute ites first chern form
+\begin{equation}
+    c_1(K_S, \omega_{FS}) = \frac{i}{2 \pi} \partial \overline{\partial} \ln \det(\omega_{FS})
+\end{equation}
+find $c_1(K_S) = -(n+1)\omega_{FS}$ for $\mathbb{C}P^n$
+
+\question{if the first chern class is as above, can we conclude that the mfd is $\mathbb{C}P^n?$ open question
+}
+
+canonical bundle of hypersurface: given $F$ a degree d poly, then $\mathrm{ker}(F)$ definces $S =\in \mathbb{C}P^n$ and restrict metric to
+\begin{equation}
+    \omega_M= i^*\omega_{FS}
+\end{equation}
+hard calculation is hard but
+\begin{equation}
+    c_1(K_S) = (d-n-1)w_{FS} + i \partial \overline{\partial} \psi
+\end{equation}
+look at bando-futaki invations on hypersurfaces by liu.
+Can be proved by adjounction formulat
+
+now recall $c_1(S) = -c_1(K_S) = (n+1-d)\omega_FS - i \partial \overline{\partial} \psi$
+let $h = det(\omega_{FS})e^{2 \pi \psi}$ a new metric on $K_S^*$ then
+\begin{equation}
+    c_1(K_S^*,h) = c_1(K_S) - i \partial \overline{\partial} \psi
+\end{equation}
+
+sp the anti canonical line bundle is a positive line budle for $d < n+1$ and negative for less. For $d = n+1$ then $c_1(S) = [0]$. special name Calabi yau manifold
+
+For example the fermat quintic
+\begin{equation}
+    \sum_{i=0}^5 (X^i)^5 = 0
+\end{equation}
+in $\mathbb{C}P^4$ has $c_1 = [0]$ this is a calabi yau $3$-manifold.
+\subsection{connection on kahler mfd} % (fold)
+\label{sub:connection_on_kahler_mfd}
+Let (M,h) a complex manifold with hermitian metric h; it induces a compatible Riemannian metric.
+there are 2 connections on $T^{0,1}M$, the levi-civita of g and the chern connectiuon of $h$.
+\proposition{
+    If M is kahler, these 2 coincide!
+}
+\begin{proof}
+    Choose holomorphic normal coordinates around $p$. all metrics are standard up to $1$st order.
+    Therefore christofell symbols for both metrics are 0 at this point.
+    The converse is true but this shortcut does not work.
+    If they coincide on one patch, then by holomorphic can extend.
+\end{proof}
+can link algebraic goemetry and riemann geometry in the case of kahler.
+
+As a consequence, the curvature tensor of the kahler metric has the same symmetry as riemann connection.
+
+\definition{
+    Riemannian tensor
+    \begin{equation}
+        R(X,Y)Z = \Theta^i_{j}Z^j (X,Y) ?
+    \end{equation}
+}
+\definition{
+    Ricci tensor
+    \begin{equation}
+        Ric(Y,Z) = \mathrm{tr}\left(X \rightarrow R(X,Y)Z\right)
+    \end{equation}
+    so $Ric_{kl} = \Theta^i_j(\partial_i, \partial_l)$
+}
+so in holomorphic coordinates
+qe have
+\begin{equation}
+    \Theta^i_j = \overline{\partial} \partial \overline{h}_{ij} = \overline{\partial}\partial 
+    \frac{\partial^2 \phi}{\partial \overline{z}^i \partial z^j}
+\end{equation}
+
+so in these coordinates
+\begin{equation}
+    Ric_{kl} = \sum \frac{\partial^4 \phi}{\partial \partial \partial \partial}
+\end{equation}
+hence
+\begin{equation}
+    Ric_{kl}dz^k \wedge d \overline{z}^l = \mathrm{tr}(\Theta)(\partial_{\overline{l}}, \partial_k)
+\end{equation}
+the normalised ricci form is thus $C_1(M)$.
+% subsection connection_on_kahler_mfd (end)
+\subsection{another calabi conjecture} % (fold)
+\label{sub:another_calabi_conjecture}
+Given a real $d$-closed $1,1$-form $\eta$ such that $[\eta] = c_1(M)$ and kahler class $[\Omega]$, ther exists a unique kahler metric
+\begin{equation}
+    \omega_\phi = \omega + i \iota \partial \overline{\partial} \phi
+\end{equation}
+such that $Ric(\omega_\phi) = \eta$.
+Solve by Yau.
+When $c_1(M) = [0]$, there exists a ricci flat metric. so there is a ricci flat metric on the fermat quintic $Q_5$.
+But if the metric is flat then one can prove the manifold is isomorphic to a torus!
+
+However, one can show $Q_5$ is simply connected using morse theory. therefore it cannot be a torus! so it is ricci flat but with non-flat metric. first interesting example of a calabi-yau manifold.
+
+Moreover, if $c_1(M) >0$ then it has a kahler form. Then can choose $\eta$ to be a positive form. In other words, calabi conjecture implies there is a positive ricci metric, the ricci curvature of such metric is positive.
+
+Recall, if ricci curvature is positive of compact manifold, by Bonnet-Myers theorem, the fundamental group of M is finite.
+More details: bonnet myers: if ricci curvature is bounded below, then diameter is bounded above, then manifold is compact.
+So if ricci curvature bounded below, then pullback to universal cover is also compact so fundamental group is finite.
+but can check using algebraic geometry that $c_1(M)$ to look at topology. link here
+Such manifold are called fano manifolds (when simply connected?)
+% subsection another_calabi_conjecture (end)
+\subsection{reduction to simpler pde} % (fold)
+\label{sub:reduction_to_simpler_pde}
+a priori this is a 4th order pde.
+but we note
+\begin{equation}
+    \eta - Ric(\omega) = i \partial \overline{\partial} f
+\end{equation}
+but we want $Ric(\omega_\phi) = Ric(\omega) + i \partial \overline{\partial} f$.
+Hence
+\begin{equation}
+    i \partial \overline{\partial} \ln(\frac{\omega^n}{\omega^n_\phi}) = i \partial \overline{\partial} f
+\end{equation}
+hence difference of these two is a cte.
+therefore
+\begin{equation}
+    \omega_\phi^n = e^{\tilde{f} }\omega^n
+\end{equation}
+where 
+\begin{equation}
+    \int \omega^n (e^{\tilde{f}}-1) = 0
+\end{equation}
+this equation is the monge ampere equation encountred in the other calabi conjecture.
+% subsection reduction_to_simpler_pde (end)
+\subsection{Kahler-einstein metrics} % (fold)
+\label{sub:kahler_einstein_metrics}
+
+Form gr,
+\begin{equation}
+    Ric(g) = \lambda g + \rho
+\end{equation}
+where $\rho$ has the matter energy density. $\lambda$ is related to cosmological constant.
+In vaccum, einstein metrics $Ric(g) = \lambda g$
+
+A KE metric $\omega$ is one that satisfies $Ric(\omega) = \lambda \omega$, so 
+$c_1(M)$ has sign of $\lambda$.
+
+\conjecture{
+    if $C_1(M)$ has a sign and $|\lambda| =1$ or 0, then there is a unique KE metric.
+}
+
+This is proved by Yau for $c_1 <0$ but it is \textbf{False} for $c_1 >0$ in general,(the fano manifolds).
+(btw all orientable surfaces have a complex structure)
+A priori this is also a 4th order pde. but can be reduced also.
+
+let $|\lambda| = 1$
+\begin{equation}
+    \lambda \omega - Ric(\omega) = i \partial \overline{\partial} f
+\end{equation}
+hence go to $\omega_\phi$
+thus
+\begin{equation}
+    i \partial \overline{\partial} \ln(\frac{\omega^n}{\omega^n_\phi}) = i \partial \overline{\partial} (\lambda \phi + f)
+\end{equation}
+normalise
+$\omega_\phi^n = e^{-f - \lambda \phi} \omega^n $, similar to previous eqution, but behaves very differenlty
+
+If $\lambda = -1$, uniqueness is easy.
+Spose $\omega, \omega_\phi$ are 2 KE metrics, then $f =0$ hence
+$\omega_f^n = e^\phi \omega^n$, at maximum of $\phi$, we have $\omega_\phi \leq \omega^n$. Hence $\phi \leq 0$ likewise for positive, hence $\phi = 0$
+% subsection kahler_einstein_metrics (end)
+\subsection{constant scalar curvature} % (fold)
+\label{sub:constant_scalar_curvature}
+The point of KE metrics is algebraic geometry.
+If there is a KE metric, then there areinequalities between chern classes.
+If $c_1<0$, there are inequalities.
+One can construct moduli spaces of manifold that mantain KE metric in an analytical manner. ??dafuq
+If $[\omega]$ no a multiple of $c_1(M)$, can we find a metric in that class?
+Such classes can be given by $c_1(L)$ for some line L.
+Could parametrics pairs of line bundles $(M,L)$ suing classes.
+
+cscK metric
+Scalar curvature
+\begin{equation}
+    Ric_{ij} g^{ij} =? \frac{n \omega^{n-1}c_1(\omega)}{\omega^n}
+\end{equation}
+exercise
+\conjecture{
+    Existence and uniqueness of cscK metrics? Question still open in general
+}
+
+KE metrics are cscK metrics.
+
+parametrising triples with vector bundles $(M,L,E)$, get Kahler-yang-mills equations.
+
+\begin{proof}
+    sketch of calabi yau conjecture.
+    Method of continuity, family of pde
+    \begin{equation}
+        \omega^n_{\phi_t} = e^{tf}\omega^n
+    \end{equation}
+    at $t=0$, the obvious somlution.
+    Want to prove that the set of $t \in [0,1]$ solving the equation is open and closd.
+    For openness, one uses infinite finite-dimensional implicit function theorem, to reduce to the solvability of an linear elliptic pde. (laplace like equation)\\
+    to prove closedness, suppose $t_n \rightarrow t_0$ $t_n$ a colleciton of times that are solutions.
+    need to show that 
+    \begin{equation}
+        \norm{\phi}_{C^{2,\alpha}} \leq C
+    \end{equation}
+    for all $t_n< t_0$. $\alpha$ is from the ``heldard norm?''
+    using the Arzela-ascoli theorem, a subsequence in $C^{2,\beta}$ $\beta < \alpha$ to a solution. Smoothness follows from linear elliptic pde.
+    The $C^0$ estimate is the hardest part and is the one that fials for $c_1 >0$ KE case.
+\end{proof}
+
+
+% subsection constant_scalar_curvature (end)
+% section lecture_4 (end)
