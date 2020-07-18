@@ -1,5 +1,6 @@
-% DO NOT put a magic command here as it messes with output directory
-% build from chapters or main
+% DO NOT put a magic command here as it messes with output directory when trying the custom build code
+% !TeX root = ../main.tex
+
 
 % To update completions and keymaps goto /home/guillaume/.config/sublime-text-3/Packages/LaTeXTools etc...
 
@@ -152,7 +153,7 @@
 % -----------------------------------------COMMANDS-----------------------------------------
 
 % \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
-\newcommand\sslashed[1]{{\mathllap{\slashed{#1}}}}
+% \newcommand\sslashed[1]{{\mathllap{\slashed{#1}}}} replaced by \not \psi .... much better 
 \renewcommand\CancelColor{\color{red}}
 
 \def\mathcolor#1#{\@mathcolor{#1}}
@@ -169,24 +170,25 @@
 % Theorems
 \theoremstyle{definition}
 \newtheorem*{aim}{Aim}
+\newtheorem*{assumption}{Assumption}
 \newtheorem*{axiom}{Axiom}
 \newtheorem*{claim}{Claim}
-\newtheorem*{cor}{Corollary}
+\newtheorem{corollary}{Corollary}[subsection]
 \newtheorem*{conjecture}{Conjecture}
-\newtheorem{definition}{Definition}[section]
-\newtheorem*{eg}{Example}
+\newtheorem{definition}{Definition}[subsection]
+\newtheorem{example}{Example}[subsection]
 \newtheorem*{ex}{Exercise}
 \newtheorem*{fact}{Fact}
 \newtheorem*{law}{Law}
-\newtheorem*{lemma}{Lemma}
+\newtheorem{lemma}{Lemma}[subsection]
 \newtheorem*{notation}{Notation}
-\newtheorem{proposition}{Proposition}[section]
+\newtheorem{note}{Note}
+\newtheorem{proposition}{Proposition}[subsection]
 \newtheorem*{question}{Question}
 \newtheorem*{rrule}{Rule}
-\newtheorem*{thm}{Theorem}
-\newtheorem*{assumption}{Assumption}
+\newtheorem{remark}{Remark}[subsection]
+\newtheorem{theorem}{Theorem}[subsection]
 
-\newtheorem*{remark}{Remark}
 \newtheorem*{warning}{Warning}
 \newtheorem*{exercise}{Exercise}
 

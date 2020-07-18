@@ -9,7 +9,7 @@
 \definition{
     A \textbf{Poisson Algebra} is a triple $(A, \cdot, \{ , \})$ such that
     \begin{enumerate}
-        \item $(A, \cdot)$ is a commuttative, associative and unital $\mathbbm{R}$-algebra
+        \item $(A, \cdot)$ is a commuttative, associative and unital $\mathbbm{R}$-algebra (or $\mathbb{C}$ algebra maybe?)
         \item $(A, \{ , \})$ is a Lie $\mathbbm{R}$-algebra, which means that the bracket follows the Jacobi identity:
         \begin{equation}
             \{ \{ a, b \},c \} + \{ \{ b,c \},a \} + \{ \{ c,a \},b \} = 0 
@@ -85,7 +85,7 @@
     \begin{equation}
         \{ f,g \} \mapsto  X_{\{ f,g \} } = [X_f,X_g]
     \end{equation}
-
+% 
 \end{tcolorbox}
 % 
 \definition{
@@ -105,7 +105,7 @@
     \begin{equation}
         \llbracket \Pi, \Pi \rrbracket = 0.
     \end{equation}
-    Before proving this statement, we recall facts about the Schouten-Nijenhius which forms a special case of a \textit{Gerstenhaber algebra}.
+    Before proving this statement, we recall facts about the Schouten-Nijenhius which forms a special case of a \textit{Gerstenhaber algebra}. CHECK THIS!!
 }\label{schouten_poisson}
 \definition{
     Let P be an n-dimensional manifold and let $A^{k}(P) = \Gamma(\bigwedge^{k+1}TP)$. There exists a unique bracket $[\cdot,\cdot] : A^k(P)\times A^l(P) \rightarrow A^{k+l}(P)$ such that 
@@ -116,7 +116,7 @@
         \item $\forall X \in A^k(P)$, $[X, \cdot]$ is a derivation of degree k. 
         \footnote{
         recall that a derivation D of degree k has
-        $D(ab) = D(a)b + (-1)^{|a| k}aD(b)$. not sure here though
+        $D(ab) = D(a)b + (-1)^{k |b|}aD(b)$.
         }
     \end{itemize}
     The \textbf{Schouten-Nijenhius} bracket is the unique extension of the Lie bracket to a $\mathbbm{Z}$-graded bracket on the space of forms.
@@ -125,4 +125,6 @@
     One needs only prove that the Poisson bracket $\{ , \} $ satisfies the Jacobi identity if and only if $\Pi$ has vanishing Schouten bracket to complete the proof that $(P, \Pi)$ defines a Poisson manifold.
 \end{proof}
 % subsection poisson_manifolds (end)
+
+COMPLETE LECTURE LATER
 % section lecture_1_poisson_and_presymplectic_geometry (end)
