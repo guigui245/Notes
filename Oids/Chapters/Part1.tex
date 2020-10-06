@@ -111,27 +111,7 @@ The first lecture is mostly based on section $2.4$ of \citep{Zapata-Carratala201
         CHECK THIS, will prove this later, after defining the Gerstenhaber algebra stuff.
     }
 }\label{schouten_poisson}
-% \definition{
-%     Let P be an n-dimensional manifold and let $A^{k}(P) = \Gamma(\bigwedge^{k+1}TP)$. There exists a unique bracket $[\cdot,\cdot] : A^k(P)\times A^l(P) \rightarrow A^{k+l}(P)$ such that 
-%     \begin{itemize}
-%         \item $\forall X \in A^0(P) = \mathcal{X}(P)$, the bracket of vector fields (degree 0) is the Lie derivative $[X,\cdot] = \mathcal{L}_X$,
-%         \item $\forall X \in A^k(P)\: \forall Y \in A^l(P)$, the graded antisymmetry:
-%         $ [X,Y] = - (-1)^{kl}[Y,X]$,
-%         \item $\forall X \in A^k(P)$, $[X, \cdot]$ is a derivation of degree k. 
-%         \footnote{
-%         recall that a derivation D of degree k has
-%         $D(ab) = D(a)b + (-1)^{k |b|}aD(b)$. might be $|a|$ instead actually. CHECK
-%         }
-%     \end{itemize}
-%     The \textbf{Schouten-Nijenhius} bracket is the unique extension of the Lie bracket to a $\mathbbm{Z}$-graded bracket on the space of forms.
-%     }
-% \begin{proof}[Proof of \cref{schouten_poisson}]
-%     One needs only prove that the Poisson bracket $\{ , \} $ satisfies the Jacobi identity if and only if $\Pi$ has vanishing Schouten bracket to complete the proof that $(P, \Pi)$ defines a Poisson manifold.
-% \end{proof}
-% \footnote{
-%     complete lecture later
-% }
-
+% 
 \definition{
     Given a Poisson bivector $\Pi$, the musical map (sharp) 
     \begin{align}
@@ -181,11 +161,11 @@ The first lecture is mostly based on section $2.4$ of \citep{Zapata-Carratala201
 
 \definition{
     Consider $2$ Poisson manifold $(P_1, \Pi_1)$ and $(P_2, \Pi_2)$, the \textit{product Poisson manifold} is $(P_1 \times P_2, \Pi_1 + \Pi_2)$, where the canonical isomorphism 
-    $T(P_1 \times P_2) \cong \mathrm{pr}_1^* TP_1 \oplus \mathrm{pr}_2^* TP_2$. 
-    % 
-    \footnote{
-        This is the Whitney sum by the way
-    }
+    $T(P_1 \times P_2) \cong \mathrm{pr}_1^* TP_1 \oplus \mathrm{pr}_2^* TP_2$. \\
+    The Whitney sum of vector bundle $A_M,B_M$ over manifold $P$ is defined as above by
+    \begin{equation}
+        A_M  \boxplus B_M = \mathrm{pr}_1^* A_M \oplus \mathrm{pr}_2^* B_M
+    \end{equation}
     % 
     Also it's easy to see that pulling back onto either $P_1,P_2$ commutes with the bracket structure, with "cross-pulling" bracket vanishing
 }\label{def:product_poisson_mfd}

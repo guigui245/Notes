@@ -21,9 +21,9 @@ Let's first review facts about vector bundles, but with a more `categorical' min
         \begin{tikzcd}
             E_1 \arrow[r, "F"] \arrow[d, "\pi_1"] & E_2 \arrow[d, "\pi_2"] \\
             M_1 \arrow[r, "\phi"] & M_2
-        \end{tikzcd}
+        \end{tikzcd}\label{diag:vbundle_morphism}
     \end{equation}
-    commutes. We say that $F$ is a covering for $\phi$.
+    commutes. We say that $F$ is a \textit{covering} for $\phi$.
     Equivalently, $F$ restricts to a linear map on the fibre
     $F_x: (E_1)_x \rightarrow (E_2)_{\phi(x)}$.
 }
@@ -34,17 +34,365 @@ Let's first review facts about vector bundles, but with a more `categorical' min
 
 \remark[Categorification]{
     Fixing a base manifold $M$, the point-wise construction of fibre bundles over $M$ restricts us to the subcategory of vector bundles over $M$ denoted $\mathbf{Vect}_M$.
-    This subcategory has objects the vector bundles over $M$ and morphisms $F$ covering the identity morphism.
-    Further, point-wise constructions are symmetric abelian products $ \bigotimes : \mathbf{Vect}_M \times \mathbf{Vect}_M \rightarrow \mathbf{Vect}_M$ such that $\bigotimes$ is a \textbf{binary functor} (or bifunctor).
-    By that we mean for morphisms $F,G,H \in \mathrm{Mor}(\mathbf{Vect}_M)$, we have 
-    \begin{equation}
-    (F \circ G )\otimes H = (F \otimes H) \circ (G \otimes H)
-    \end{equation}
-    and so on.
+    % This subcategory has objects the vector bundles over $M$ and morphisms $F$ covering the identity morphism.
+    % Further, point-wise constructions are symmetric abelian products $ \bigotimes : \mathbf{Vect}_M \times \mathbf{Vect}_M \rightarrow \mathbf{Vect}_M$ such that $\bigotimes$ is a \textbf{binary functor} (or bifunctor).
+    % A bifunctor for morphisms $F,G,H \in \mathrm{Mor}(\mathbf{Vect}_M)$, has
+    % \begin{equation}
+    % (F \circ G )\otimes H = (F \otimes H) \circ (G \otimes H)
+    % \end{equation}
+    % and so on.
+    % A symmetric product in this category means there exists a symmetric map
+    % \begin{equation}
+    %     S : \mathbf{Vect}_M \times \mathbf{Vect}_M \rightarrow \mathbf{Vect}_M \times \mathbf{Vect}_M.
+    % \end{equation}
+    % And abelianness, I'm not sure
+    % \footnote{
+    %     expand on this please
+    % }
     So the point-wise construction of vector bundle over base manifold $M$ forms a \textbf{abelian symmetric monoidal category}. 
     \footnote{
-        expand on this please
+        One day, try to understand category stuff
     }
 }\label{rem:categorical_aspects_of_vbundle}
+
+\definition{
+    Given vector bundle $E_1, E_2$ over manifold $M$, 
+    \begin{itemize}
+        \item the vector bundle direct sum called the \textit{Whitney sum} is the fiberwise direct sum $E_1 \boxplus E_2$ (as seen in \cref{def:product_poisson_mfd}),
+        \item the vector bundle tensor product is the fiberwise tensor product $(E_1)_x \otimes (E_2)_x$ for all $x \in M$,
+        \item and the dual vector bundle is given by $E^* = \mathrm{Hom}(E, \mathbb{R})$ (which is a functor by the way).
+    \end{itemize}
+}\label{def:vb_sum_prod_dual}
+
+\definition{
+    Given a vector bundle $E \xrightarrow{\pi} M$, and a smooth map $\phi:N \rightarrow M$, \textbf{pullback vector bundle} by $\phi$ is defined as the categorical pull-back $\phi^* E = N  \tensor[_\phi]{\times}{_\pi} E$ such that the diagram commutes:
+    \begin{equation}
+        \begin{tikzcd}
+            N \tensor[_\phi]{\times}{_\pi} E \arrow[r, ""] \arrow[d, ""]& E  \arrow[d, "\pi"] \\
+            N \arrow[r, "\phi"] &M 
+        \end{tikzcd}
+    \end{equation}
+    which is simply $\phi^*E = \{ (p, e) \in N \times E \; | \; \phi(p) = \pi(e)\}$.
+}\label{def:pullback_vb}
+
+\definition{
+    A \textbf{section} $s$ of vector bundle $E \xrightarrow{\pi} M$ is a map $s : M \rightarrow E$ such that $\pi \circ s = \mathrm{id}_M$. 
+    The set of all sections of $E$ is denoted
+    \begin{equation}
+        \Gamma(E) = \{s : M \rightarrow E\; |\;\pi \circ s = \mathrm{id}_M\}.
+    \end{equation}
+}\label{def:sections_vb}
+
+\remark{
+    We would naturally guess that the functor $C^\infty : \mathbf{Man} \rightarrow \mathbf{Ring}$ would similarly extend to sections on manifold. 
+    But the assignment $\Gamma : \mathbf{Vect}_{\mathrm{Man}} \rightarrow R\textrm{-}\mathbf{Mod}$ fails to be a functor. 
+    To see this, consider the vector bundle morphism $F: E_1 \rightarrow E_2$ covering $\phi: M \rightarrow N$, and the pullback bundle along $\phi$:
+    % 
+    \begin{equation}
+        \begin{tikzcd}[sep = huge]
+            E_1 \arrow[r, "F"] \arrow[d, "\pi_1"] 
+            &\phi^*E_2 \arrow[r, "\mathrm{id}_{E_2}"] \arrow[d, "\mathrm{pr}_2", swap]
+            & E_2  \arrow[d, "\pi_2", swap] \\
+            % 
+            M \arrow[r, "\mathrm{id}_M"] \arrow[bend left= 30, "s_1", dashed]{u}
+            & M \arrow[r, "\phi"] \arrow[bend right = 40, swap, color = red, "\phi^*s_2"]{u}
+            & N  \arrow[u, bend right = 30, "s_2", dashed, swap]
+        \end{tikzcd}
+    \end{equation}
+    For sections on the vector bundle, we have the maps
+    \begin{align*}
+        &\Gamma(E_1) \xrightarrow{F} \Gamma(\phi^*E_2) \xleftarrow{\phi^*} \Gamma(E_2)\\
+        &s_1 \rightarrow F \circ s_1 \;;\; s_2 \circ \phi \leftarrow s_2
+    \end{align*}
+    If $\phi$ is \textbf{not} a diffeomorphism, then one \textit{cannot} in general construct such maps.
+    However, when maps agree
+    \begin{equation}
+        F \circ s_1 = s_2 \circ \phi \qquad \Leftrightarrow \qquad s_2 \sim_F s_1 
+    \end{equation}\label{eqn:F_related}
+    we say that the sections are \textbf{F-related}.
+}\label{rem:duality_not_functor}
+
+\definition{
+    If $\phi :M \rightarrow N$ \textbf{is} a diffeomorphism, and $F:E_1 \rightarrow E_2$ a covering of vector bundle then the \textbf{pushforward} of sections
+    \begin{align}
+        F_*: \Gamma(E_1) &\rightarrow \Gamma(E_2) \\
+        s_1 &\mapsto F \circ s_1 \circ \phi^{-1}
+    \end{align}
+    is well-defined.
+    The pushforward satisfies
+    \begin{align}
+        F_*(s+r) &= F_*(s) + F_*(r)\\
+        F_*(f \cdot s) &= (\phi^{-1})^*f \cdot F_*(s)
+    \end{align}
+    for $s,r \in \Gamma(E_1)$ and $f \in C^\infty(M)$. 
+    Note that you can \textit{always} pushforward vector fields via $\phi_*: \mathcal{X}(M) \rightarrow \mathcal{X}(N)$.
+}\label{def:pushforward_sections}
+
+\definition{
+    In contrast, $\phi$ need not be a diffeomorphism for the \textbf{pullback} of dual sections (aka: forms) to be well-defined.
+    \begin{align*}
+        F: \Gamma(E_2^*) &\rightarrow \Gamma(E_1^*)\\
+        \alpha &\mapsto F^* \alpha = \alpha \circ \phi
+    \end{align*}
+    So for any sections $s_1 \in \Gamma(E_1)$, 
+    \begin{equation}
+        F^*\alpha (s_1) = \left(\alpha \circ \phi\right) ( F \circ s_1)
+    \end{equation}
+    since $F(s_1) \in \Gamma( \phi^* E_2)$. 
+    % Meaning that F-relatedness is not necessary to construct well-defined forms since we need only pushforward
+    % We see that that the notion of pullback and pushforward allows us to extend to notion of F-relatedness as in \eqref{eqn:F_related}
+    \footnote{
+    In the case of cotangeant bundle, I should expand on the fact that $\phi$ needs to be diffeomorphism to define pullbacks. See notes on int systems    
+    }
+}\label{def:pushforward}
+
+\definition{
+    The pullback naturally extends to all tensor powers of the dual bundles $\bigotimes^{k}E_2^*$, such that for $\eta, \omega \in \Gamma( \bigotimes^\bullet E_2^*)$, and function $f \in \Gamma(\bigotimes^0 E_2) \cong C^\infty(N)$, we have
+    \begin{align*}
+        F^*(\eta + \omega) &= F^* \eta + F^* \omega \\
+        F^*(\eta \otimes \omega ) &= F^*\eta \otimes F^*\omega \\
+        F^*(f) &= f \circ \phi = \phi^* f.
+    \end{align*}
+}\label{def:extensions_to_tensor_duals}
+
+\definition{
+    Given vector bundle morphisms $F: E_1 \rightarrow E_2$, $G: E_2 \rightarrow E_3$, we see that on the tensor powers of dual bundles we have the contravariant identity:
+    \begin{equation}
+        (G \circ F)^* = F^* \circ G^*.
+    \end{equation}
+    This motivates the definition of the \textit{contravariant} \textbf{tensor functor} to the category of associative unital algebras
+    \begin{align*}
+        \mathcal{T}: \mathbf{Vect}_{Man} &\rightarrow \mathbf{AssAlg}\\
+        E &\mapsto \Gamma\left( \bigotimes {}^\bullet E^*\right) \\
+        F &\mapsto F^*
+    \end{align*}
+}\label{def:tensor_functor}
+Look into spanning functions and restrictions of $C^\infty$ functor.
+
+\definition{
+    Let $E \rightarrow M$ be a smooth vector bundle, a \textbf{connection} is a vector bundle morphism $\nabla: E \rightarrow DE \subset \mathrm{End}(E)$ covering the identity. (We go into some details of derivation bundle in \ref{sub:derivations}).\\
+    A \textbf{Kozul connection} is a $\mathbb{R}$-linear map 
+    \begin{align*}
+        \nabla: \mathcal{X}(M) \times \Gamma(E) &\rightarrow \Gamma(E)\\
+        (X,s) & \mapsto \nabla_X s
+    \end{align*}
+    such that the Liebniz identity is satisfied.
+}\label{def:kozul connection}
 % subsection vector_bundles (end)
+% 
+\subsection{Definition and Examples} % (fold)
+\label{sub:definition_and_examples}
+
+\definition{
+    A \textbf{Derivative Lie algebra} is a vector bundle $\alpha: A \rightarrow M$ whose module of sections with an $\mathbb{R}$-linear structure $(\Gamma(A), [\cdot,\cdot])$ acts as derivations on each of its arguments.
+    That is 
+    \begin{equation*}
+         \mathrm{ad}_{[\cdot,\cdot]} : \Gamma(A) \rightarrow \mathrm{Der}(A)
+    \end{equation*} 
+    is well-defined.
+}\label{def:derivative_lie_algebra}
+\example{
+    A Poisson algebra is a derivative Lie algebra.
+}
+% 
+\definition{
+    A \textbf{Lie Algebroid} $\left\{ A \rightarrow M; \rho: A \rightarrow TM; [\cdot, \cdot] \right\}$
+    % $\left\{ \begin{tikzcd}[row sep = tiny]
+    %     A \arrow[d]{}\\
+    %     M
+    % \end{tikzcd},  \right\} $
+    over smooth manifold $M$ is a vector bundle $A \rightarrow M$ together with a derivative Lie algebra structure on $\left(\Gamma(A), \left[\cdot,\cdot\right]\right)$ and a vector bundle morphism $\rho: A \rightarrow TM$ called the \textit{anchor map}. \\
+    The anchor map induces a Lie algebra homomorphism on modules of sections $\rho_* : \Gamma(A) \rightarrow \Gamma(TM) $ by the \textit{symbol-squiggle theorem} which we will see in \ref{thm:symbol_squiggle}
+    \footnote{
+        see later absolutely
+    }.\\
+    with
+    \begin{equation}
+        \rho_*[s,s']_E = [\rho(s), \rho(s')]
+    \end{equation}
+    This means that the derivative algebra structure is respected for $s,s' \in \Gamma(A)$ and $f \in C^{\infty}(M)$,
+    \begin{equation}
+        \left[s, f \cdot s'\right] = f  \cdot [s,s'] + \rho_*(s) f \cdot s'
+    \end{equation}
+
+    In general, vector bundle morphism \textbf{DO NOT} induce well-defined maps between modules of sections. This again will be highlighted in a future section.
+}\label{def:lie_algebroids}
+
+\remark{
+    The anchor map naturally defines two distributions $\mathrm{ker}(\rho) \subset A$ and $\mathrm{im}(\rho) \subset TM$.
+    Now fiberwise, the vector spaces $\mathfrak{g}_x := \mathrm{ker}(\rho_x) \subset A_x$ form a Lie algebra with bracket extending on the fibres $A_x$.
+    We call $(\mathfrak{g}_x, [\cdot,\cdot]_{\Gamma(A)}|_x)$ the \textbf{isotropy Lie algebras} of Lie algebroid $A$.\\
+    SInce $\rho$ is a Lie algebra morphism, the image distribution $\rho(A)$ is involutive and it will be integrable by a singular foliation on $M$.
+    We call the image distribution the \textbf{characteristic distribution} of the Lie algebroid $A$.
+} 
+% 
+\example{
+% 
+    \begin{itemize}
+        \item A natural first example is the vector bundle $\mathfrak{g} \rightarrow \star$, with $\mathfrak{g}$ having a Lie algebra structure. This is a trivial Lie algebroid.
+        \item The tangent bundle $TM \rightarrow M$ is a Lie algebroid with projection anchor map and the vector field forming a derivative algebra.
+        \item Likewise, involutive distributions $D \hookrightarrow TM$ with trivial anchor form a sub Lie algebroid.
+        \item The vector bundle $\mathbb{R} \rightarrow M$, with derivative Lie algebra being the commutative algebra of smooth functions over $M$.
+        Then for $h \in C^\infty(M)$ and associated vector field $X_h \in \Gamma(TM)$, the anchor map is given by
+        \begin{equation*}
+            \rho_X : f \mapsto f \cdot X
+        \end{equation*}
+        and the bracket is
+        \begin{equation}
+            [f,g]_X = f X(g) - g X(f).
+        \end{equation}
+        We've just reinterpreted the regular Lie algebra of functions over a manifold as a Lie algebroid.
+        \item The Atiyah algebroids $A_P$ of a principal $G$-bundle $\pi: P \rightarrow M$, as a vector bundle appears in the sequence 
+        \begin{equation*}
+            0 \rightarrow \mathrm{ad}(P) \rightarrow A_P \rightarrow TM \rightarrow 0,
+        \end{equation*}
+        where the adjoint bundle $\mathrm{ad}(P) \cong P \times_G \mathfrak{g}$ of Lie algebra $\mathfrak{g}$ is given via the adjoint action of $G$ on its Lie algebra. (A more general statement can be made using the associated bundle).
+        This is constructed from the short exact sequence
+        \begin{equation}
+             0\rightarrow VP\rightarrow TP \xrightarrow{\pi_*} TM \rightarrow 0,
+        \end{equation}
+        where $VP$ is the \textit{vertical bundle}, the kernel of the differential surjective map. Now the vertical bundle is isomorphic to the trivial bundle $VP \cong \mathfrak{g}\times P$.
+        Now since $P$ is a principal bundle, G acts on this short exact sequence yielding the Atiyah sequence as $G$ acts as the adjoint map on the vertical bundle.
+        \item The bundle of derivations $DE \rightarrow M$ for a vector bundle $E \rightarrow M$ is a Lie algebroid.
+    \end{itemize}
+    % 
+}\label{ex:Examples_of_lie_algebroids}
+% subsection definition_and_examples (end)
+% 
+\subsection{Algebraic structures associated with Lie algebroid} % (fold)
+\label{sub:algebraic_structures_associated_with_la}
+% 
+Let's first discuss a notion that combines the structure of $\mathbbm{Z}$-graded Lie superalgebras and supercommutative rings. Attention not to confuse with regular supersymmetry and $\mathbbm{Z}_2$-grading for Poisson superalgebras for example.
+\definition{
+    A \textbf{Gerstenhaber algebra} $A^\bullet$ is a graded commutative algebra with a Lie bracket $\llbracket\cdot,\cdot\rrbracket$ of degree $-1$ that satisfies the \textit{Poisson identity} and a multiplication $\cdot$ in the supercommutative associative ring. For $a,b,c \in A^\bullet$, we denote $|a|$ the degree of $a$ and we have the following
+    \begin{tcolorbox}
+        \begin{itemize}
+            \item $|ab| = |a| + |b|$
+            \item $|\llbracket a,b\rrbracket| = |a| + |b| - 1 $
+            \item $ab = (-1)^{|a||b|} ba$
+            \item $\llbracket a, bc\rrbracket = \llbracket a,b\rrbracket c + (-1)^{(|a|-1)|b|}b \llbracket a,c\rrbracket$
+            \item $\llbracket a,b\rrbracket = - (-1)^{(|a|-1)(|b|-1)} \llbracket b,a\rrbracket$
+            \item $\llbracket a, \llbracket b, c\rrbracket\rrbracket = 
+            \llbracket \llbracket a,b\rrbracket,c\rrbracket
+            + (-1)^{(|a|-1)(|b|-1)} \llbracket b, \llbracket a,c\rrbracket\rrbracket$  
+        \end{itemize}
+    \end{tcolorbox}    
+}\label{def:Gerstenhaber}
+% 
+Given a Lie algebroid $(A, \rho, [,])$ over $M$, we can \textit{uniquely} extend the bracket to a Gerstenhaber bracket on the graded algebra of multisections.
+% 
+\definition{
+    There exists a Gerstenhaber algebra $(\Gamma(\bigwedge^{\bullet}A), \wedge, \llbracket \cdot,\cdot\rrbracket)$ such that, for $a,b \in \Gamma(A)$ and $f,g \in C^{\infty}(M)$
+    \begin{itemize}
+        \item $\llbracket a,b\rrbracket = [a,b]$
+        \item $\llbracket a,f\rrbracket = \rho_*a [f]$
+        \item $\llbracket f,g\rrbracket=0$
+    \end{itemize}
+}\label{def:gerstenhaber_for_Lie_algebroid}
+% 
+\definition{
+    We can construct a Lie algebroid counterpart to exterior calculus of the differential geometry of tangent bundles. This is a dual construction to the Gerstenhaber algebra seen above.
+    Given a Lie algebroid $A \rightarrow M$, we construct a differential graded algebra $\Omega(A) = \bigoplus \Omega^k(A)$ of the sections $\Gamma(\bigwedge^\bullet A^*)$.
+    The map
+    \begin{equation*}
+         d_A: \Omega^k(A) \rightarrow \Omega^{k+1}
+    \end{equation*}
+    is called the \textit{differential} and explicitly, acting on homogeneous element $\omega \in \Gamma(\bigwedge^k A^*)$ we have:
+    \begin{equation}
+        d_A \omega(a_0, \ldots, a_k) = 
+        \sum_{i<j}(-1)^{i+j-1} \omega([a_i, a_j], a_1, \ldots, \hat a_i, \ldots \hat a_j \ldots, a_k)
+        + \sum_{i=0}^{k}(-1)^{i-1} \rho_* a_i [\omega(a_0, \ldots \hat a_i, \ldots a_k)],
+    \end{equation}
+    for $a_i \in \Gamma(A)$.
+    This differential graded algebra $\Omega^\bullet(A) = (\Gamma(\bigwedge^{\bullet} A^{*}), \wedge, d_A)$ is called the \textbf{exterior algebra} of the Lie algebroid $A$.
+}\label{def:exterior_algebroid}
+
+As usual we find $d_A^2 = 0$ which forms a \textit{de Rham} complex and its cohomology is the \textbf{Lie algebroid cohomology with trivial coefficients}.
+
+\definition{
+    Just like a regular exterior algebra, there are natural notions of \textit{interior product} and \textit{Lie derivatives}, defined for $w \in \Gamma(\bigwedge^{k} A^{*})$ and $a, a_0, \ldots, a_{k-1} \in \Gamma(A)$
+    as 
+    \begin{align*}
+        \iota_a \omega(a_0, \ldots, a_{k-1}) &= \omega(a, a_0, \ldots , a_{k-1})\\
+        \mathcal{L}_a \omega(a_0, \ldots, a_{k_1}) &=
+        \sum_{i=0}^k \omega(\ldots, a_{i-1}, [a, a_i], \ldots, a_{k-1}) - \rho_*a \omega(a_0, \ldots, a_{k-1}),
+    \end{align*}
+    with extension by linearity.
+    These follow the usual Cartan calculus identity:
+    \begin{tcolorbox}
+        \begin{align*}
+            \mathcal{L}_a &= \iota_a \circ d_A + d_A \circ \iota_a\\
+            [\mathcal{L}_a, \mathcal{L}_b] &= \mathcal{L}_{[a,b]}\\
+            [\mathcal{L}_a, \iota_b] &= \iota_{[a,b]}\\
+            [\iota_a, \iota_b] &=0
+        \end{align*}
+        So the operators $\iota, \mathcal{L}, d$ have respectively degrees $-1,0, 1$.
+    \end{tcolorbox}
+}\label{def:la_cartan_calculus}
+
+\proposition{
+    There is a $1-1$ correspondence between Lie algebroids and \textit{Linear Poisson structures}.
+}\label{prop:correspondance_with_poisson_structures}
+
+Maybe talk about splittings and covariant derivatives?
+
+% 
+% \definition{
+%     Let P be an n-dimensional manifold and let $A^{k}(P) = \Gamma(\bigwedge^{k+1}TP)$. There exists a unique bracket $[\cdot,\cdot] : A^k(P)\times A^l(P) \rightarrow A^{k+l}(P)$ such that 
+%     \begin{itemize}
+%         \item $\forall X \in A^0(P) = \mathcal{X}(P)$, the bracket of vector fields (degree 0) is the Lie derivative $[X,\cdot] = \mathcal{L}_X$,
+%         \item $\forall X \in A^k(P)\: \forall Y \in A^l(P)$, the graded antisymmetry:
+%         $ [X,Y] = - (-1)^{kl}[Y,X]$,
+%         \item $\forall X \in A^k(P)$, $[X, \cdot]$ is a derivation of degree k. 
+%         \footnote{
+%         recall that a derivation D of degree k has
+%         $D(ab) = D(a)b + (-1)^{k |b|}aD(b)$. might be $|a|$ instead actually. CHECK
+%         }
+%     \end{itemize}
+%     The \textbf{Schouten-Nijenhius} bracket is the unique extension of the Lie bracket to a $\mathbbm{Z}$-graded bracket on the space of forms.
+%     }
+% \begin{proof}[Proof of \cref{schouten_poisson}]
+%     One needs only prove that the Poisson bracket $\{ , \} $ satisfies the Jacobi identity if and only if $\Pi$ has vanishing Schouten bracket to complete the proof that $(P, \Pi)$ defines a Poisson manifold.
+% \end{proof}
+% subsection algebraic_structures_associated_with_la (end)
+
+\subsection{Morphisms of Lie algebroids} % (fold)
+\label{sub:morphisms_of_la}
+
+We will talk about the notion of local Lie algebras later, but in the case of Lie algebroid, the extra structure of a vector bundle constrains morphisms between these algebraic structures.
+We start by considering a general vector bundle morphism $F: A \rightarrow B$, and demand that this map induces a Lie algebra morphism of the modules of sections, which is not always guaranteed.
+% subsection morphisms_of_la (end)
+% 
+\subsection{Connections on Lie algebroids} % (fold)
+\label{sub:connections_on_la}
+A good ref is \citep{Lyakhovich2003}.
+Can view the concept of a Lie algebroid as a tool to transfer the differential geometry of tangent bundles to abstract vector bundles.
+\definition{
+    A \textit{A-connection} $\nabla$ on a Lie algebroid $A \rightarrow M$ is a vector bundle morphism  $\nabla : A \rightarrow DA$, that is a Kozul connetion with the added property that it is compatible with the anchor map in the sense that given $s \in \Gamma(A)$, the induced connection on the tangent bundle $TM$ is
+    \begin{align*}
+        \nabla : \Gamma(A) &\rightarrow \Gamma( T^*M \otimes TM) \\
+        s & \mapsto \nabla_{\rho_*(s)}
+    \end{align*}
+}\label{def:connection on lie algebroid}
+% 
+In \citep{Marotta2019a}, the splitting is explored further.
+% 
+\definition{
+    The \textbf{curvature} $R_\nabla \in \Omega^2(A)$ of connection $\nabla$ of a Lie algebroid $A \rightarrow M$ is defined as $R = \nabla^2$ or for sections of the algebroids,
+    \begin{equation}
+        R_\nabla (a,b) = [\nabla_a, \nabla_b] - \nabla_{[a,b]}
+    \end{equation}
+    for $a,b \in \Gamma(A)$. 
+    Alternatively, the curvature can be viewed as a map
+    \begin{align*}
+        R_\nabla : \Gamma(TM) \rightarrow \Omega^2(A)
+    \end{align*}
+    If the curvarue vanishes, we say that the connection is flat and we call $(A, \nabla)$ a \textbf{representation} of the Lie algebroid over itself.
+    This is because this definition can be extended where $A \rightarrow M$ a Lie algebroid and $E \rightarrow M$ a vector bundle and looking at morphisms between them. Fortunately we only need $A = E$.
+}\label{def:Curvature of Lie algebroid connection}
+% 
+
+You can play the same game with $\Omega_E^\bullet(A) = (\Gamma(\bigwedge^{\bullet} A^{*} \otimes E), \wedge, d_A^E)$ which will lead to \textit{Lie algebroid cohomology with coefficient in E}. This maybe what I need for my problem.
+
+% subsection connections_on_la (end)
 % section lie_algebroids (end)

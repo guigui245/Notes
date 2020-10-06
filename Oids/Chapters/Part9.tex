@@ -1,0 +1,161 @@
+% !TeX root = ../main.tex
+% 
+\newpage
+\lhead{\emph{Lecture 9}}
+\section{Lecture 9: Dirac Geometry} % (fold)
+\label{sec:lecture_9}
+Aim of the lecture is to recover Dirac geometry. A lot of the ideas can be traced back to Courant's thesis \citep{Courant1990}. As usual Gualtieri's thesis \citep{Gualtieri2004} serves us well. In the following the underlying field is $\mathbb{R}$.
+\subsection{Courant Spaces} % (fold)
+\label{sub:courant_spaces}
+\definition{
+    A \textbf{Courant space} is a triple $(C, \langle \cdot, \cdot \rangle, \rho)$ where
+    $(C, \langle \cdot,\cdot \rangle)$ is a inner product space (meaning the inner product is bilinear and non-degenerate but \textbf{not} positive-definite) and $\rho: C \rightarrow V$ is a linear homomorphism compatible with the inner product called the \textit{anchor}.
+}\label{def:courant_space}
+
+\definition{
+    With respect to the \textit{bilinear form}, a subspace $N \subset C$ and its orthogonal complement $N^\perp := \{ x \in C\; |\; \langle x,y \rangle = 0 \; \forall\, y \in N\}$, need not be disjoint as the inner product is not in general positive definite.
+    Therefore a subspace $N \subset C$ is called the following ways if the orthogonality conditions hold:
+    \begin{itemize}
+        \item $N \subset N^\perp$ is isotropic,
+        \item $N \supset N^\perp$ is coisotropic,
+        \item $N = N^\perp$ is Lagrangian.
+    \end{itemize}
+}\label{def:courant_subspaces}
+
+\definition{
+    Since $(C, \langle \cdot, \cdot\rangle)$ is an inner product space, we have the usual \textit{musical isomorphisms}:
+    \begin{align*}
+        C &\xrightarrow{\flat} C^*\\
+        C^* &\xrightarrow{\sharp} C
+    \end{align*}
+    
+}\label{def:musical_iso}
+% 
+This data of a Courant space implies that we can construct a map $j : V^* \rightarrow V$ such that the following diagram commutes:
+% 
+\begin{equation}
+    \begin{tikzcd}
+        C^* \arrow[d,"\sharp"]& V^* \arrow[l,  "\rho^*"] \arrow[d, dashed, "j"]\\
+        C \arrow[r, "\rho"]& V
+    \end{tikzcd}
+\end{equation}
+
+\definition{
+    A Courant space is \textbf{exact} when we have the short exact sequence
+    \begin{equation}
+        0 \rightarrow V^* \xrightarrow{\sharp \rho^*} C \xrightarrow{\rho} V \rightarrow 0.
+    \end{equation}
+    So $\rho$ is surjective and $\mathrm{ker}(\rho) \subset C$ is an isotropic subspace.
+}\label{def:exact_courant_space}
+
+\definition{
+    Given a Courant space $C, C'$, we define
+    \begin{itemize}
+        \item the \textit{opposite Courant space} $(\overline{C}, - \langle \cdot, \cdot \rangle, \rho)$,
+        \item the \textit{direct sum} of two Courant spaces $(C \oplus C, \langle \cdot,\cdot \rangle \oplus \langle \cdot,\cdot \rangle', \rho \oplus \rho')$
+    \end{itemize}
+}\label{def:construction_courant_space}
+
+\definition{
+    For $V \in \mathbf{Vect}_{\mathbb{R}}$ we define the \textbf{Standard Courant space} as $\mathbbm{V} =(V \oplus V', \langle \cdot,\cdot \rangle, \mathrm{pr}_1)$, with bilinear pairing
+    \begin{equation}
+        \langle v \oplus \alpha, w \oplus \beta \rangle = \frac{1}{2}\left(\alpha(w) + \beta(v)\right)
+    \end{equation}
+    Note that we can also define a skew-symmetric bilinear form as well, but we will only call the \textit{inner} product the symmetric one. Further note that, the symmetry group preserving orientation is $\mathrm{SO}(d,d)$, the non-compact special orthogonal group. 
+}\label{def:std_courant} 
+\footnote{
+    probably add some example such as B transform here, for posterity
+}
+
+\definition{
+    A \textbf{Dirac space} D is a Lagrangian subspace of Courant space $(C, \langle \cdot,\cdot \rangle, \rho)$ for which there exists $W \subset V$ and $\overline{W} \subset V^*$ such that the following sequence is exact
+    \begin{equation}
+        0 \rightarrow \overline{W} \xrightarrow{\sharp \rho^*} D \xrightarrow{\rho} W \rightarrow 0
+    \end{equation}
+    The space $W = \rho(D) = \faktor{D}{\overline{W}}$ is generally called the \textit{range} of $D$.
+    We remark that the Lagrangian condition imposed on the space implies that the bilinear form is $0$ along this subspace.
+}
+
+\proposition{
+    A Dirac space $D \subset (C, \langle \cdot,\cdot \rangle, V)$ specifies a $2$-form on its range $\rho(D)$,
+    \begin{equation}
+        \omega_D \in \bigwedge^2 W^*
+    \end{equation}
+    Such that for $w_i = \rho(d_i) + j(\epsilon_i) := \rho(a_i)$, with $d_i \in D$ and $\epsilon_i \in V \setminus W$, 
+    \begin{align}
+        \omega_D(w_1, w_2) &= \langle a_1, \sharp \rho^*(\epsilon_2) \rangle \\
+        & = - \langle \sharp \rho^*(\epsilon_1), a_2 \rangle \nonumber
+    \end{align}
+
+    \begin{proof}
+        D is maximally isotropic so $\forall d_1, d_2 \in D \subset C$,
+        \begin{equation}
+            \langle d_1, d_2 \rangle = 0.
+        \end{equation}
+        Since $\rho$ is surjective there exists $w_1, w_2 \in W$ such that $\rho(d_i) = w_i$.
+        Consider the extension of elements $w_1, w_2 \in W \subset V$ by $\rho$, that is $a_1, a_2 \in C$ such that
+        \begin{equation}
+            w_{i} = \rho(a_{i}).
+        \end{equation}
+        where $a_i = d_i + \sharp \rho^* (\epsilon_i)$
+        for some $\epsilon_1, \epsilon_2 \in V^* \setminus W^*$.
+% 
+        \begin{equation}
+            \langle a_1 - \sharp \rho^* (\epsilon_1)\; ,\;  a_2 - \sharp \rho^* (\epsilon_2) \rangle=0
+        \end{equation}
+        The cross terms must vanish while the non-cross terms carry the non-zero part of the inner product, therefore
+        \begin{equation}
+            \langle a_1, \sharp \rho^* (\epsilon_2) \rangle = -\langle \sharp \rho^*(\epsilon_1), a_2 \rangle.
+        \end{equation}
+        sketchy af proof. coset construction? do this
+    \end{proof}
+}\label{prop:2_form_on_range}
+% 
+\definition{
+    An \textit{isotropic} relation (or Lagrangian relation) $\Lambda: A \dashrightarrow B$ between two exact Courant spaces $(A, \langle , \rangle_A, \alpha : A\rightarrow V)$, $(B, \langle , \rangle_B, \beta : B \rightarrow W)$ is a morphism such that $\Lambda \subset A \oplus \overline{B}$ is a Lagrangian subspace with the relations
+    \begin{align*}
+        a_1 \sim_\Lambda b_1, &\quad a_2 \sim_\Lambda b_2 \\
+        \Rightarrow& \quad \langle a_1, a_2 \rangle_A = \langle b_1, b_2 \rangle_B
+    \end{align*}
+    In this case, we say that elements $a,b \in \Lambda$ are $\Lambda$-related. 
+}\label{def:Isotropy_relation}
+% 
+\definition{
+    An isotropic relation $\Gamma:  A\dashrightarrow B $ is a \textbf{Courant morphism} if there exists a map $\gamma: V \rightarrow W$ such that elements of $\mathrm{graph}(\Gamma) \subset B \oplus \overline{A}$ have
+    \begin{align*}
+        b \oplus a& \in \Gamma \\
+        \Rightarrow \beta(b) &= (\gamma \circ \alpha)(a)
+    \end{align*}
+    A Courant morphism becomes a Dirac space $\Gamma_\gamma \subset B \oplus \overline{A}$ and enters the following short exact sequence,
+    \begin{equation}
+         0\rightarrow \mathrm{graph}(\gamma^*) \rightarrow \Gamma_\gamma \xrightarrow{\beta \oplus \alpha} \mathrm{graph}(\gamma)  \rightarrow 0
+    \end{equation}
+    where $\mathrm{graph}(\gamma) \subset W \oplus V^*$ and similarly for $\gamma^*$. This exact sequence is easily read as both piece of the graphs are exact Courant morphisms, on which we take the direct sum.
+}\label{def:Courant morphism}
+
+Courant morphisms are morphism in the category of Courant algebroids, and we have seen that elements are mapped appropriately. A lesser constraint would be to consider maps such that the inner product is preserved.
+% 
+\definition{
+    A \textit{Courant} map $\Psi: A \rightarrow B$ of Courant algebroids is a linear map together with $\psi: V \rightarrow W$ such that the inner product is preserved,
+    \begin{equation}
+         \Psi \langle \cdot, \cdot \rangle_A = \langle \cdot, \cdot \rangle
+    \end{equation} 
+    and the following diagram commutes
+    \begin{equation}
+        \begin{tikzcd}
+            A \arrow[d,"\alpha"]  \arrow["\Gamma"]{r}& B  \arrow["\beta"]{d}\\
+            V \arrow[r, "\gamma"]& W.
+        \end{tikzcd}
+    \end{equation}
+}\label{def:Courant map}
+
+\proposition{
+    A map $\Psi: A \rightarrow B$ is Courant if and only if $\mathrm{graph}(\Psi) \in B \oplus \overline{A}$ is a Courant morphism.
+}\label{prop:equivalence of courant maps and morphism}
+\begin{proof}
+    do later
+\end{proof}
+
+
+% subsection courant_spaces (end)
+% section lecture_9 (end)
