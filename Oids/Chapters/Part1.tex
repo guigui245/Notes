@@ -98,7 +98,7 @@ The first lecture is mostly based on section $2.4$ of \citep{Zapata-Carratala201
     \end{align*}
 }
 \proposition{
-    A manifold $P$; with a commutative algebra of smooth functions $(\mathrm{C}^{\infty}(P), \cdot, \{ , \} )$, and a bivector $\Pi \in \Gamma( \bigwedge T^2P)$ defined as
+    A manifold $P$; with a commutative algebra of smooth functions $(\mathrm{C}^{\infty}(P), \cdot, \{ , \} )$, and a bivector $\Pi \in \Gamma( \bigwedge^2 TP)$ defined as
     \begin{equation}
         \Pi(df,dg) = \{ f,g \}; 
     \end{equation}
@@ -106,11 +106,25 @@ The first lecture is mostly based on section $2.4$ of \citep{Zapata-Carratala201
     \begin{equation}
         \llbracket \Pi, \Pi \rrbracket = 0.
     \end{equation}
-    Before proving this statement, we recall facts about the Schouten-Nijenhius which forms a special case of a \textit{Gerstenhaber algebra}. 
-    \footnote{
-        CHECK THIS, will prove this later, after defining the Gerstenhaber algebra stuff.
-    }
+    Before proving this statement, we recall facts about the Schouten-Nijenhius which forms a special case of a \textit{Gerstenhaber algebra}. We will define Gerstenhaber algebras in \cref{def:Gerstenhaber}.
 }\label{schouten_poisson}
+% 
+\begin{proof}
+    The Schouten-Nijenhius bracket is defined as a degree $-1$ bracket on the differential graded algebra of alternating multivector fields, so
+    \begin{equation}
+        \llbracket \cdot, \cdot \rrbracket : \Gamma( \bigwedge^2 TP) \times \Gamma( \bigwedge^2 TP) \rightarrow \Gamma( \bigwedge^3 TP).
+    \end{equation}
+    By considering $f,g,h \in C^\infty(P)$ with corresponding forms $\alpha,\beta, \gamma \in  \Omega^1(P)$, then
+    \begin{align*}
+        \llbracket \Pi, \Pi\rrbracket(\alpha, \beta, \gamma) &= \Pi( \Pi(\alpha, \beta), \gamma) + \mathrm{cyclic} \\
+        \Leftrightarrow \qquad \qquad  &= \left\{\left\{  f,g\right\}, h  \right\} 
+        + \left\{ \left\{ g,h \right\},f \right\}
+        + \left\{  \left\{ h,f \right\},g \right\} \\
+        \Leftrightarrow \qquad \qquad &=0 \quad \quad \mathrm{(Poisson)}
+    \end{align*}
+    
+\end{proof}
+
 % 
 \definition{
     Given a Poisson bivector $\Pi$, the musical map (sharp) 
@@ -119,13 +133,17 @@ The first lecture is mostly based on section $2.4$ of \citep{Zapata-Carratala201
         df &\mapsto \Pi (df, \cdot) := \{f, \cdot\}
     \end{align}
     defines an \textbf{Hamiltonian distribution}.
-    Equivalently, $X_{\cdot} = \Pi^\sharp \circ d : C^\infty(P) \rightarrow \Gamma(TP)$ is an \textit{Hamiltonian map}. Note that the space of Hamiltonian distribution $\Pi^\sharp(T^*P)$ is involutive as it is a Lie algebra morphism.
+    Equivalently, 
+    \begin{equation*}
+        X_{\cdot} = \Pi^\sharp \circ d : C^\infty(P) \rightarrow \Gamma(TP) 
+    \end{equation*}
+    is an \textit{Hamiltonian map}. Note that the space of Hamiltonian distribution $\Pi^\sharp(T^*P)$ is involutive as it is a Lie algebra morphism.
 }\label{def:hamiltonian_distribution}
 
 \definition{
-    A submanifold $C \subset (P, \Pi)$ is \textbf{coisotropic submanifold} if $TC \subset (TP, \Pi)$ is a coisotropic subspace, that is $TC \supset (TC)^0$ an isotropic (i.e: normal) subspace of $TC$ with respect to the bivector:
+    A submanifold $C \subset (P, \Pi)$ is \textbf{coisotropic} if $TC \subset (TP, \Pi)$ is a coisotropic subspace, that is $TC \supset (TC)^0$ an isotropic (sometimes denoted $TC \supset TC^\perp$) subspace of $TC$ with respect to the bivector:
     \begin{equation}
-        \Pi(\alpha, \beta) = 0 \quad \forall \alpha \in (T^*C)^0, \beta \in T^*C
+        \Pi(\alpha, \beta) = 0 \quad \forall \alpha \in (T^*C)^0, \forall \beta \in T^*C
     \end{equation}
     % \begin{equation*}
     %     \forall \alpha \in (T^*C)^0 \, , \forall v \in TP \quad \alpha(v) = 0.
@@ -139,6 +157,13 @@ The first lecture is mostly based on section $2.4$ of \citep{Zapata-Carratala201
     \end{equation}
 }\label{def:coisotropic_submanifold}
 
+It is useful to make the connection between geometry and algebra, relating manifolds to ideals of the algebra of functions on said manifold.
+In \citep{OFarrill1989}, a nice treatise is presented in the following.
+% 
+% 
+\remark{
+    It is useful to study manifolds $M$ in a `dual' way by considering the commutative algebra of smooth functions $C^\infty(M)$. There exits as isomorphism between $M$ and the set $\mathcal{M}$ of all maximal ideal $I(p)$ consisting of functions $f \in C^\infty(M)$ such that $f\big|_p = 0$.
+}\label{rem:dual_notion_mfd}
 \proposition{
     Let $\iota : C \hookrightarrow P$ be a closed submanifold of Poisson manifold $(P, \Pi)$, then the following are equivalent:
     \begin{itemize}
@@ -146,11 +171,15 @@ The first lecture is mostly based on section $2.4$ of \citep{Zapata-Carratala201
         \item The vanishing ideal $I_C = \mathrm{ker}(\iota^*) := \{ g \in C^\infty(P)\,  \Big\vert \:  g\rvert_C = 0\}$ is a coisotrope of the Poisson algebra $(C^\infty(P), \cdot, \{\cdot, \cdot\})$.
         \item Hamiltonian vector fields $X_g$ generated by $g \in I_C$ are tangent to $C$: $X_g|_C \in \Gamma(TC)$ 
     \end{itemize}
-
+% 
     \begin{proof}
         \begin{itemize}
-            \item $(1) \Rightarrow (2)$: First $(I_C, \cdot)$ is a multiplicative ideal of $(C^\infty(P), \cdot)$ by construction. And $(I_C, \{\cdot, \cdot\})$ is a Lie subalgebra because the Poisson bracket vanishes on $C \hookrightarrow P$.
+            \item $(1) \Rightarrow (2)$: First $(I_C, \cdot)$ is a multiplicative ideal of $(C^\infty(P), \cdot)$ by construction. 
+            Further, if $f,g \in I_C$ then $df,dg \in (T^*C)^\perp$ and the associated Poisson bracket vanishes, making $I_C$ into a Lie subalgebra.
+            So $I_C$ is coisotropic to the Poisson Algebra on $P$. 
+            % 
             \item $(2) \Rightarrow (3)$: for a basis $g \in I_C$, the Hamiltonian vector fields $X_g = \{g, \cdot\}$ span the $\mathrm{Der}(C^\infty(C))$ which is the space of tangent vector to $C$.
+            % 
             \item $(3) \Rightarrow (1)$: 
             $\iota^* \{g,f\} = 0$  for $g \in I_C$, $\forall f \in C^\infty(P)$ \footnote{
                 continue later
@@ -207,18 +236,23 @@ The first lecture is mostly based on section $2.4$ of \citep{Zapata-Carratala201
     \end{equation}
     for all $p \in M$.
 \end{tcolorbox}
+We now consider the important notion of coisotropic reduction. A full treatment is given in \citep{Marsden1986}, but we focus on the simpler case where the involutive distribution on $C \hookrightarrow P$ is given by the sets of its Hamiltonian vector fields.
 
-\proposition{
+\proposition{(Coisotropic Reduction of Poisson manifold)\\
     Let $(P, \Pi)$ a Poisson manifold, and $\iota: C \hookrightarrow P$ a closed coisotropic submanifold. 
-    Suppose $X_{I_C}$, the Hamiltonian vector field tangent to $C$, or equivalently generated by the ideal $I_C = \mathrm{ker}(\iota^*)$ as in \cref{prop:characterisation_of_coisotropic_submfd}; integrates to a regular foliation on C.
-    Further assume that the leaf space is smooth $P':= \faktor{C}{\chi_C}$ such that there is a surjective submersion (quotient map) $q$ fitting in the diagram
+    Let $\{X_{I_C}\}$ be the set of Hamiltonian vector field tangent to $C$ generated by the ideal $I_C = \mathrm{ker}(\iota^*)$.
+    This integrates to a regular foliation $\chi_C$ on C because of the involution
+    \begin{equation}
+        [X_{I_C}, X_{I_C}] \subset X_{\left\{ I_C, I_C \right\}} \subset X_{I_C}.
+    \end{equation}
+    Further assume that the leaf space is smooth $P':= \faktor{C}{\chi_C}$ such that there is a submersion (quotient map) $q$ fitting in the reductive diagram
     \begin{equation}
         \begin{tikzcd}
             C \arrow[d, twoheadrightarrow, "q"]\arrow[r, hook, "\iota"] & (P, \Pi) \\
             (P', \Pi')
         \end{tikzcd}
-    \end{equation}
-    Then inherits a Poisson bracket on functions $(C^\infty(P'), \{\cdot, \cdot\}')$ uniquely determined by the condition
+    \end{equation}\\
+    Then $P'$ inherits a Poisson structure on functions $(C^\infty(P'), \{\cdot, \cdot\}')$ that is uniquely determined by the condition
     \begin{equation}
         \iota^* \{F,G\} = q^* \{f,g\}'
     \end{equation}
@@ -227,7 +261,86 @@ The first lecture is mostly based on section $2.4$ of \citep{Zapata-Carratala201
         q^*f &= \iota^*F\\
         q^*g &= \iota^*g
     \end{align*}
-    
 }\label{prop:coisotropic_reduction}
+\begin{proof}
+    Following \citep{Marsden1986}, theorem 2.2.
+    As opposed to the theorem in the paper, we consider the trivial case where the involutive distribution is given by the set of Hamiltonian vector fields $X_{I_C}$. 
+    It's clear from \cref{prop:characterisation_of_coisotropic_submfd} that on $C$, the distribution of Hamiltonian vector field vanishes: $X_{I_C} = 0 \subset TC$.
+\end{proof}
+
+The upshot is, we have identified a Poisson submanifold $(P', \Pi')$ with a reduced Poisson structure, all this is because of the coisotropic datum given.
+
+\remark{
+    Let $\tilde P \subset P$ a Poisson submanifold, then $\Pi^\sharp (T^* \tilde P) = X_{I_{\tilde P}} =0$
+    is equivalent to  $\tilde P \hookrightarrow P$ is a Poisson morphism.
+}
+\example{
+    Consider a Lie group action $G \circlearrowright (P, \Pi)$ via the Poisson map $G \times P \rightarrow P$ that is also a morphism of Poisson algebras. 
+    Infinitesimally, this is the action of $\mathfrak{g} = \mathrm{Lie}(G)$ on $P$ by the Lie algebra-valued Hamiltonian vector fields given by the map $\psi$ and the comoment map $\overline{\mu}$ defined as
+    \begin{align*}
+    \psi: \mathfrak{g} &\rightarrow \Gamma(TP)\\
+    \overline{\mu} : \mathfrak{g} & \rightarrow C^\infty(P)
+    \end{align*}
+    such that, for all $\xi,\zeta \in \mathfrak{g}$
+    \begin{align}
+        \psi(\xi) &= X_{\overline{\mu}(\xi)} \coloneq \left\{ \overline{\mu}(\xi), \cdot \right\}    \\
+        \overline{\mu}([\xi, \zeta]) &= \left\{ \overline{\mu}(\xi), \overline{\mu}(\zeta) \right\}
+    \end{align}
+    The map $\overline{\mu}$ is called the \textbf{comoment map} and it is a Lie algebra morphism between the Lie algebra $\mathfrak{g}$ and the Poisson algebra.
+    Dually, we define the \textbf{moment map} such that the following diagram commutes
+    \begin{equation}
+        \begin{tikzcd}
+            g \arrow["\overline{\mu}"]{r}&C^\infty(P)\\
+            g^* \arrow["\mathrm{Hom}"]{u}&P \arrow[]{u} \arrow["\mu"]{l}
+        \end{tikzcd}
+    \end{equation}
+    or by the relation
+    \begin{equation}
+        \langle \mu(p), \xi \rangle = X_{\overline{\mu}(\xi)}(p)
+    \end{equation}
+    for $p \in P$ and $\xi \in \mathfrak{g}$.\\
+    % 
+    If $0 \in \mathfrak{g}^*$ is a regular value, then $C \coloneq \mathrm{ker}(\mu) \subset P$ is a coisotropic submanifold because the equation above defines a tangent distribution $X_{\overline{\mu}(\xi)} = 0$ for all $\xi \in \mathfrak{g}$. Therefore by \cref{prop:characterisation_of_coisotropic_submfd}, we have a coisotropic submanifold.
+    % 
+    If the Poisson action is free and proper, then $\mathrm{ker}(\mu)/G$ is the coisotropic reduction of $(P, \Pi)$, and in this case this is an \textit{Hamiltonian reduction}.
+    If the quotient space is not a manifold, then we can still construct a groupoid action and reduction.
+}\label{ex:Hamiltonian group action}
+
+
 % subsection poisson_manifolds (end)
+\subsection{Presymplectic manifold} % (fold)
+\label{sub:presymplectic_mfd}
+\definition{
+    A \textbf{presymplectic manifold} $(S, \omega)$ is a smooth manifold $M$ and a closed $2-$form $\omega \in \Omega^2(S) \cong \Gamma( \bigwedge^2 T^*S)$ with $d \omega = 0$.
+    We also say that $S$ carries a symplectic structure $\omega$.\\
+    If the symplectic structure $\omega$ is exact, we say that $S$ has an exact presymplectic structure.
+}\label{def:presymplectic manifold}
+
+\definition{
+    A smooth map $\phi: S_1 \rightarrow S_2$ between presymplectic manifold is a \textit{presymplectic map} if
+    \begin{equation*}
+         \phi^*\omega_2 = \omega_1.
+    \end{equation*} 
+}\label{def:presymplectic map}
+
+\definition{
+    A diffeomorphism $\phi: S_1 \rightarrow S_2$ that is also a presymplectic is called a symplectomorphism. Infinitesimally, this is generated by vector fields $X \in \Gamma(TS_1)$ that respect the symplectic form on $S_1$, 
+    \begin{equation}
+        \mathcal{L}_X \omega_1 = 0
+    \end{equation}
+}\label{def:symplectomorphism}
+
+\definition{
+    Given a presymplectic manifold $(S,\omega)$, we define the flat \textit{musical map} as
+    \begin{align*}
+        \omega^\flat &: TS \rightarrow T^*S\\
+        X & \mapsto \omega(X, \cdot) \coloneq \iota_X \omega
+    \end{align*}
+    
+}\label{def:symplectic musical map}
+% subsection presymplectic_mfd (end)
+\subsection{Symplectic manifold} % (fold)
+\label{sub:symplectic_mfd}
+
+% subsection symplectic_mfd (end)
 % section lecture_1_poisson_and_presymplectic_geometry (end)

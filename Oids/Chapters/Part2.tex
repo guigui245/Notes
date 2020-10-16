@@ -1,7 +1,56 @@
 % !TeX root = ../main.tex
 % 
+\newpage
 \lhead{\emph{Lecture 2}}
 \section{Lie Groupoids} % (fold)
 \label{sec:lie_groupoids}
+\subsection{Definition and structure maps} % (fold)
+\label{sub:definition_and_structure_maps}
+Some notation will use some category theory, so we recall here that a small category is a category where objects and morphisms are \textit{small}. This means that they they are small enough to fit in the category of \textbf{Set}.
+\definition{
+    A Groupoid $\mathcal{G} \coloneq (G_1 \rightrightarrows G_0)$ is a \textit{small category} with morphisms that are all invertible.
+    Let's unpack this definition (or parts of it for now):
+    \begin{itemize}
+        \item $G_0$ is the set of objects
+        \item $G_1$ is the set of morphisms
+        \item An element $g \in G_1$ is denoted, given a pair of functions called the \textit{source} and \textit{target} $s,t: G_1 \rightrightarrows G_0$ such that $s(g) \rightarrow t(g)$. Technically, this defines the set of composable arrows $G_1 ~_s{\times}_t \:G_1$.
+    \end{itemize}
+}
+% subsection definition_and_structure_maps (end)
+\subsection{Bisections} % (fold)
+\label{sub:bisections}
+
+% subsection bisections (end)
+\subsection{Lie Groupoids} % (fold)
+\label{sub:lie_groupoids}
+
+% subsection lie_groupoids (end)
+\subsection{Examples of Lie Groupoids} % (fold)
+\label{sub:examples_of_lie_groupoids}
+
+% subsection examples_of_lie_groupoids (end)
+
+\subsection{Morphisms of Lie Groupoids} % (fold)
+\label{sub:morphisms_of_lie_groupoids}
+
+% subsection morphisms_of_lie_groupoids (end)
+\subsection{Vector fields on Lie Groupoids} % (fold)
+\label{sub:vector_fields_on_lie_groupoids}
+
+% subsection vector_fields_on_lie_groupoids (end)
+\subsection{Action Lie Groupoid} % (fold)
+\label{sub:action_lie_groupoid}
+We follow \citep{Jurco2019a} for a brief but useful description of the action of Lie groupoids on manifolds.
+We recall that the orbit space  $M / G$ of a group action $\rho: G \times M \rightarrow M$ by a Lie group $G$ can be badly behaved (eg: not free, so singular quotient space). One way out of this problem is to consider the action of a Lie groupoid. \\
+
+\definition{
+    The action Lie groupoid of a group $G$ on manifold $M$ is the category $G \ltimes M \rightrightarrows M$ (sometimes denote $M // G$) or $M//_\rho G$ for map $\rho$ an automorphism on the manifold).
+    For $g \in G$ and $x \in M$, the map
+    \begin{equation*}
+        x \mapsto g \triangleright x
+    \end{equation*}
+}
+
+% subsection action_lie_groupoid (end)
 
 % section lie_groupoids (end)

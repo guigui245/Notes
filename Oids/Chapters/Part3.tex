@@ -1,5 +1,6 @@
 % !TeX root = ../main.tex
 % 
+\newpage
 \lhead{\emph{Lecture 3}}
 \section{Lie Algebroids} % (fold)
 \label{sec:lie_algebroids}
@@ -125,7 +126,7 @@ Let's first review facts about vector bundles, but with a more `categorical' min
         F_*(f \cdot s) &= (\phi^{-1})^*f \cdot F_*(s)
     \end{align}
     for $s,r \in \Gamma(E_1)$ and $f \in C^\infty(M)$. 
-    Note that you can \textit{always} pushforward vector fields via $\phi_*: \mathcal{X}(M) \rightarrow \mathcal{X}(N)$.
+    Note that you can \textit{always} pushforward vector fields via $\phi_*: \mathcal{X}(M) \rightarrow \mathcal{X}(N)$. BUT you can't always pushforward tangent vectors!!
 }\label{def:pushforward_sections}
 
 \definition{
@@ -295,7 +296,7 @@ Given a Lie algebroid $(A, \rho, [,])$ over $M$, we can \textit{uniquely} extend
     Given a Lie algebroid $A \rightarrow M$, we construct a differential graded algebra $\Omega(A) = \bigoplus \Omega^k(A)$ of the sections $\Gamma(\bigwedge^\bullet A^*)$.
     The map
     \begin{equation*}
-         d_A: \Omega^k(A) \rightarrow \Omega^{k+1}
+         d_A: \Omega^k(A) \rightarrow \Omega^{k+1}(A)
     \end{equation*}
     is called the \textit{differential} and explicitly, acting on homogeneous element $\omega \in \Gamma(\bigwedge^k A^*)$ we have:
     \begin{equation}
@@ -308,6 +309,14 @@ Given a Lie algebroid $(A, \rho, [,])$ over $M$, we can \textit{uniquely} extend
 }\label{def:exterior_algebroid}
 
 As usual we find $d_A^2 = 0$ which forms a \textit{de Rham} complex and its cohomology is the \textbf{Lie algebroid cohomology with trivial coefficients}.
+
+\remark{    
+Maybe a slightly more illuminating definition of the differential is given in \citep{Cattaneo2003}. For $\omega \in \Gamma(A^*)$ and $a_1,a_2 \in \Gamma(A)$, we have
+\begin{equation}
+    d_A \omega (a_1, a_2) = - \omega([a_1,a_2]) + (d_A \omega(a_1) )(a_2) - (d_A \omega(a_2))(a_1)
+\end{equation}
+This is easier to understand upon introducing the notation $\langle \cdot, \cdot \rangle$ for the natural pairing of section of the algebroid and its dual. This definition is extended to recover what we had before. And it's easier to see that this is a nilpotent derivation now.
+}
 
 \definition{
     Just like a regular exterior algebra, there are natural notions of \textit{interior product} and \textit{Lie derivatives}, defined for $w \in \Gamma(\bigwedge^{k} A^{*})$ and $a, a_0, \ldots, a_{k-1} \in \Gamma(A)$
@@ -393,6 +402,9 @@ In \citep{Marotta2019a}, the splitting is explored further.
 % 
 
 You can play the same game with $\Omega_E^\bullet(A) = (\Gamma(\bigwedge^{\bullet} A^{*} \otimes E), \wedge, d_A^E)$ which will lead to \textit{Lie algebroid cohomology with coefficient in E}. This maybe what I need for my problem.
-
 % subsection connections_on_la (end)
+\subsection{Lie integration of Algebroids} % (fold)
+\label{sub:lie_integration_of_algebroids}
+
+% subsection lie_integration_of_algebroids (end)
 % section lie_algebroids (end)
