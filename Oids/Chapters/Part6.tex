@@ -1,9 +1,53 @@
 % !TeX root = ../main.tex
 % 
+\newpage
 \lhead{\emph{Lecture 6}}
-\section{Lecture 6: Local Lie algebras} % (fold)
+\section{Lecture 6: Local Lie Algebras} % (fold)
 \label{sec:lecture_6_local_lie_algebras}
+% 
+We will now explore the important notion of \textbf{locality}, which we formalise from the physical intuition that things should only depend on local variables, or that an open neighbourhood around a point should be sufficient to reconstruct sections (onto whatever) at that point.
+% 
+\subsection{General Local Lie Algebras} % (fold)
+\label{sub:general_local_lie_algebras}
+% 
+\definition{
+    The \textbf{support} of a map $f : X \rightarrow Y$ is
+    \begin{equation}
+        \mathrm{supp}(f) = \left\{ x \in X \big | x \notin \mathrm{ker}(f)  \right\}
+    \end{equation}
+}\label{def:support}
+\definition{
+    A structure is \textbf{local}, if for any two maps $f,g: X \rightarrow Y$
+    \begin{equation}
+        \mathrm{supp}(fg) \subset \mathrm{supp}(f) \cap \mathrm{supp}(g)
+    \end{equation}
+    and the support is compatible with the structure.
+}\label{def:locality}
+% 
+Some examples to illumintes what we mean:
+\begin{itemize}
+    \item The algebra of smooth functions on manifold $M$ has,
+    \begin{equation*}
+        \mathrm{supp}(fg) \subset \mathrm{supp}(f) \cap \mathrm{supp}(g)
+    \end{equation*}
+    for $f,g \in C^\infty(M)$.
+    \item Similarly for a vector bundle $A \rightarrow M$,
+    \begin{equation*}
+        \mathrm{supp}(f \cdot s  ) \subset \mathrm{supp}(f) \cap \mathrm{supp}(s)
+    \end{equation*}
+    for $f \in C^\infty(M), s \in \Gamma(A)$.
+    \item The Poisson bracket in a Poisson algebra as seen in \cref{def:Poisson algebra} has manifestly the same property since it is an algebra over smooth functions.
+\end{itemize}
+% 
+\definition{
+    A vector bundle $A \rightarrow M$ is a \textbf{Local Lie Algebra} if the $\mathbb{R}$-linear bracket on the smooth sections is local.
+    \begin{equation}
+        \mathrm{supp}([a,b]) \subset \mathrm{supp}(a) \cap \mathrm{supp}(b)
+    \end{equation}
+    for $a,b \in \Gamma(A)$.
+}
 
+% subsection general_local_lie_algebras (end)
 \theorem{
     test
 }\label{thm:symbol_squiggle}

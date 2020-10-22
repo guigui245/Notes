@@ -87,7 +87,11 @@ We can generalise this definition a little.
 \definition[Second definition]{
     % The differential operators of order at most $p$ can be defined another way. 
     A \textbf{regular} differential operator of order p is an element of
-    $D^p(A) = \{ \theta \in \mathrm{End}_\mathbb{C}(A) \; \vert \theta a - a \theta = \theta(a) \in D^{p-1}(A) \quad \forall a \in A \} $, with $D^0(A) = A$.
+    \begin{equation}
+        D^p(A) = \{ \theta \in \mathrm{End}_\mathbb{C}(A) \quad \big \vert \quad\theta a - a \theta = \theta(a) \in D^{p-1}(A) \quad \forall a \in A \},
+        \label{eq:regular differential operator}
+    \end{equation}
+    with $D^0(A) = A$.
     The ring of \textbf{regular differential operators} is $D(A) = \bigcup D^p(A)$ and it is easy to see that
     \begin{equation}
         D^p(A)D^r(A) \subseteq D^{p+r}(A).

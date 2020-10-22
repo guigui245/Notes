@@ -171,13 +171,21 @@ Let's first review facts about vector bundles, but with a more `categorical' min
 Look into spanning functions and restrictions of $C^\infty$ functor.
 
 \definition{
-    Let $E \rightarrow M$ be a smooth vector bundle, a \textbf{connection} is a vector bundle morphism $\nabla: E \rightarrow DE \subset \mathrm{End}(E)$ covering the identity. (We go into some details of derivation bundle in \ref{sub:derivations}).\\
+    Let $E \rightarrow M$ be a smooth vector bundle, a \textbf{connection} is a vector bundle morphism $\nabla: E \rightarrow DE \subset \mathrm{End}(E)$ to its derivation bundle covering the identity.
+    % 
+    \footnote{
+        Derivation bundle will be studied more in \ref{sub:derivations}
+    }
+    % 
     A \textbf{Kozul connection} is a $\mathbb{R}$-linear map 
     \begin{align*}
-        \nabla: \mathcal{X}(M) \times \Gamma(E) &\rightarrow \Gamma(E)\\
+        \nabla: \mathfrak{X}(M) \times \Gamma(E) &\rightarrow \Gamma(E)\\
         (X,s) & \mapsto \nabla_X s
     \end{align*}
     such that the Liebniz identity is satisfied.
+    \begin{equation}
+        \nabla(f \cdot s) = f \nabla s + df \cdot s
+    \end{equation}
 }\label{def:kozul connection}
 % subsection vector_bundles (end)
 % 
@@ -198,15 +206,8 @@ Look into spanning functions and restrictions of $C^\infty$ functor.
 % 
 \definition{
     A \textbf{Lie Algebroid} $\left\{ A \rightarrow M; \rho: A \rightarrow TM; [\cdot, \cdot] \right\}$
-    % $\left\{ \begin{tikzcd}[row sep = tiny]
-    %     A \arrow[d]{}\\
-    %     M
-    % \end{tikzcd},  \right\} $
     over smooth manifold $M$ is a vector bundle $A \rightarrow M$ together with a derivative Lie algebra structure on $\left(\Gamma(A), \left[\cdot,\cdot\right]\right)$ and a vector bundle morphism $\rho: A \rightarrow TM$ called the \textit{anchor map}. \\
     The anchor map induces a Lie algebra homomorphism on modules of sections $\rho_* : \Gamma(A) \rightarrow \Gamma(TM) $ by the \textit{symbol-squiggle theorem} which we will see in \ref{thm:symbol_squiggle}
-    \footnote{
-        see later absolutely
-    }.\\
     with
     \begin{equation}
         \rho_*[s,s']_E = [\rho(s), \rho(s')]
@@ -377,29 +378,34 @@ We start by considering a general vector bundle morphism $F: A \rightarrow B$, a
 A good ref is \citep{Lyakhovich2003}.
 Can view the concept of a Lie algebroid as a tool to transfer the differential geometry of tangent bundles to abstract vector bundles.
 \definition{
-    A \textit{A-connection} $\nabla$ on a Lie algebroid $A \rightarrow M$ is a vector bundle morphism  $\nabla : A \rightarrow DA$, that is a Kozul connetion with the added property that it is compatible with the anchor map in the sense that given $s \in \Gamma(A)$, the induced connection on the tangent bundle $TM$ is
+    A \textit{A-connection} $~^A\nabla$ on a Lie algebroid $A \rightarrow M$ is an anchor compatible \textit{Kozul connection} on the vector bundle $A \rightarrow M$. \citep{Kotov2019}
+    So it is a bundle morphism $\nabla : A \rightarrow DA$ covering the identity\footnotemark . 
+    Simply put, this is a $C^\infty(M)$-module with values in regular differential operators of order $1$ on M
     \begin{align*}
-        \nabla : \Gamma(A) &\rightarrow \Gamma( T^*M \otimes TM) \\
-        s & \mapsto \nabla_{\rho_*(s)}
+        ~^A\nabla: \Gamma(A) \times \Gamma(TM) &\rightarrow \Gamma(TM) \\
+        (s, X) & \mapsto ~^A\nabla_s X 
     \end{align*}
+    satisfying the Leibniz identity
+    \begin{equation}
+        ~^A\nabla_s ( f \cdot X) = \rho_{*}(s)(f) X + f ~^A \nabla_s X
+    \end{equation}
+    The compatibility with the anchor is integrated in the Leibniz identity, this is really the only equation we can write down. Below we explore other connections that can be induced on the algebroid itself and the tangent bundle. In some sense the $A$-connection intertwines between connections on an abstract vector bundle and a regular tangent bundle.
 }\label{def:connection on lie algebroid}
-% 
-In \citep{Marotta2019a}, the splitting is explored further.
+\footnotetext{
+    Some subtleties I don't get here yet.            
+}
 % 
 \definition{
-    The \textbf{curvature} $R_\nabla \in \Omega^2(A)$ of connection $\nabla$ of a Lie algebroid $A \rightarrow M$ is defined as $R = \nabla^2$ or for sections of the algebroids,
-    \begin{equation}
-        R_\nabla (a,b) = [\nabla_a, \nabla_b] - \nabla_{[a,b]}
-    \end{equation}
-    for $a,b \in \Gamma(A)$. 
-    Alternatively, the curvature can be viewed as a map
+    The \textbf{curvature} $R_\nabla \in \Omega^2(A)$ of $A$-connection $\nabla$ of a Lie algebroid $A \rightarrow M$ 
     \begin{align*}
-        R_\nabla : \Gamma(TM) \rightarrow \Omega^2(A)
+        R_\nabla : \Gamma(A) \times \Gamma(A) &\rightarrow \mathrm{End}(\Gamma(TM))\\
+        R_\nabla (a,b) &= [\nabla_a, \nabla_b] - \nabla_{[a,b]}
     \end{align*}
-    If the curvarue vanishes, we say that the connection is flat and we call $(A, \nabla)$ a \textbf{representation} of the Lie algebroid over itself.
+    for $a,b \in \Gamma(A)$. 
+    Alternatively, given $X \in \Gamma(TM)$, the curvature is a $2$-form $R_\nabla \in \Omega(A)$.
+    If the curvature vanishes, we say that the connection is \textit{flat} and we call $(A, \nabla)$ a \textbf{representation} of the Lie algebroid over itself.
     This is because this definition can be extended where $A \rightarrow M$ a Lie algebroid and $E \rightarrow M$ a vector bundle and looking at morphisms between them. Fortunately we only need $A = E$.
 }\label{def:Curvature of Lie algebroid connection}
-% 
 
 You can play the same game with $\Omega_E^\bullet(A) = (\Gamma(\bigwedge^{\bullet} A^{*} \otimes E), \wedge, d_A^E)$ which will lead to \textit{Lie algebroid cohomology with coefficient in E}. This maybe what I need for my problem.
 % subsection connections_on_la (end)

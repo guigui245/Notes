@@ -1,7 +1,188 @@
 % !TeX root = ../main.tex
 % 
+\newpage
 \lhead{\emph{Lecture 5}}
 \section{Lecture 5: Differential Operators II} % (fold)
 \label{sec:lecture_5_differential_operators_ii}
+% 
+\subsection{Differential operators on Manifolds} % (fold)
+\label{sub:differential_operators_on_manifolds}
+In this section, we will build up a correspondence between the algebraic theory and the geometric theory of differential operators on manifolds.
+Throughout this lecture, we assume the algebra $\mathcal{A}$ to be unital, associative and commutative over the real, and we'll restrict very soon to the algebra of smooth functions over a manifold.
 
+\definition{
+    A \textit{point} $x$ is an algebra morphism $x: \mathcal{A} \rightarrow \mathbb{R}$. The dual $|\mathcal{A}|$ of the algebra $\mathcal{A}$ is the set of all such algebra morphisms.
+}
+\definition{
+    The set of $\mathbb{R}$-valued functions on $|\mathcal{A}|$ is denoted
+    \begin{equation}
+        \tilde{\mathcal{A}} = \left\{ f_a : |\mathcal{A}| \rightarrow \mathbb{R} \quad \big\vert \quad f_a(x) = x(a) \: \forall a \in \mathcal{A} \right\}
+    \end{equation}
+}
+\definition{
+    An algebra $\mathcal{A}$ is said to be \textit{geometric} if
+    \begin{equation}
+        \bigcap_{x \in |\mathcal{A}|} \mathrm{ker}(x) = 0.
+    \end{equation}
+    The named geometric comes from the canonical isomorphism 
+    \begin{equation}
+        \mathcal{A} \cong \tilde{\mathcal{A}},
+    \end{equation}
+    therefore putting an algebra structure on the $\mathbb{R}$-valued functions on the set $|\mathcal{A}|$.
+    This is an identification between geometric algebras and sets.
+}
+    It is possible to put a topology on such spaces, or to find a smooth structure in order to define the notion of continuous/smooth algebras.
+
+Let's consider a smooth manifold $M$ and its ring of smooth functions $C^\infty(M)$, then the ring of regular differential operators $\mathrm{Diff}(M)$ has the $2$ equivalent definitions from \cref{thm:equiv_def} 
+\footnote{
+    I'm assuming here that the spectrum of the ring of smooth functions is non-singular...    
+}:
+\begin{align}
+    \mathrm{Diff}(M) = \bigcup_p D^p(C^\infty(M))
+\end{align}
+We sometimes denote $\mathrm{Diff}_p(M) = D^p(C^\infty(M))$ for simplicity.
+\footnote{
+    Or even $\mathrm{Diff}(M, \mathbb{R})$ more precisely.
+}
+% subsection differential_operators_on_manifolds (end)
+% 
+A useful equivalence between elements of the algebra of smooth functions on a manifold, relating to differential operators is the following local relation.
+For $f,g \in C^\infty(M)$
+\begin{align*}
+    f &\sim_x^k g\\
+    \Leftrightarrow \qquad f(x) &= g(x), \quad \partial^{|k|} f (x) = \partial^{|k|} g(x),
+\end{align*}
+where $|k|$ is the order of the differential operator (potentially the sum of integers).
+This equivalence relation can be globalised into a vector bundle.
+\definition{
+    The \textbf{k-jet} bundle of a manifold $M$ is
+    \begin{equation}
+        J^k M := \bigcup_{x\in M} J^k_x M, \qquad J^k_x := \left\{ [f]^k_x , f\in C^\infty(M) \right\}
+    \end{equation}
+    under the equivalence relation defined above.
+    There is a natural projective resolution
+    \begin{equation}
+        \begin{tikzcd}
+            \ldots \xrightarrow{\pi^{k+1}} J^k M \xrightarrow{\pi^k} J^{k-1} M \rightarrow
+            \ldots \xrightarrow{\pi^1} C^\infty(M) \rightarrow 0,
+        \end{tikzcd}
+    \end{equation}
+    where the projective maps $\pi^k$ sends classes of functions in the $k$-jet to the class of function that agree on a lower order derivative.
+    There exists also a map
+    \begin{align*}
+        j^k: C^\infty(M) &\rightarrow \Gamma(J^k M)\\
+        f &\mapsto j^k f(x) := [f]^k_x
+    \end{align*}
+    sending functions to their $k-$jet.
+}\label{def:jet bundle for manifold}
+% 
+\proposition{
+    \begin{equation}
+        \mathrm{Diff}_k(M) \cong \Gamma(J^k M ^*)
+    \end{equation}
+}
+\begin{proof}{(Sketch)\\}
+    Let $\Delta \in \mathrm{Diff}_k(M) \subset \mathrm{End}(C^\infty(M))$ an $\mathbb{R}$-linear endomorphism then, by the universal property, there exists a $C^\infty(M)$-linear map $\delta : J^k M \rightarrow \mathbb{R}$ (in other words, the dual jet bundle) fitting the diagram
+    \begin{equation}
+        \begin{tikzcd}
+            C^\infty(M) \arrow["j^k_x"]{r} \arrow["\Delta"]{d}& J^k_x M \arrow["\delta"]{d} \\
+            C^\infty(M) & \mathbb{R} \arrow["\delta_*"]{l}
+        \end{tikzcd}
+    \end{equation}
+    Meaning that at the level of sections, we have 
+    \begin{equation}
+        \Delta = \delta_* \circ j^k
+    \end{equation}
+    where the pushforward $\delta_*: \Gamma(J^k M ^*) \rightarrow C^\infty(M)$ makes the diagram commute.
+\end{proof}
+\subsection{Differential operators on Vector Bundles} % (fold)
+\label{sub:differential_operators_on_vector_bundles}
+% 
+\definition{
+    Let $\mathcal{A}$ be a $\mathbb{K}$-algebra and $\mathcal{P}, \mathcal{Q}$ be $\mathcal{A}$-modules with
+    \begin{align*}
+        \mu_\mathcal{P}: \mathcal{A} \times \mathcal{P} &\rightarrow \mathcal{P}\\
+        \mu_\mathcal{Q}: \mathcal{A} \times \mathcal{Q} &\rightarrow \mathcal{Q}
+    \end{align*}
+    their respective operation.
+    For $\phi \in \mathrm{Hom}_\mathbb{K}(\mathcal{P}, \mathcal{Q})$ and $a \in \mathcal{A}$, we define the \textit{commutator} of $\mathbb{K}$-linear morphisms
+    \begin{align}
+        c_a(\phi) &\in \mathrm{Hom}_\mathbb{K}(\mathcal{P},\mathcal{Q}) \nonumber\\
+        c_a(\phi) &:= [\phi, a] = \phi \circ \mu_\mathcal{P}(a) - \mu_\mathcal{Q}(a) \circ \phi
+    \end{align}
+}
+\definition{
+    The \textbf{Differential Operators} of order less than $n$ between the $\mathcal{A}$-modules $\mathcal{P}, \mathcal{Q}$ is
+    \begin{equation}
+        D^n(\mathcal{P}, \mathcal{Q}) := \left\{ 
+        \Delta \in \mathrm{Hom}_\mathbb{K}(\mathcal{P}, \mathcal{Q}) \:\big \vert \:
+        c_{a_0} \circ \ldots \circ c_{a_n} (\Delta) = 0 \quad \forall a_i \in \mathcal{A}
+         \right\}
+    \end{equation}
+}
+Making the connection with regular differential operators on an algebra $A$ over the complex numbers in\cref{eq:regular differential operator}, the definition above is equivalent to the previous statement using $\theta a - a \theta = \theta(a) \equiv c_a(\theta) $.
+
+We previously identified geometric/continuous/smooth algebras with sets/topological spaces/manifolds. 
+Similarly, there is an equivalence between vector bundles and finitely generated projective modules over smooth algebras.
+\definition{
+    A \textit{Differential operator} between two vector bundles over the same manifold $A,B \rightarrow M$ are defined as
+    \begin{equation}
+        \mathrm{Diff}(A,B) := \bigcup_k \mathrm{Diff}_k(A,B),
+    \end{equation}
+    where $\mathrm{Diff}_k(A,B) := D^k(\Gamma(A), \Gamma(B))$ the set of $k$ differential operators on sections of vector bundles.
+}\label{def:differential operators between two vector bundles}
+% 
+\remark{
+    As we have seen, differential operators form a filtered structure and we now show that this gives the \textit{symbol short exact sequence}
+    \begin{equation}
+           0\rightarrow \mathrm{Diff}_{k-1}(A,B)\rightarrow \mathrm{Diff}_k(A,B)  \xrightarrow{\sigma}
+           \Gamma(\bigodot^k TM \otimes A^* \otimes B)  \rightarrow 0
+      \end{equation}
+    Note that since vector bundles are commutative algebras that respect the Jacobi identity, we have 
+    \begin{equation}
+        c_f \circ c_g = c_g \circ c_f
+    \end{equation}
+    for $f,g \in  C^\infty(M)$. 
+    The map $\sigma$ is called the \textbf{symbol} and completes this sequence in the following way. 
+    For $f_i \in C^\infty(M)$,
+    \begin{align*}
+        \sigma: \Delta &\mapsto \sigma_\Delta \\
+        \sigma_\Delta(df_1,\ldots,df_k) &:= c_{f_1} \circ \ldots \circ c_{f_k} (\Delta)
+    \end{align*}
+    We prove this is a multiderivation by considering the case $k=1$ and extending linearly.
+    Acting on $a \in \Gamma(A)$, for $df \in T^*M$
+    \begin{align*}
+        \sigma_\Delta(df) (a) &= [\Delta, f] (a)\\
+        &= \Delta (f \cdot a) - f \cdot \Delta(a)
+    \end{align*}
+    It is also easy to show that for any $a \in \Gamma(A)$, this acts as a derivation on functions on the manifold $M$, therefore
+    $[\Delta, \cdot](a) \in \Gamma(TM)$.    
+}
+% 
+\definition{
+    The \textbf{k-jet bundle} of a vector bundle $A \rightarrow M$ is
+    \begin{equation}
+        J^k A := \bigcup J^k_x A,
+    \end{equation}
+    where the equivalence class is on sections of the vector bundle i.e $J^k_x A = \left\{ [s]^k_x := j^k s(x) \: \big \vert s \in \Gamma(A)\right\}$.
+    The induced jet maps $j^k: \Gamma(A) \rightarrow \Gamma(J^k A)$ are defined analogously.
+    As in \cref{def:jet bundle for manifold}, we have the long exact sequence
+    \begin{equation}
+        \begin{tikzcd}
+            \ldots \xrightarrow{\pi^{k+1}} J^k A \xrightarrow{\pi^k} J^{k-1} A \rightarrow
+            \ldots \xrightarrow{\pi^1} \Gamma(A) \rightarrow 0,
+        \end{tikzcd}
+    \end{equation}
+}\label{def:jet bundles of vector bundles}
+% 
+\proposition{
+    \begin{equation}
+        \mathrm{Diff}_k(A,B) \cong \Gamma( (J^k A)^* \otimes B)
+    \end{equation}
+}
+% subsection differential_operators_on_vector_bundles (end)
+\subsection{Derivations on Vector Bundles} % (fold)
+\label{sub:derivations_on_vector_bundles}
+
+% subsection derivations_on_vector_bundles (end)
 % section lecture_5_differential_operators_ii (end)
