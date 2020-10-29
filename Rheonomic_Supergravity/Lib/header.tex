@@ -1,0 +1,405 @@
+% DO NOT put a magic command here as it messes with output directory when trying the custom build code
+% !TeX root = ../main.tex
+
+
+% To update completions and keymaps goto /home/guillaume/.config/sublime-text-3/Packages/LaTeXTools etc...
+
+% So what do I change between report, thesis and presentation?
+% change the Bib type, the geometry, the dependencies w.r.t thesis.cls, section numbering, thesis_cls mise en page, graphicx folder ?
+% one day will try to make a global header and call it GOD_mode :p
+% ---------------- Following command redefines sections as the mother ------------------
+\renewcommand\thesection{\arabic{section}}
+
+% --------------------------------------------------------------------------------------
+% --------------------------------------- Packages -------------------------------------
+% --------------------------------------------------------------------------------------
+\usepackage{alltt}
+\usepackage{amscd}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\numberwithin{equation}{section}
+\usepackage{amssymb}
+\usepackage{amsthm} 
+\usepackage[english]{babel}
+\usepackage{booktabs}
+\usepackage{bbm}
+\usepackage{bibentry}
+\usepackage[makeroom]{cancel}
+\usepackage{caption}
+\usepackage{cleveref}
+    \crefformat{section}{\S#2#1#3}
+    \crefformat{subsection}{\S#2#1#3}
+    \crefformat{subsubsection}{\S#2#1#3}
+    \crefrangeformat{section}{\S\S#3#1#4 to~#5#2#6}
+    \crefmultiformat{section}{\S\S#2#1#3}{ and~#2#1#3}{, #2#1#3}{ and~#2#1#3}
+
+\usepackage{changepage}
+\usepackage{enumitem}
+\usepackage{etoolbox}
+\usepackage{faktor}
+\usepackage{fancyhdr}
+\usepackage[T1]{fontenc}
+
+\usepackage{geometry}
+    \addtolength{\oddsidemargin}{+.5in} % left side
+    \addtolength{\evensidemargin}{+.5in} % right side
+    \addtolength{\textwidth}{1in}
+    \addtolength{\topmargin}{+.875in}
+    \addtolength{\textheight}{1.5in}
+
+\usepackage{graphicx}
+\graphicspath{ {./images/} } %wrt main.tex i think
+
+\usepackage{hyperref}
+\hypersetup{urlcolor=blue, colorlinks=false} 
+
+\usepackage{imakeidx}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[mathstyleoff]{breqn}
+\usepackage{mathdots}
+\usepackage{mathtools}
+\usepackage{microtype}
+\usepackage{multirow}
+
+% add authoryear below for presentation citation
+\usepackage[square, numbers, comma, sort&compress]{natbib}  % Use the "Natbib" style for refs
+\usepackage{pgffor}  % For repeating patterns
+\usepackage{pdflscape}
+\usepackage{pgfplots}
+    \pgfplotsset{compat=1.16}
+\usepackage{siunitx}
+\usepackage{slashed}
+\usepackage{stmaryrd}
+\usepackage{tabu}
+\usepackage{tabularx}
+\usepackage[most]{tcolorbox}
+\usepackage{tensor}
+\usepackage[normalem]{ulem}
+\usepackage{verbatim}  % Needed for the "comment" environment to make LaTeX comments
+\usepackage{Lib/vector}  % Allows "\bvec{}" and "\buvec{}" for "blackboard" style bold vectors
+\usepackage{wrapfig} 
+\usepackage{xcolor}
+\usepackage{xfrac}
+\usepackage{xspace}
+\usepackage[all]{xy}
+
+
+% --------------------------------------------------------------------------------------------
+% -------------------------------------------TIKZ---------------------------------------------
+% --------------------------------------------------------------------------------------------
+% sends warning etex btwb
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{decorations.markings}
+\usepackage{tkz-euclide}
+% remember that luluatex is needed for automatic placement BUT i have disabled the warning in
+% /usr/local/texlive/2020/texmf-dist/tex/latex/tikz-feynman/tikzlibraryfeynman.code.tex 
+\usepackage{tikz-feynman} 
+\usepackage[tikz]{bclogo}                   % For cute logo boxes
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% TIKZ - for drawing Feynman diagrams %%%%
+%%% ... use with pdflatex               %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usetikzlibrary{arrows,shapes}
+\usetikzlibrary{trees}
+\usetikzlibrary{decorations}
+\usetikzlibrary{matrix,arrows}              % For commutative diagram
+                                            % http://www.felixl.de/commu.pdf
+\usetikzlibrary{positioning}                % For "above of=" commands
+\usetikzlibrary{calc,through}               % For coordinates
+\usetikzlibrary{decorations.pathreplacing}  % For curly braces
+
+\usetikzlibrary{decorations.pathmorphing}   % For Feynman Diagrams
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{intersections}              % For interesections
+
+
+% Based on:
+% http://www.texample.net/tikz/examples/feynman-diagram/
+
+\tikzset{
+    % >=stealth', %% more traditional arrows, I don't like them
+    vector/.style={decorate, decoration={snake}, draw},
+    fermion/.style={postaction={decorate},
+        decoration={markings,mark=at position .55 with {\arrow{>}}}},
+    fermionbar/.style={draw, postaction={decorate},
+        decoration={markings,mark=at position .55 with {\arrow{<}}}},
+    fermionnoarrow/.style={},
+    gluon/.style={decorate,
+        decoration={coil,amplitude=4pt, segment length=5pt}},
+    % scalar/.style={dashed, postaction={decorate},
+    %     decoration={markings,mark=at position .55 with {\arrow{>}}}},
+    scalar/.style={dashed},
+    scalarbar/.style={dashed, postaction={decorate},
+        decoration={markings,mark=at position .55 with {\arrow{<}}}},
+    scalarnoarrow/.style={dashed,draw},
+%
+%%%     Special vectors (when you need to fine-tune wiggles)
+%   provector/.style={decorate, decoration={snake,amplitude=2.5pt}, draw},
+%   antivector/.style={decorate, decoration={snake,amplitude=-2.5pt}, draw},
+%       electron/.style={draw=black, postaction={decorate},
+%        decoration={markings,mark=at position .55 with {\arrow[draw=black]{>}}}},
+%   bigvector/.style={decorate, decoration={snake,amplitude=4pt}, draw},
+    vectorscalar/.style={loosely dotted,draw=black, postaction={decorate}},
+}
+
+% -------------------------------------------------------------------------------------------
+% ---------------------------------------ENVIRONMENT---------------------------------------
+% \newenvironment{claim}[1]{\par\noindent\underline{Claim:}\space#1}{}
+% \newenvironment{claimproof}[1]{\par\noindent\underline{Proof:}\space#1}{\hfill $\blacksquare$}
+
+% -----------------------------------------COMMANDS-----------------------------------------
+
+% \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+% \newcommand\sslashed[1]{{\mathllap{\slashed{#1}}}} replaced by \not \psi .... much better 
+\renewcommand\CancelColor{\color{red}}
+
+\def\mathcolor#1#{\@mathcolor{#1}}
+\def\@mathcolor#1#2#3{%
+  \protect\leavevmode
+  \begingroup
+    \color#1{#2}#3%
+  \endgroup
+}
+
+
+% --------------------------------------------------------------------------------------------
+
+% Theorems
+\theoremstyle{definition}
+\newtheorem*{aim}{Aim}
+\newtheorem*{assumption}{Assumption}
+\newtheorem*{axiom}{Axiom}
+\newtheorem*{claim}{Claim}
+\newtheorem{corollary}{Corollary}[subsection]
+\newtheorem*{conjecture}{Conjecture}
+\newtheorem{definition}{Definition}[subsection]
+\newtheorem{example}{Example}[subsection]
+\newtheorem*{ex}{Exercise}
+\newtheorem*{fact}{Fact}
+\newtheorem*{law}{Law}
+\newtheorem{lemma}{Lemma}[subsection]
+\newtheorem*{notation}{Notation}
+\newtheorem{note}{Note}
+\newtheorem{proposition}{Proposition}[subsection]
+\newtheorem*{question}{Question}
+\newtheorem*{rrule}{Rule}
+\newtheorem{remark}{Remark}[subsection]
+\newtheorem{theorem}{Theorem}[subsection]
+
+\newtheorem*{warning}{Warning}
+\newtheorem*{exercise}{Exercise}
+
+\newtheorem{nthm}{Theorem}[section]
+\newtheorem{nlemma}[nthm]{Lemma}
+\newtheorem{nprop}[nthm]{Proposition}
+\newtheorem{ncor}[nthm]{Corollary}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Maths Symbols %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Commented out when in autocompletions
+% ------------------------------------------------------------------------------------------
+% ---------------------------------------Matrix groups--------------------------------------
+
+%  don't really use below
+% \newcommand{\PGL}{\mathrm{PGL}}
+% \newcommand{\PSL}{\mathrm{PSL}}
+% \newcommand{\PSO}{\mathrm{PSO}}
+% \newcommand{\PSU}{\mathrm{PSU}}
+% \newcommand{\Spin}{\mathrm{Spin}}
+% \newcommand{\Sp}{\mathrm{Sp}}
+% ------------------------------------------------------------------------------------------
+%------------------------------------- Matrix algebras -------------------------------------
+% \newcommand{\gl}{\mathfrak{gl}}
+% \newcommand{\ort}{\mathfrak{o}}
+% \newcommand{\so}{\mathfrak{so}}
+% \newcommand{\su}{\mathfrak{su}}
+% \renewcommand{\sl}{\mathfrak{sl}}
+% \newcommand{\uu}{\mathfrak{u}}
+
+% ------------------------------------------------------------------------------------------
+% --------------------------------------- Special sets ---------------------------------------
+% \newcommand{\Cx}{\mathbb{C}}
+% \newcommand{\CP}{\mathbb{CP}}
+% \newcommand{\RP}{\mathbb{RP}}
+
+% conflits with greek letters
+% \newcommand{\N}{\mathbb{N}}
+% \newcommand{\Q}{\mathbb{Q}}
+% \newcommand{\R}{\mathbb{R}}
+% \newcommand{\Z}{\mathbb{Z}}
+% % don't use those
+% \newcommand{\GG}{\mathbb{G}}
+% \renewcommand{\H}{\mathbb{H}}
+% \newcommand{\T}{\mathbb{T}}
+
+% -------------------------------------------------------------------------------------------
+% ----------------------------------------- Brackets -----------------------------------------
+% \newcommand{\abs}[1]{\left\lvert #1\right\rvert}
+% \newcommand{\bket}[1]{\left\lvert #1\right\rangle}
+% \newcommand{\brak}[1]{\left\langle #1 \right\rvert}
+% \newcommand{\braket}[2]{\left\langle #1\middle\vert #2 \right\rangle}
+% \newcommand{\bra}{\langle}
+% \newcommand{\ket}{\rangle}
+% \newcommand{\norm}[1]{\left\lVert #1\right\rVert}
+% \newcommand{\normalorder}[1]{\mathop{:}\nolimits\!#1\!\mathop{:}\nolimits}
+% \newcommand{\tv}[1]{|#1|}
+% \renewcommand{\vec}[1]{\boldsymbol{\mathbf{#1}}}
+
+% ----------------------------------------- not-math -----------------------------------------
+% \newcommand{\bolds}[1]{{\bfseries #1}}
+% \newcommand{\cat}[1]{\mathsf{#1}}
+% \newcommand{\ph}{\,\cdot\,}
+% \newcommand{\term}[1]{\emph{#1}\index{#1}}
+% \newcommand{\phantomeq}{\hphantom{{}={}}}
+
+% -----------------------------------------------------------------------------------------
+%----------------------------------------- Algebra-----------------------------------------
+% \DeclareMathOperator{\adj}{adj}
+% \DeclareMathOperator{\Aut}{Aut}
+% \DeclareMathOperator{\End}{End}
+% \DeclareMathOperator{\Hom}{Hom}
+% \DeclareMathOperator{\id}{id}
+% \DeclareMathOperator{\im}{im}
+% \DeclareMathOperator{\tr}{tr}
+% \DeclareMathOperator{\Tr}{Tr}
+% \DeclareMathOperator{\Span}{\mathrm{Span}}
+% \newcommand{\Der}{\mathrm{Der}}
+% \newcommand{\Cech}[1]{\check{#1}}
+
+% don't use those
+% \newcommand{\Gr}{\mathrm{Gr}}
+% \DeclareMathOperator{\Ann}{Ann}
+% \DeclareMathOperator{\Char}{char}
+% \DeclareMathOperator{\disc}{disc}
+% \DeclareMathOperator{\dom}{dom}
+% \DeclareMathOperator{\fix}{fix}
+% \DeclareMathOperator{\image}{image}
+% \newcommand{\Bilin}{\mathrm{Bilin}}
+% \newcommand{\Frob}{\mathrm{Frob}}
+
+% -------------------------------------------------------------------------------------------
+% ---------------------------------------- Topology  ----------------------------------------
+% \newcommand{\pr}{\mathrm{pr}}
+% \newcommand{\pt}{\mathrm{pt}}
+% \newcommand{\dR}{\mathrm{dR}}
+% \newcommand{\Hol}{\mathrm{Hol}}
+% \newcommand{\hol}{\mathfrak{hol}}
+
+
+% ------------------------------------------ Others ----------------------------------------- 
+
+% % should autocomplete this
+% \renewcommand{\d}{\mathrm{d}}
+
+% \newcommand\Art{\mathrm{Art}} %typo here?
+% \newcommand{\B}{\mathcal{B}}
+% \newcommand{\cU}{\mathcal{U}}
+% \newcommand{\D}{\mathrm{D}}
+% \newcommand{\exterior}{\mathchoice{{\textstyle\bigwedge}}{{\bigwedge}}{{\textstyle\wedge}}{{\scriptstyle\wedge}}}
+% \newcommand{\F}{\mathbb{F}}
+% % \newcommand{\G}{\mathcal{G}}
+% \newcommand{\haut}{\mathrm{ht}}
+% \newcommand{\Id}{\mathrm{Id}}
+% \newcommand{\lie}[1]{\mathfrak{#1}}
+% \newcommand{\op}{\mathrm{op}}
+% \newcommand{\Oc}{\mathcal{O}}
+% \newcommand{\Ps}{\mathcal{P}}
+% \newcommand{\qeq}{\mathrel{``{=}"}}
+% \newcommand{\Rs}{\mathcal{R}}
+% \newcommand{\Vect}{\mathrm{Vect}}
+% \newcommand{\wsto}{\stackrel{\mathrm{w}^*}{\to}}
+% \newcommand{\wt}{\mathrm{wt}}
+% \newcommand{\wto}{\stackrel{\mathrm{w}}{\to}}
+% \renewcommand{\P}{\mathbb{P}}
+% %\renewcommand{\F}{\mathcal{F}}
+
+
+% \let\Im\relax
+% \let\Re\relax
+
+% % should autocomplete those
+% \DeclareMathOperator{\Diff}{Diff}
+% \DeclareMathOperator{\Ext}{Ext}
+% \DeclareMathOperator{\Sym}{Sym}
+
+% \DeclareMathOperator{\area}{area}
+% \DeclareMathOperator{\card}{card}
+% \DeclareMathOperator{\ccl}{ccl}
+% \DeclareMathOperator{\ch}{ch}
+% \DeclareMathOperator{\cl}{cl}
+% \DeclareMathOperator{\cls}{\overline{\mathrm{span}}}
+% \DeclareMathOperator{\coker}{coker}
+% \DeclareMathOperator{\conv}{conv}
+% \DeclareMathOperator{\cosec}{cosec}
+% \DeclareMathOperator{\cosech}{cosech}
+% \DeclareMathOperator{\covol}{covol}
+% \DeclareMathOperator{\diag}{diag}
+% \DeclareMathOperator{\diam}{diam}
+% \DeclareMathOperator{\energy}{energy}
+% \DeclareMathOperator{\erfc}{erfc}
+% \DeclareMathOperator{\erf}{erf}
+% \DeclareMathOperator*{\esssup}{ess\,sup}
+% \DeclareMathOperator{\ev}{ev}
+% \DeclareMathOperator{\fst}{fst}
+% \DeclareMathOperator{\Fit}{Fit}
+% \DeclareMathOperator{\Frac}{Frac}
+% \DeclareMathOperator{\Gal}{Gal}
+% \DeclareMathOperator{\gr}{gr}
+% \DeclareMathOperator{\hcf}{hcf}
+% \DeclareMathOperator{\Im}{Im}
+% \DeclareMathOperator{\Ind}{Ind}
+% \DeclareMathOperator{\Int}{Int}
+% \DeclareMathOperator{\Isom}{Isom}
+% \DeclareMathOperator{\lcm}{lcm}
+% \DeclareMathOperator{\length}{length}
+% \DeclareMathOperator{\Lie}{Lie}
+% \DeclareMathOperator{\like}{like}
+% \DeclareMathOperator{\Lk}{Lk}
+% \DeclareMathOperator{\Maps}{Maps}
+% \DeclareMathOperator{\orb}{orb}
+% \DeclareMathOperator{\ord}{ord}
+% \DeclareMathOperator{\otp}{otp}
+% \DeclareMathOperator{\poly}{poly}
+% \DeclareMathOperator{\rank}{rank}
+% \DeclareMathOperator{\rel}{rel}
+% \DeclareMathOperator{\Rad}{Rad}
+% \DeclareMathOperator{\Re}{Re}
+% \DeclareMathOperator*{\res}{res}
+% \DeclareMathOperator{\Res}{Res}
+% \DeclareMathOperator{\Ric}{Ric}
+% \DeclareMathOperator{\rk}{rk}
+% \DeclareMathOperator{\Rees}{Rees}
+% \DeclareMathOperator{\Root}{Root}
+% \DeclareMathOperator{\sech}{sech}
+% \DeclareMathOperator{\sgn}{sgn}
+% \DeclareMathOperator{\snd}{snd}
+% \DeclareMathOperator{\Spec}{Spec}
+% \DeclareMathOperator{\spn}{span}
+% \DeclareMathOperator{\stab}{stab}
+% \DeclareMathOperator{\St}{St}
+% \DeclareMathOperator{\supp}{supp}
+% \DeclareMathOperator{\Syl}{Syl}
+% \DeclareMathOperator{\vol}{vol}
+
+% % who cares?
+% % --------------------------------------- Probability ---------------------------------------
+% \DeclareMathOperator{\Bernoulli}{Bernoulli}
+% \DeclareMathOperator{\betaD}{beta}
+% \DeclareMathOperator{\bias}{bias}
+% \DeclareMathOperator{\binomial}{binomial}
+% \DeclareMathOperator{\corr}{corr}
+% \DeclareMathOperator{\cov}{cov}
+% \DeclareMathOperator{\gammaD}{gamma}
+% \DeclareMathOperator{\mse}{mse}
+% \DeclareMathOperator{\multinomial}{multinomial}
+% \DeclareMathOperator{\Poisson}{Poisson}
+% \DeclareMathOperator{\var}{var}
+% \newcommand{\E}{\mathbb{E}}
+% \newcommand{\Prob}{\mathbb{P}}

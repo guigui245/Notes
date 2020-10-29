@@ -1,0 +1,176 @@
+% !TeX root = ../main.tex
+
+% ---------------------------------------------------------------------------------------------
+\section{Lecture 1} % (fold)
+\label{sec:lecture_1}
+Mostly covered in \citep{Wise2010}
+
+\subsection{Klein Geometry} % (fold)
+\label{sub:klein_geometry}
+
+\definition{
+    Homogenous spaces, group action on LEFT $(M,G)$ manifold, G Lie group action that is transitive.
+    That is $\forall x,y \in M  \exists g \in G | gx = y$.
+    For element $o \in G$, the stab $G_o = \left\{ g \in G | g o=  o \right\}$, it turns out that 
+    \begin{equation}
+        G / G_o \cong M
+    \end{equation}
+    a G-invariant diffeomorphism.
+
+    If G is a group and H a closed subgroup, then $G/H$ is a homogeneous space.
+}
+
+\definition{ (Klein Geometry)\\
+    A Klein geometry is a pair $(G,H)$ where $H$ closed subgroup of G and $G/H$ is connected.
+    The last condition is not necessary and not always there but is convenient.
+}\label{def:Klein geo}
+
+\remark{
+    Given a Klein geometry $(G,H)$, we can get a pair of Lie algebra 
+    $(G,H) \xrightarrow{Lie} (\mathfrak{g}, \mathfrak{h})$. (See Lie functor??)
+    gives a short exact sequence of $H$-modules
+    \begin{equation}
+         0\rightarrow \mathfrak{h}\rightarrow \mathfrak{g} \rightarrow \frac{\mathfrak{g}}{\mathfrak{h}} \rightarrow 0
+    \end{equation}
+    If the sequence splits then get 
+    \begin{align*}
+        \mathfrak{g} = \mathfrak{h} \oplus \mathfrak{m} \\
+        \mathfrak{m} \cong \mathfrak{g}/ \mathfrak{h}
+    \end{align*}
+    as $H$-modules. m is a submodule, we call it reductive?
+    Put in the table here and explain.    
+}
+
+Given $G \circlearrowright M$ such that (M,G) homogeneuous
+then the 
+\begin{equation}
+    (r_g)_* : T_x M \rightarrow T_{gx} M
+\end{equation}
+
+Taking an origin $o \in M$ and let $H = G_o$ then for $h \in H$
+$(l_h)_* \in \mathrm{GL}(T_oM)$
+that sends $h \rightarrow (l_h)_*$ is a rep of $H$ on $T_oM$ called the linear isotropy rep of $(M,G,o)$.
+
+If $M \cong G/H$, 
+\begin{equation}
+    T_oM \xrightarrow{\sim} T_H(G/H) \xrightarrow{\sim } \mathfrak{g}/ \mathfrak{h} \cong m
+\end{equation}
+
+\begin{equation}
+     0\rightarrow T_eH \rightarrow T_eG \rightarrow T_H(G/H) \rightarrow 0
+\end{equation}
+
+the upshot is we get 
+\begin{equation}
+    T_oM \cong \mathfrak{g}/ \mathfrak{h} \cong \mathfrak{m}
+\end{equation}
+and linear structures on $\mathfrak{g}/\mathfrak{h}$ induce a \textit{geometric } structures on $M$.
+
+The correspondances between $H$-invariant tensors of $T_oM$ and $G$-equivariant tensor fields on $M$.
+\example{
+    \begin{equation}
+        \tau \in T_oM  \rightarrow t_o = \tau \\
+    \end{equation}
+    such that $t_{g \cdot o} = (l_g)_* \tau$
+    this is well defined because for $g' o = g o$ we have 
+    $g'g^{-1} \in H$ by H-invariance of $\tau$, meaning $t$ is well defined.
+    THe other way is by evaluating at $o \in M$.
+}
+
+In particular, a pseudo inner product on $\mathfrak{g}/\mathfrak{h}$ gives rise to a pseudo-riemanian metric on M.
+
+\definition{
+    (Metric Klein geometry) \\
+    $(G,H, \eta)$
+    \begin{itemize}
+        \item $(G,H)$ klein geo
+        \item $\eta$ is a pseudo inner product on $g/h$ which is $H$-invariant
+    \end{itemize}
+}
+\example{
+    \begin{itemize}
+        \item $G = ISO_o(\mathbb{R}^{d-1,1}) \cong SO_o(d-1,1) \ltimes \mathbb{R}^{d-1,1}$
+        , with H the $SO$ part, then 
+        $G/H \cong \mathbb{R}^{d-1,1}$ has the structure steming from the lie algebra structure of $g/h \cong \mathbb{R}^{d-1,1}$
+        \item $G = ISO_o(\mathbb{R}^d)$ with $H = SO(d)$ then $G/H \cong \mathbb{R}^d$
+    \end{itemize}
+}\label{ex:}
+
+\begin{equation*}
+    \begin{tikzcd}
+        &ISO_o(n,1) \arrow["\textrm{space of spacelike hyperplane}", swap]{dl} \arrow["/\mathbb{R}^{n,1}"]{dr}&\\
+        ISO_o(n) \arrow["/\mathbb{R}^n"]{dr}&&SO_0(n,1) \arrow["\textrm{/velocity space}"]{dl} \\
+        &SO(n)&
+    \end{tikzcd}
+\end{equation*}
+
+\begin{equation*}
+    \begin{tikzcd}
+        &SO(4,1) \arrow["dS"]{dr} \arrow["H^4"]{dl}&\\
+        SO(4) \arrow["S^3"]{dr}&&SO(3,1) \arrow["\textrm{velocity space}"]{dl}\\
+        &SO(3)&
+    \end{tikzcd}
+\end{equation*}
+ISO means inhomogeneous something
+% subsection klein_geometry (end)
+\subsection{Cartan geometry} % (fold)
+\label{sub:cartan_geometry}
+\definition{
+    (Cartan geom)\\
+    $(\pi: P \rightarrow M, A)$ modelled on a Klein geometry $(G,H)$ is a principle right H-bundle $P \rightarrow M$ with a Cartan connection  $A \in \Omega^1(P, \mathfrak{g})$.
+    Noting that the cartan connection takes values in the larger Lie algebra.
+    this satisfies the conditions
+    \begin{itemize}
+        \item $A_p : T_pP \rightarrow \mathfrak{g}$ is a linear isomorphism 
+        \item $(R_h)^* A = \mathrm{Ad}_{h^{-1}} \circ A$ for all $h \in H$
+        \item $A(\xi_X) = X$ for $X \in \mathfrak{h}$ for fundamental vector field $\xi$ of 
+        $H \circlearrowright P$, an Ehresmannn-like connection
+    \end{itemize}
+}\label{def:Cartan geo}
+\remark{
+    Because of the first condition, 
+    \begin{align*}
+        dim P &= dim G\\
+        dim M &= dim (G/H) \\
+        (A_p)^{-1} :& \mathfrak{g} \rightarrow T_pP \\
+        (A_0)^{-1} :& \mathfrak{g} \rightarrow \mathfrak{X}(P)\\ 
+        (A_0)^{-1} :& \mathfrak{h} \rightarrow \mathfrak{X}_{\textrm{vert}}(P)\\
+        X &\mapsto \xi_X
+    \end{align*}
+If $G/H$ is metrci klein, M inherits a ùetric of saùe sign with 
+\begin{equation}
+    T_xM \cong T_pP / \mathrm{ker}(\pi_*) \cong \mathfrak{g}/\mathfrak{h} \cong \mathfrak{m}
+\end{equation}    
+
+\begin{equation}
+    TM \cong P \times_H \mathfrak{g}/\mathfrak{h}
+\end{equation}
+}
+\definition{
+    The curvature of a cartan geometry
+    \begin{equation}
+        F(A) = dA + \frac{1}{2} [A,A] \in \Omega^2(P, \mathfrak{g})
+    \end{equation}
+}
+
+Diagrams diagrams
+
+Take curvature of cartan connection 
+
+\begin{align*}
+    F[A] &= dA + \frac{1}{2}[A,A] \\
+    &=d \omega + de + \frac{1}{2} [\omega + e, \omega + e] \\
+    &= \left(
+    d \omega + \frac{1}{2}[\omega, \omega]_h + [\omega , e]_h + [e,e]_h
+    +de + \frac{1}{2}[\omega,\omega]_m + [\omega,e]_m + \frac{1}{2}[e,e,]_h
+    \right)
+\end{align*}
+colors:
+
+$\hat{F} = \Omega(\omega) + \frac{1}{2}[e,e]_h$,
+$T = d_\omega e + \frac{1}{2} [e,e]_m$
+If $\hat{F}$ is flat, then $\Omega(\omega) = -\frac{1}{2}[e,e]_h$ and
+$T = 0$ then $d_\omega e = \frac{1}{2}[e,e]_m$
+
+% subsection cartan_geometry (end)
+% section lecture_1 (end)
