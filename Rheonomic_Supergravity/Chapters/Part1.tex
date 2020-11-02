@@ -1,176 +1,352 @@
 % !TeX root = ../main.tex
 
-% ---------------------------------------------------------------------------------------------
+% --------------------------------------------------------------------------------------------
 \section{Lecture 1} % (fold)
 \label{sec:lecture_1}
-Mostly covered in \citep{Wise2010}
+Mostly covered in \citep{Wise2010}, lectured by comrade Andrew Beckett.
 
 \subsection{Klein Geometry} % (fold)
 \label{sub:klein_geometry}
-
-\definition{
-    Homogenous spaces, group action on LEFT $(M,G)$ manifold, G Lie group action that is transitive.
-    That is $\forall x,y \in M  \exists g \in G | gx = y$.
-    For element $o \in G$, the stab $G_o = \left\{ g \in G | g o=  o \right\}$, it turns out that 
-    \begin{equation}
-        G / G_o \cong M
-    \end{equation}
-    a G-invariant diffeomorphism.
-
-    If G is a group and H a closed subgroup, then $G/H$ is a homogeneous space.
+In the lecture, let $M$ denote a smooth manifold, $G$ a Lie group and throughout, $G \circlearrowright M$ \textit{transitively}.
+\footnotemark
+\footnotetext{
+    That is $\forall x,y \in M \: ,  \exists g \in G \textrm{ such that } g \cdot x = y$.
 }
-
+% 
+\definition{
+    A homogeneous space $(M,G)$ is a smooth manifold $M$ together with a transitive Lie group action $G \circlearrowright M$.
+    Right now we stick with a \textbf{left} group action, but might change in the notes depending on Andrew's taste.
+    We study homogeneous spaces by considering subgroups $H \subset G$, and looking at the geometry of the quotient space, which can be thought as the space modelled on $H$.
+}\label{def:Homogeneous space}
+% 
+If we pick a point $o \in M$ to act as an "origin", the \textit{stabiliser} which fixes $o$ is the subgroup 
+\begin{equation}
+    \mathrm{stab}_o (G) :=  \left\{ g \in G \:|\:  g \cdot o=  o \right\}.
+\end{equation}
+We denote this subgroup of symmetries leaving $o$ invariant $\mathrm{stab}_o (G) = G_o$, or the \textit{isotropy} subgroup at $o$.
+There exists an isomorphism
+\begin{align*}
+    M &\cong G / G_o \\
+    g \cdot o &\mapsto g \: G_0
+\end{align*}
+which is a  $G_0$-invariant diffeomorphism. It turns out that this is independent of the origin chosen as stabiliser subgroups at different points are conjugate by transitivity of the group action.
+% 
+\definition{
+    Given a homogeneous space $(M,G)$, and closed subgroup $H \subset G$ the space with "features" $H$ is $G/H$ and it is also a homogeneous space.
+    Sometimes, this quotient is called the homogeneous space in the literature.
+}\label{def:Quotient Homogeneous space}
+% 
+% 
 \definition{ (Klein Geometry)\\
-    A Klein geometry is a pair $(G,H)$ where $H$ closed subgroup of G and $G/H$ is connected.
-    The last condition is not necessary and not always there but is convenient.
-}\label{def:Klein geo}
-
-\remark{
-    Given a Klein geometry $(G,H)$, we can get a pair of Lie algebra 
-    $(G,H) \xrightarrow{Lie} (\mathfrak{g}, \mathfrak{h})$. (See Lie functor??)
-    gives a short exact sequence of $H$-modules
+    A (smooth connected) Klein geometry is a pair $(G,H)$ where $H$ closed subgroup of G such that $G/H$ is connected. 
+    Note that 
     \begin{equation}
-         0\rightarrow \mathfrak{h}\rightarrow \mathfrak{g} \rightarrow \frac{\mathfrak{g}}{\mathfrak{h}} \rightarrow 0
+        \begin{tikzcd}
+            G \arrow["\pi"]{d} \\ G/H
+        \end{tikzcd}
     \end{equation}
-    If the sequence splits then get 
-    \begin{align*}
-        \mathfrak{g} = \mathfrak{h} \oplus \mathfrak{m} \\
-        \mathfrak{m} \cong \mathfrak{g}/ \mathfrak{h}
-    \end{align*}
-    as $H$-modules. m is a submodule, we call it reductive?
-    Put in the table here and explain.    
+    is automatically a principal $H$-bundle, because the fibres are left $H$-cosets and the action of $H$ on the fibres is obviously an $H$-torsor.
+    % The last condition is not necessary and not always there but it is convenient.
+}\label{def:Klein geometry}
+% 
+% 
+Consider a Klein geometry $(G,H)$, then the Lie functor gives us a pair of Lie algebras 
+$(G,H) \xrightarrow{Lie} (\mathfrak{g}, \mathfrak{h})$, where $\mathfrak{h}$ is a Lie subalgebra of $\mathfrak{g}$.
+Notably, this induces a short exact sequence of $H$-modules 
+\footnote{
+    A abelian group on which $H$ acts compatibly. Here it is the vector space structure that is the abelian group.    
 }
-
-Given $G \circlearrowright M$ such that (M,G) homogeneuous
-then the 
 \begin{equation}
-    (r_g)_* : T_x M \rightarrow T_{gx} M
+    \begin{tikzcd}
+        0 \arrow[]{r}& \mathfrak{h} \arrow[]{r} & \mathfrak{g} \arrow[]{r}& \mathfrak{g}/ \mathfrak{h} \arrow[bend right=-60, color= green]{l} \arrow[]{r}& 0
+    \end{tikzcd}
+    \label{eq: ses of H-modules}
 \end{equation}
-
-Taking an origin $o \in M$ and let $H = G_o$ then for $h \in H$
-$(l_h)_* \in \mathrm{GL}(T_oM)$
-that sends $h \rightarrow (l_h)_*$ is a rep of $H$ on $T_oM$ called the linear isotropy rep of $(M,G,o)$.
-
-If $M \cong G/H$, 
-\begin{equation}
-    T_oM \xrightarrow{\sim} T_H(G/H) \xrightarrow{\sim } \mathfrak{g}/ \mathfrak{h} \cong m
-\end{equation}
-
-\begin{equation}
-     0\rightarrow T_eH \rightarrow T_eG \rightarrow T_H(G/H) \rightarrow 0
-\end{equation}
-
-the upshot is we get 
-\begin{equation}
-    T_oM \cong \mathfrak{g}/ \mathfrak{h} \cong \mathfrak{m}
-\end{equation}
-and linear structures on $\mathfrak{g}/\mathfrak{h}$ induce a \textit{geometric } structures on $M$.
-
-The correspondances between $H$-invariant tensors of $T_oM$ and $G$-equivariant tensor fields on $M$.
-\example{
-    \begin{equation}
-        \tau \in T_oM  \rightarrow t_o = \tau \\
-    \end{equation}
-    such that $t_{g \cdot o} = (l_g)_* \tau$
-    this is well defined because for $g' o = g o$ we have 
-    $g'g^{-1} \in H$ by H-invariance of $\tau$, meaning $t$ is well defined.
-    THe other way is by evaluating at $o \in M$.
-}
-
-In particular, a pseudo inner product on $\mathfrak{g}/\mathfrak{h}$ gives rise to a pseudo-riemanian metric on M.
-
+% 
 \definition{
-    (Metric Klein geometry) \\
-    $(G,H, \eta)$
+    If a short exact sequence of $H$-modules as above splits, then we call $(\mathfrak{g},\mathfrak{h})$ \textbf{reductive} and define the orthogonal complement $\mathfrak{m} \subseteq \mathfrak{g}$ as the $H$-module such that
+    \begin{align}
+        \mathfrak{g} = \mathfrak{h} \oplus \mathfrak{m}
+    \end{align}
+    A consequence of a splitting is 
+    \begin{equation}
+        [\mathfrak{h}, \mathfrak{m}] \subseteq \mathfrak{m}. 
+    \end{equation}
+    The reductive case will always be denoted by green throughout the rest of this lecture.
+}\label{def:reductive}
+% 
+\definition{
+    A pair of \textit{reductive} Lie algebras $(\mathfrak{g,h})$ is called \textbf{symmetric} if it further follows the condition
+    \begin{equation}
+        [\mathfrak{m,m}] \subseteq \mathfrak{h}.
+    \end{equation}
+    We will follow the convention of denoting in blue the symmetric case from now on.
+}\label{def:Symmetric pair}
+% 
+The terminology is summarised in the table below for $\mathfrak{m} = \mathfrak{g/h}$ (in general):
+\begin{center}
+$
+    \begin{tabu}{ c|c|c|c }  
+    \subseteq&General&Reductive& Symmetric \\
+    \hline
+    \left[\mathfrak{h}, \mathfrak{h}\right]&\mathfrak{h}&{\color{green}\mathfrak{h}}&{\color{blue}\mathfrak{h}}\\
+    \left[\mathfrak{h}, \mathfrak{m}\right]&\mathfrak{h} \oplus \mathfrak{m} & {\color{green}\mathfrak{m} } &{\color{blue}\mathfrak{m}}\\
+    \left[\mathfrak{m}, \mathfrak{m}\right]& \mathfrak{h} \oplus \mathfrak{m}  &{\color{green} \mathfrak{h} \oplus \mathfrak{m}}& {\color{blue} \mathfrak{h}}    
+    \end{tabu}
+$
+\end{center}
+\example{
+    Consider the homogeneous space  $G \circlearrowright M$. The left group action induces a morphism of tangent bundles
+    \begin{equation}
+        (L_g)_* : T_x M \rightarrow T_{g \cdot  x}M.
+    \end{equation}
+    Considering the isotropy subgroup $H := G_o$ for a chosen origin $o \in M$, then for $h \in H$, the pushforward $(L_h)_* \in \mathrm{GL}(T_oM) $ is an automorphism of the tangent bundle at the origin.
+    Further, the map
+    \begin{align*}
+        \rho : H &\rightarrow \mathrm{GL}(T_oM) \\
+        h &\mapsto (L_h)_*
+    \end{align*}
+    is a representation of $H$ on $T_oM$. We call this the \textit{linear isotropy representation} of $(M, G, o)$.
+}\label{ex:Linear isotropy representation}
+% 
+\remark{
+    For a Klein geometry $M \cong G/H$, we have the sequence of isomorphisms of $H$-representations
+    \begin{equation}
+        T_oM \xrightarrow{\sim} T_H(G/H) \xrightarrow{\sim } \mathfrak{g/h} 
+        \quad {\color{green} \cong m}
+        \label{eq:isomorphism of H reps}
+    \end{equation}
+    which can be constructed from the transitivity of the group action.
+%  
+    However, looking at the tangent bundles on the group manifolds we find the following short exact sequence
+    \begin{equation}
+         0\rightarrow T_eH \xrightarrow{(L_e)_*} T_eG \xrightarrow{(\pi_e)_*} T_H(G/H) \rightarrow 0,
+    \end{equation}
+    which is really the same as \cref{eq: ses of H-modules}.
+    But noticing the isomorphisms of $H$-representations in \cref{eq:isomorphism of H reps}, the tangent bundle of the manifold $M$ at the origin is modelled on 
+    \begin{equation}
+        T_oM \cong \mathfrak{g}/ \mathfrak{h} \quad {\color{green} \cong \mathfrak{m}}
+    \end{equation}
+    This facts leads us to notice a broader correspondence between geometry and algebra for Klein geometries.
+}
+% 
+\proposition{ (Correspondence)\\
+    Let $(G,H)$ be a Klein geometry, then linear structures on $\mathfrak{g/h}$ correspond to geometric structures on the manifold $M \cong G/H$ in the following sense:
+    \begin{equation}
+        \left\{ 
+        H\textrm{-invariant tensors of } \mathfrak{g/h} \cong T_oM
+         \right\}
+         \qquad \longleftrightarrow \qquad
+         \left\{ 
+         G\textrm{-invariant tensor fields on } M
+          \right\}
+    \end{equation}
+}\label{prop:correspondance between algebraic and geometric}
+% 
+\begin{proof}
+    $(\Rightarrow)$\\
+    Consider $\tau \in \bigotimes T_oM$ an $H$-invariant tensor, such that $(L_h)_* \tau = \tau$ for $h \in H$.
+    Consider the map $\tau \mapsto T_o$ for a fixed origin, we then left translate by $g \in G$ to span the manifold. 
+    So define 
+    \begin{align*}
+        T_{g \cdot o} = (L_g)_* T_o \:\in \Gamma( \bigotimes T_{g \cdot o}M).
+    \end{align*}
+    for all $g \in G$.
+    This map is well defined since if $g \cdot o = g' \cdot o$ are two left translation yielding the same tensor field at $T_{g \cdot o} = T_{g' \cdot o}$, then $g^{-1}g' \in H$ an isotropy.
+    But $\tau = T_o$ is H-invariant implying that $(L_{g^{-1}g'})_* T_o = T_o$ is $G$-invariant.
+    \\
+    $(\Leftarrow)$\\
+    Given a $G$-invariant $T \in \Gamma(TM)$, the evaluation map $\mathrm{ev}_o : \Gamma(TM) \rightarrow T_oM$ sends $T \rightarrow T_o$ which has isotropy group $H$.
+\end{proof}
+% 
+In particular, a pseudo inner product on $\mathfrak{g/h}$ gives rise to a pseudo-riemannian metric on M.
+% 
+\definition{
+    A Metric Klein geometry $(G,H, \eta)$ is 
     \begin{itemize}
-        \item $(G,H)$ klein geo
-        \item $\eta$ is a pseudo inner product on $g/h$ which is $H$-invariant
+        \item $(G,H)$ a Klein geometry
+        \item $\eta$ is a pseudo inner product on $\mathfrak{g/h}$ which is $H$-invariant in the sense describe in the proposition above.
     \end{itemize}
 }
+% 
+Let's just recall the isometries of flat spacetime for completeness.
+\definition{
+    The Poincaré group $\mathrm{ISO}(d-1,1)$ of $d$-dimensional Minkowski spacetime is the isotropy group that leaves the split quadratic form invariant. 
+    We also call it the \textit{inhomogeneous special orthonormal} group as it consists of disconnected components.
+    It consists of the semidirect product of the Lorentz group (not \textbf{necessarily} orthochronous) and the group of spacetime translations,
+    \begin{equation}
+        \mathrm{ISO}(d-1,1) \cong \mathrm{SO}(d-1,1) \ltimes \mathbbm{R}^{d-1,1}
+    \end{equation}
+    with multiplication
+    \begin{equation}
+        (g, \alpha) \cdot (f, \beta) = (g f, \alpha + f \cdot \beta)
+    \end{equation}
+}\label{def:Poincaré group}
+% 
 \example{
-    \begin{itemize}
-        \item $G = ISO_o(\mathbb{R}^{d-1,1}) \cong SO_o(d-1,1) \ltimes \mathbb{R}^{d-1,1}$
-        , with H the $SO$ part, then 
-        $G/H \cong \mathbb{R}^{d-1,1}$ has the structure steming from the lie algebra structure of $g/h \cong \mathbb{R}^{d-1,1}$
-        \item $G = ISO_o(\mathbb{R}^d)$ with $H = SO(d)$ then $G/H \cong \mathbb{R}^d$
-    \end{itemize}
-}\label{ex:}
-
-\begin{equation*}
-    \begin{tikzcd}
-        &ISO_o(n,1) \arrow["\textrm{space of spacelike hyperplane}", swap]{dl} \arrow["/\mathbb{R}^{n,1}"]{dr}&\\
-        ISO_o(n) \arrow["/\mathbb{R}^n"]{dr}&&SO_0(n,1) \arrow["\textrm{/velocity space}"]{dl} \\
+    % 
+    Using our new-found understanding of the Poincaré group, we understand it as a homogeneous space. For example, taking $G = ISO(d-1,1)$ and considering the isotropy group at an origin $o$ to be the Lorentz group $H = \mathrm{SO}(d-1,1)$. 
+    The manifold $G/H \cong \mathbbm{R}^{d-1,1}$ is connected and at the level of algebras $\mathfrak{g/h} \cong \mathbb{R}^{d-1,1}$.
+    Further, the bilinear form on $\mathfrak{g/h}$ is invariant under rotations ($H$-invariant). 
+    Therefore, the Poincaré group with its Lorentz subgroups is a Klein geometry. 
+    A similar argument can be made for Euclidean Poincaré groups.
+    It is interesting to note however, that using the correspondence established in \cref{prop:correspondance between algebraic and geometric}, the Lorentz invariant bilinear form on $\mathfrak{g/h}$ corresponds to Poincaré invariant tensor fields on the full Minkowski spacetime.
+}\label{ex:examples of metric klein geometry}
+% 
+% 
+\example{
+    We can summarise the ideas presented above in the following reductive diagrams, where arrows represent the subgroup that is quotiented out:
+    \begin{equation*}
+        \begin{tikzcd}
+        &ISO(d-1,1) \arrow["\textrm{spacelike hyperplane}", swap]{dl} 
+        \arrow["\mathbb{R}^{d-1,1} = \textrm{ event space}"]{dr}&\\
+        ISO(d-1) \arrow["\mathbb{R}^{d-1}"]{dr}
+        &&SO(d-1,1) \arrow["\textrm{velocity space}"]{dl} \\
         &SO(n)&
-    \end{tikzcd}
-\end{equation*}
-
-\begin{equation*}
-    \begin{tikzcd}
-        &SO(4,1) \arrow["dS"]{dr} \arrow["H^4"]{dl}&\\
-        SO(4) \arrow["S^3"]{dr}&&SO(3,1) \arrow["\textrm{velocity space}"]{dl}\\
-        &SO(3)&
-    \end{tikzcd}
-\end{equation*}
-ISO means inhomogeneous something
+        \end{tikzcd}
+    \end{equation*}
+    By "event space", we mean that we quotient by all possible translations of spacetime, while the "spacelike hyperplane" is quotienting by the Lorentz boosts. 
+    \footnote{
+        not sure here
+    }
+    In $4$ spacetime dimensions, the more familiar diagram:
+    \begin{equation*}
+        \begin{tikzcd}
+            &SO(4,1) \arrow["dS"]{dr} \arrow["H^4"]{dl}&\\
+            SO(4) \arrow["S^3"]{dr}&&SO(3,1) \arrow["\textrm{velocity space}"]{dl}\\
+            &SO(3)&
+        \end{tikzcd}
+    \end{equation*}
+    I don't know much about dS, so maybe someone can complete here.
+}\label{ex:diagrams}
+% ------------------------------------------------------------------------------------------
 % subsection klein_geometry (end)
+% 
 \subsection{Cartan geometry} % (fold)
 \label{sub:cartan_geometry}
-\definition{
-    (Cartan geom)\\
-    $(\pi: P \rightarrow M, A)$ modelled on a Klein geometry $(G,H)$ is a principle right H-bundle $P \rightarrow M$ with a Cartan connection  $A \in \Omega^1(P, \mathfrak{g})$.
-    Noting that the cartan connection takes values in the larger Lie algebra.
-    this satisfies the conditions
-    \begin{itemize}
-        \item $A_p : T_pP \rightarrow \mathfrak{g}$ is a linear isomorphism 
-        \item $(R_h)^* A = \mathrm{Ad}_{h^{-1}} \circ A$ for all $h \in H$
-        \item $A(\xi_X) = X$ for $X \in \mathfrak{h}$ for fundamental vector field $\xi$ of 
-        $H \circlearrowright P$, an Ehresmannn-like connection
-    \end{itemize}
-}\label{def:Cartan geo}
-\remark{
-    Because of the first condition, 
-    \begin{align*}
-        dim P &= dim G\\
-        dim M &= dim (G/H) \\
-        (A_p)^{-1} :& \mathfrak{g} \rightarrow T_pP \\
-        (A_0)^{-1} :& \mathfrak{g} \rightarrow \mathfrak{X}(P)\\ 
-        (A_0)^{-1} :& \mathfrak{h} \rightarrow \mathfrak{X}_{\textrm{vert}}(P)\\
-        X &\mapsto \xi_X
-    \end{align*}
-If $G/H$ is metrci klein, M inherits a ùetric of saùe sign with 
-\begin{equation}
-    T_xM \cong T_pP / \mathrm{ker}(\pi_*) \cong \mathfrak{g}/\mathfrak{h} \cong \mathfrak{m}
-\end{equation}    
+Assuming familiarity with Maurer-Cartan form $\omega_G \in \Omega^1(G, \mathfrak{g})$ for a Lie group $G$, which are the $G$-invariant one forms on $G$, we review the more general notion of connections on a principal $G$-bundle.
+For some reason, the literature often prefers \textit{right} action on principal bundles. idk
 
-\begin{equation}
-    TM \cong P \times_H \mathfrak{g}/\mathfrak{h}
-\end{equation}
-}
 \definition{
-    The curvature of a cartan geometry
+    An Ehresmann connection on a principal right $G$-bundle $(P \rightarrow M)$ is a $\mathfrak{g}$-valued one-form $A$ on $P$, that is a map
+    \begin{equation}
+        \omega : TP \rightarrow \mathfrak{g}
+    \end{equation}
+    such that
+    \begin{align*}
+        (R_g)^* \omega &= \mathrm{Ad}_{g^{-1}} \omega \:\textrm{ for all } g \in G\\
+        \omega(\xi_X) &= X \: \textrm{ for } X \in V_p.
+    \end{align*}
+    Equivalently an Ehresmann connection is a \textit{choice} of Horizontal distribution such that $T_pP = V_p \oplus H_p$ where $H_p$ is $G$-equivariant. This is better explained in the EKC notes from last year.
+}\label{def:Ehresmann Connections}
+% 
+We now turn our attention to the case of a principal bundle modelled on a reduced geometry.
+% 
+\definition{ (Cartan Geometry)\\
+    A Cartan Geometry $(\pi: P \rightarrow M, A)$ modelled on a Klein geometry $(G,H)$ is a principle right H-bundle $P \rightarrow M$ with a \textbf{Cartan connection}  $A \in \Omega^1(P, \mathfrak{g})$ satisfying the conditions:
+    % 
+    \begin{itemize}
+        \item $A_p : T_pP \rightarrow \mathfrak{g}$ is a linear \textbf{isomorphism} (or simply put a $\mathfrak{g}$-valued one-form for on $P$).
+        \item $(R_h)^* A = \mathrm{Ad}_{h^{-1}} \circ A$ for all $h \in H$
+        \item $A(\xi_X) = X$ for $X \in \mathfrak{h}$ and fundamental vector field $\xi_X$ of $H \circlearrowright P$.
+    \end{itemize}
+    % 
+    Importantly, the Cartan connection one-form takes values in the larger Lie algebra $\mathfrak{g}$, because the tangent space of this principal bundle is isomorphic to the larger Lie algebra $\mathfrak{g}$.
+    Morally speaking, the algebra $\mathfrak{g} \cong T_pP$, while $\mathfrak{h} \cong V_p$ and $\mathfrak{m} \cong H_P \cong T_{\pi(p)}M$. 
+    % 
+}\label{def:Cartan geo}
+% 
+\remark{
+    Consequently, in a Cartan geometry we identify because of the first condition $\mathrm{dim} (P) = \mathrm{dim} (G)$ and $\mathrm{dim} (M) = \mathrm{dim} (G/H)$.
+    Moreover, the Cartan connection isomorphisms implies that upon restricting to the subalgebra $\mathfrak{h}$ and choosing an origin
+    \begin{align*}
+        (A_o)^{-1} :& \mathfrak{h} \rightarrow \mathfrak{X}_{\textrm{vert}}(P)\\
+        X &\mapsto \xi_X.
+    \end{align*}
+}
+% 
+\remark{
+    For a Cartan geometry $(P \rightarrow M: A)$ modelled on a \textit{metric} Klein geometry $(G,H)$, the correspondence \ref{prop:correspondance between algebraic and geometric} implies that the isomorphism
+    \begin{equation}
+        T_xM \cong T_pP / \mathrm{ker}(\pi_*) \cong \mathfrak{g}/\mathfrak{h} 
+        \quad {\color{green}\cong \mathfrak{m}}
+    \end{equation}
+    give a metric of the same sign to the manifold $M$. Where in the above $x := \pi(p)$.
+    In general, the full tangent bundle of the manifold can be thought of as the associated bundle of the $H$-action
+    \begin{equation}
+        TM \cong P \times_H \mathfrak{g}/\mathfrak{h}
+    \end{equation}
+}
+% 
+\definition{
+    The curvature of a Cartan Geometry $(\pi: P \rightarrow M, A)$ modelled on a Klein geometry $(G,H)$ is 
     \begin{equation}
         F(A) = dA + \frac{1}{2} [A,A] \in \Omega^2(P, \mathfrak{g})
     \end{equation}
 }
-
-Diagrams diagrams
-
-Take curvature of cartan connection 
-
-\begin{align*}
-    F[A] &= dA + \frac{1}{2}[A,A] \\
-    &=d \omega + de + \frac{1}{2} [\omega + e, \omega + e] \\
-    &= \left(
-    d \omega + \frac{1}{2}[\omega, \omega]_h + [\omega , e]_h + [e,e]_h
-    +de + \frac{1}{2}[\omega,\omega]_m + [\omega,e]_m + \frac{1}{2}[e,e,]_h
-    \right)
-\end{align*}
-colors:
-
-$\hat{F} = \Omega(\omega) + \frac{1}{2}[e,e]_h$,
-$T = d_\omega e + \frac{1}{2} [e,e]_m$
-If $\hat{F}$ is flat, then $\Omega(\omega) = -\frac{1}{2}[e,e]_h$ and
-$T = 0$ then $d_\omega e = \frac{1}{2}[e,e]_m$
+We summarise the different connections in a Cartan geometry, whether it is reductive or not in the following diagram.
+We denote $e : TP \rightarrow \mathfrak{g/h} \cong TM$ as the veilbein of this geometry,
+while the Ehresmann connection $\omega : TP \rightarrow \mathfrak{h}$ is denoted in green.
+\begin{equation}
+    \begin{tikzcd}
+        && {\color{green}\mathfrak{h}}\\
+        TP \arrow["A"]{r} \arrow[bend left, color = green, "\omega"]{urr}
+        \arrow[bend right, "e"]{drr}
+        & 
+        \mathfrak{g} \arrow[color = green]{ur} \arrow[->>]{dr}& \\
+        && \mathfrak{g/h} \: {\color{green} \cong \mathfrak{m}}
+    \end{tikzcd}
+\end{equation}
+So in the reductive case 
+\begin{equation}
+    A = \omega + e.
+\end{equation}
+Considering the curvature of these connections, we have the diagram
+\begin{equation}
+    \begin{tikzcd}
+        && {\color{green}\mathfrak{h}}\\
+        \bigwedge^2 (TP) \arrow["F"]{r} \arrow[bend left, color = green, "\hat{F}"]{urr}
+        \arrow[bend right, "T"]{drr}
+        & 
+        \mathfrak{g} \arrow[color = green]{ur} \arrow[->>]{dr}& \\
+        && \mathfrak{g/h} \: {\color{green} \cong \mathfrak{m}}
+    \end{tikzcd}
+\end{equation}
+with the understanding that in the reductive case, 
+\begin{equation}
+    F = \hat{F} + T
+\end{equation}
+where $T$ is called the \textit{torsion} and $\hat{F}$ is the Ehresmann part of the curvature.
+\remark{
+    A short calculation shows that if the geometry is reductive then the Cartan curvature
+    \begin{align*}
+        F[A] &= dA + \frac{1}{2}[A,A]_\mathfrak{g} \\
+        &=d \omega + de + \frac{1}{2} [\omega + e, \omega + e]_\mathfrak{g} \\
+        &= \left(
+        d \omega + \frac{1}{2}[\omega, \omega]_\mathfrak{h} + [\omega , e]_\mathfrak{h} +\frac{1}{2} [e,e]_\mathfrak{h}
+        + de + \frac{1}{2}[\omega,\omega]_\mathfrak{m} + [\omega,e]_\mathfrak{m} + \frac{1}{2}[e,e,]_\mathfrak{m}
+        \right)
+    \end{align*}
+    Now because $\omega$ is an Ehresmann connection and it reduces to a Maurer-Cartan form on the fibres we its curvature $2$-form
+    \begin{equation*}
+        d \omega + \frac{1}{2} [\omega , \omega]_\mathfrak{h} = \Omega(\omega).
+    \end{equation*}
+    If we are in the reductive case, we recall that $[\mathfrak{h,m}] \subseteq \mathfrak{m}$, so the bracket $[\omega, e]_\mathfrak{h} = 0$.
+    With further restriction in the symmetric case, $[\mathfrak{m,m}] \subseteq \mathfrak{h}$, the bracket $[e,e]_\mathfrak{h} = 0$, but we won't assume it in general so instead define a covariant derivative on $\mathfrak{m}$
+    \begin{equation}
+        d^\omega = d + \omega.
+    \end{equation}
+    \\
+    So in conclusion, the Ehresmann part of the curvature in a Cartan geometry is
+    \begin{equation}
+        \hat{F} = \Omega(\omega) + \frac{1}{2}[e,e]_\mathfrak{h},
+    \end{equation}
+    while the torsion is
+    \begin{equation}
+        T = d^\omega e + \frac{1}{2} [e,e]_m
+    \end{equation}
+    Some interpretation of flatness and torsion freedom needed here.
+}
 
 % subsection cartan_geometry (end)
 % section lecture_1 (end)
