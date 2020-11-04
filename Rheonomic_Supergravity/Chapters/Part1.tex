@@ -52,9 +52,9 @@ which is a  $G_0$-invariant diffeomorphism. It turns out that this is independen
 % 
 Consider a Klein geometry $(G,H)$, then the Lie functor gives us a pair of Lie algebras 
 $(G,H) \xrightarrow{Lie} (\mathfrak{g}, \mathfrak{h})$, where $\mathfrak{h}$ is a Lie subalgebra of $\mathfrak{g}$.
-Notably, this induces a short exact sequence of $H$-modules 
+Notably, this induces a short exact sequence of $H$-modules. 
 \footnote{
-    A abelian group on which $H$ acts compatibly. Here it is the vector space structure that is the abelian group.    
+    A vector space on which $H$ acts linearly; a representation of $H$. Here, $H$ acts via the adjoint representation on \(\mathfrak{g}\) and \(\mathfrak{h}\) and via the quotient representation on \(\mathfrak{g}/\mathfrak{h}\).
 }
 \begin{equation}
     \begin{tikzcd}
@@ -64,26 +64,27 @@ Notably, this induces a short exact sequence of $H$-modules
 \end{equation}
 % 
 \definition{
-    If a short exact sequence of $H$-modules as above splits, then we call $(\mathfrak{g},\mathfrak{h})$ \textbf{reductive} and define the orthogonal complement $\mathfrak{m} \subseteq \mathfrak{g}$ as the $H$-module such that
+    If a short exact sequence of $H$-modules as above splits, then we call $(\mathfrak{g},\mathfrak{h})$ \textbf{reductive}. Equivalently\footnote{$\mathfrak{m}$ is the image of the splitting map.},
+    there exists an $H$-invariant subspace $\mathfrak{m} \subseteq \mathfrak{g}$ such that
     \begin{align}
-        \mathfrak{g} = \mathfrak{h} \oplus \mathfrak{m}
+        \mathfrak{g} = \mathfrak{h} \oplus \mathfrak{m}.
     \end{align}
-    A consequence of a splitting is 
+   Invariance of $\mathfrak{m}$ under the action of $H$ is equivalent to  
     \begin{equation}
         [\mathfrak{h}, \mathfrak{m}] \subseteq \mathfrak{m}. 
     \end{equation}
-    The reductive case will always be denoted by green throughout the rest of this lecture.
+    As \(H\)-modules, we have \(\mathfrak{m}\cong\mathfrak{g}/\mathfrak{h}\). The reductive case will always be denoted by green throughout the rest of this lecture.
 }\label{def:reductive}
 % 
 \definition{
-    A pair of \textit{reductive} Lie algebras $(\mathfrak{g,h})$ is called \textbf{symmetric} if it further follows the condition
+    A \textit{reductive} pair of Lie algebras $(\mathfrak{g,h})$ is called \textbf{symmetric} if it further follows the condition
     \begin{equation}
         [\mathfrak{m,m}] \subseteq \mathfrak{h}.
     \end{equation}
     We will follow the convention of denoting in blue the symmetric case from now on.
 }\label{def:Symmetric pair}
 % 
-The terminology is summarised in the table below for $\mathfrak{m} = \mathfrak{g/h}$ (in general):
+The terminology is summarised in the table below, where $\mathfrak{m}$ is vector space complement to $\mathfrak{h}$ in $\mathfrak{g}$ (it is not $H$-invariant in general):
 \begin{center}
 $
     \begin{tabu}{ c|c|c|c }  
