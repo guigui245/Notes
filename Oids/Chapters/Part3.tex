@@ -177,16 +177,43 @@ Look into spanning functions and restrictions of $C^\infty$ functor.
         Derivation bundle will be studied more in \ref{sub:derivations}
     }
     % 
-    A \textbf{Kozul connection} is a $\mathbb{R}$-linear map 
+    A \textbf{Koszul connection} is a $\mathbb{R}$-linear map 
     \begin{align*}
         \nabla: \mathfrak{X}(M) \times \Gamma(E) &\rightarrow \Gamma(E)\\
         (X,s) & \mapsto \nabla_X s
     \end{align*}
-    such that the Liebniz identity is satisfied.
+    such that the Leibniz identity is satisfied.
     \begin{equation}
         \nabla(f \cdot s) = f \nabla s + df \cdot s
     \end{equation}
 }\label{def:kozul connection}
+
+\definition{
+    Given a vector bundle $E \rightarrow M$, we construct the \textbf{Koszul complex} on sections of the vector bundle.
+    We define a boundary map $\delta : \Gamma(\bigwedge^q E) \rightarrow \Gamma(\bigwedge^{q-1} E)$ such that
+    \begin{equation}
+        \delta (e_1 \wedge \ldots \wedge e_q) = \sum_{i=1}^{q}(-)^{i+1} \rho(e_i) (e_1 \wedge \ldots \hat{e_i} \wedge \ldots \wedge e_q)
+    \end{equation}
+    for $e_i \in \Gamma(E)$ and $\rho \in \Gamma(E^*)$. This map enjoys the property $\delta^2=0$, from which we can take the \textit{homology} of this complex.
+}
+
+\definition{
+    Let $E \rightarrow M$ be a vector bundle, the space of  \textbf{$E$-valued $p$-forms} is denoted
+    \begin{equation}
+        \Omega^p(M;E) = \Gamma(E \otimes \bigwedge^p T^*M).
+    \end{equation}
+    Given a Koszul connection $\nabla$ on $E$, there is a unique way to extend $\nabla$ to an \textbf{exterior covariant derivative} $d^\nabla$, mapping
+    \begin{equation}
+        d^\nabla : \Omega^p(M;E) \rightarrow \Omega^{p+1}(M;E).
+    \end{equation}
+    If the connection $d^\nabla$ is flat, then this forms the \textit{Koszul complex} with $(d^\nabla)^2 = 0$.\\
+    We extend linearly from 
+    \begin{align*}
+        d^\nabla( \omega \otimes s) &= d \omega \otimes s + (-)^{|\omega|} \omega \otimes d^\nabla s \\
+        (d^\nabla s) X &= \iota_X d s 
+    \end{align*}
+    for $s \in \Gamma(E), \omega \in \Omega^p(M;E), X \in TM$.
+}\label{def:exterior covariant derivative}
 % subsection vector_bundles (end)
 % 
 \subsection{Definition and Examples} % (fold)
@@ -248,7 +275,7 @@ Look into spanning functions and restrictions of $C^\infty$ functor.
         \begin{equation*}
             0 \rightarrow \mathrm{ad}(P) \rightarrow A_P \rightarrow TM \rightarrow 0,
         \end{equation*}
-        where the adjoint bundle $\mathrm{ad}(P) \cong P \times_G \mathfrak{g}$ of Lie algebra $\mathfrak{g}$ is given via the adjoint action of $G$ on its Lie algebra. (A more general statement can be made using the associated bundle).
+        where the adjoint bundle $\mathrm{ad}(P) \cong P \times_G \mathfrak{g}$ of Lie algebra $\mathfrak{g}$ is the associated bundle of $P$ on $\mathfrak{g}$ by $G$. 
         This is constructed from the short exact sequence
         \begin{equation}
              0\rightarrow VP\rightarrow TP \xrightarrow{\pi_*} TM \rightarrow 0,
@@ -311,13 +338,13 @@ Given a Lie algebroid $(A, \rho, [,])$ over $M$, we can \textit{uniquely} extend
 
 As usual we find $d_A^2 = 0$ which forms a \textit{de Rham} complex and its cohomology is the \textbf{Lie algebroid cohomology with trivial coefficients}.
 
-\remark{    
-Maybe a slightly more illuminating definition of the differential is given in \citep{Cattaneo2003}. For $\omega \in \Gamma(A^*)$ and $a_1,a_2 \in \Gamma(A)$, we have
-\begin{equation}
-    d_A \omega (a_1, a_2) = - \omega([a_1,a_2]) + (d_A \omega(a_1) )(a_2) - (d_A \omega(a_2))(a_1)
-\end{equation}
-This is easier to understand upon introducing the notation $\langle \cdot, \cdot \rangle$ for the natural pairing of section of the algebroid and its dual. This definition is extended to recover what we had before. And it's easier to see that this is a nilpotent derivation now.
-}
+% \remark{    
+% Maybe a slightly more illuminating definition of the differential is given in \citep{Cattaneo2003}. For $\omega \in \Gamma(A^*)$ and $a_1,a_2 \in \Gamma(A)$, we have
+% \begin{equation}
+%     d_A \omega (a_1, a_2) = - \omega([a_1,a_2]) + (d_A \omega(a_1) )(a_2) - (d_A \omega(a_2))(a_1)
+% \end{equation}
+% This is easier to understand upon introducing the notation $\langle \cdot, \cdot \rangle$ for the natural pairing of section of the algebroid and its dual. This definition is extended to recover what we had before. And it's easier to see that this is a nilpotent derivation now.
+% }
 
 \definition{
     Just like a regular exterior algebra, there are natural notions of \textit{interior product} and \textit{Lie derivatives}, defined for $w \in \Gamma(\bigwedge^{k} A^{*})$ and $a, a_0, \ldots, a_{k-1} \in \Gamma(A)$
@@ -344,7 +371,7 @@ This is easier to understand upon introducing the notation $\langle \cdot, \cdot
     There is a $1-1$ correspondence between Lie algebroids and \textit{Linear Poisson structures}.
 }\label{prop:correspondance_with_poisson_structures}
 
-Maybe talk about splittings and covariant derivatives?
+Maybe talk about splitting and covariant derivatives?
 
 % 
 % \definition{
