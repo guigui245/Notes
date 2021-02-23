@@ -7,11 +7,13 @@
 Aim of the lecture is to recover Dirac geometry. A lot of the ideas can be traced back to Courant's thesis \citep{Courant1990}. As usual Gualtieri's thesis \citep{Gualtieri2004} serves us well. In the following the underlying field is $\mathbb{R}$.
 \subsection{Courant Spaces} % (fold)
 \label{sub:courant_spaces}
+% 
 \definition{
-    A \textbf{Courant space} is a triple $(C, \langle \cdot, \cdot \rangle, \rho)$ where
-    $(C, \langle \cdot,\cdot \rangle)$ is a inner product space (meaning the inner product is bilinear and non-degenerate but \textbf{not} positive-definite) and $\rho: C \rightarrow V$ is a linear homomorphism compatible with the inner product called the \textit{anchor}.
+    Let $V$ be a vector space over $\mathbbm{R}$.
+    A \textbf{Linear Courant space} is a triple $(C, \langle \cdot, \cdot \rangle, \rho)$ where
+    $(C, \langle \cdot,\cdot \rangle)$ is a inner product space (meaning the inner product is bilinear and non-degenerate but \textbf{not} positive-definite) and $\rho: C \rightarrow V$ is a linear homomorphism called the \textit{anchor}.
 }\label{def:courant_space}
-
+% 
 \definition{
     With respect to the \textit{bilinear form}, a subspace $N \subset C$ and its orthogonal complement $N^\perp := \{ x \in C\; |\; \langle x,y \rangle = 0 \; \forall\, y \in N\}$, need not be disjoint as the inner product is not in general positive definite.
     Therefore a subspace $N \subset C$ is called the following ways if the orthogonality conditions hold:
@@ -21,31 +23,35 @@ Aim of the lecture is to recover Dirac geometry. A lot of the ideas can be trace
         \item $N = N^\perp$ is Lagrangian.
     \end{itemize}
 }\label{def:courant_subspaces}
-
+% 
 \definition{
     Since $(C, \langle \cdot, \cdot\rangle)$ is an inner product space, we have the usual \textit{musical isomorphisms}:
     \begin{align*}
         C &\xrightarrow{\flat} C^*\\
         C^* &\xrightarrow{\sharp} C
     \end{align*}
-    
 }\label{def:musical_iso}
 % 
-This data of a Courant space implies that we can construct a map $j : V^* \rightarrow V$ such that the following diagram commutes:
+This data of a Courant space implies that we can construct a map $k : V^* \rightarrow V$ such that the following diagram commutes:
 % 
 \begin{equation}
     \begin{tikzcd}
-        C^* \arrow[d,"\sharp"]& V^* \arrow[l,  "\rho^*"] \arrow[d, dashed, "j"]\\
+        C^* \arrow[d,"\sharp"]& V^* \arrow[l,  "\rho^*"] \arrow[d, dashed, "k"]\\
         C \arrow[r, "\rho"]& V
     \end{tikzcd}
 \end{equation}
-
+% 
 \definition{
     A Courant space is \textbf{exact} when we have the short exact sequence
     \begin{equation}
         0 \rightarrow V^* \xrightarrow{\sharp \rho^*} C \xrightarrow{\rho} V \rightarrow 0.
     \end{equation}
-    So $\rho$ is surjective and $\mathrm{ker}(\rho) \subset C$ is an isotropic subspace.
+    Define from now on $j = \sharp \rho^*$.
+    In such a case, $\mathrm{im}(j) = \mathrm{ker}(\rho) \subset C$ is maximally isotropic (i.e: Lagrangian) in $C$.
+    Further, the injective map $j$ is also isotropic in the sense that
+    \begin{equation}
+        \langle j(V^*), j(V^*) \rangle = 0
+    \end{equation}
 }\label{def:exact_courant_space}
 
 \definition{
@@ -74,16 +80,18 @@ This data of a Courant space implies that we can construct a map $j : V^* \right
     \end{equation}
     The space $W = \rho(D) = \faktor{D}{\overline{W}}$ is generally called the \textit{range} of $D$.
     We remark that the Lagrangian condition imposed on the space implies that the bilinear form is $0$ along this subspace.
-}
+}\label{def:Dirac space}
 
 \proposition{
     A Dirac space $D \subset (C, \langle \cdot,\cdot \rangle, V)$ specifies a $2$-form on its range $\rho(D)$,
     \begin{equation}
         \omega_D \in \bigwedge^2 W^*
     \end{equation}
-    Such that for $w_i = \rho(d_i) + j(\epsilon_i) := \rho(a_i)$, with $d_i \in D$ and $\epsilon_i \in V \setminus W$, 
+    Such that for $w_i = \rho(d_i) + j(\epsilon_i) := \rho(a_i)$, with $d_i \in D$, $\epsilon_i \in V \setminus W$ and some $a_i \in C$ (that restricts to $\omega_i$ in D); the 2-form is:
     \begin{align}
-        \omega_D(w_1, w_2) &= \langle a_1, \sharp \rho^*(\epsilon_2) \rangle \\
+        \omega_D(w_1, w_2) &= \langle a_1, \sharp \rho^*(\epsilon_2) \rangle 
+        \label{eq: Dirac 2-form}
+        \\
         & = - \langle \sharp \rho^*(\epsilon_1), a_2 \rangle \nonumber
     \end{align}
 
@@ -109,7 +117,7 @@ This data of a Courant space implies that we can construct a map $j : V^* \right
         \end{equation}
         sketchy af proof. coset construction? do this
     \end{proof}
-}\label{prop:2_form_on_range}
+}\label{prop:2_form_on_dirac_space}
 % 
 \definition{
     An \textit{isotropic} relation (or Lagrangian relation) $\Lambda: A \dashrightarrow B$ between two exact Courant spaces $(A, \langle , \rangle_A, \alpha : A\rightarrow V)$, $(B, \langle , \rangle_B, \beta : B \rightarrow W)$ is a morphism such that $\Lambda \subset A \oplus \overline{B}$ is a Lagrangian subspace with the relations
@@ -126,25 +134,28 @@ This data of a Courant space implies that we can construct a map $j : V^* \right
         b \oplus a& \in \Gamma \\
         \Rightarrow \beta(b) &= (\gamma \circ \alpha)(a)
     \end{align*}
-    A Courant morphism becomes a Dirac space $\Gamma_\gamma \subset B \oplus \overline{A}$ and enters the following short exact sequence,
+}\label{def:Courant morphism}
+% 
+\remark{
+    A Courant morphism induces a Dirac space $\Gamma_\gamma \subset B \oplus \overline{A}$ and enters the following short exact sequence,
     \begin{equation}
          0\rightarrow \mathrm{graph}(\gamma^*) \rightarrow \Gamma_\gamma \xrightarrow{\beta \oplus \alpha} \mathrm{graph}(\gamma)  \rightarrow 0
     \end{equation}
     where $\mathrm{graph}(\gamma) \subset W \oplus V^*$ and similarly for $\gamma^*$. This exact sequence is easily read as both piece of the graphs are exact Courant morphisms, on which we take the direct sum.
-}\label{def:Courant morphism}
-
+}\label{rem:Courant morphism induces Dirac}
+% 
 Courant morphisms are morphism in the category of Courant algebroids, and we have seen that elements are mapped appropriately. A lesser constraint would be to consider maps such that the inner product is preserved.
 % 
 \definition{
-    A \textit{Courant} map $\Psi: A \rightarrow B$ of Courant algebroids is a linear map together with $\psi: V \rightarrow W$ such that the inner product is preserved,
+    A \textbf{Courant map} $\Psi: A \rightarrow B$ of Courant algebroids is a linear map together with $\psi: V \rightarrow W$ such that the inner product is preserved,
     \begin{equation}
-         \Psi \langle \cdot, \cdot \rangle_A = \langle \cdot, \cdot \rangle
+        \Psi^* \langle \cdot, \cdot \rangle_B = \langle \cdot, \cdot \rangle_A
     \end{equation} 
     and the following diagram commutes
     \begin{equation}
         \begin{tikzcd}
-            A \arrow[d,"\alpha"]  \arrow["\Gamma"]{r}& B  \arrow["\beta"]{d}\\
-            V \arrow[r, "\gamma"]& W.
+            A \arrow[d,"\alpha"]  \arrow["\Psi"]{r}& B  \arrow["\beta"]{d}\\
+            V \arrow[r, "\psi"]& W.
         \end{tikzcd}
     \end{equation}
 }\label{def:Courant map}
@@ -153,9 +164,437 @@ Courant morphisms are morphism in the category of Courant algebroids, and we hav
     A map $\Psi: A \rightarrow B$ is Courant if and only if $\mathrm{graph}(\Psi) \in B \oplus \overline{A}$ is a Courant morphism.
 }\label{prop:equivalence of courant maps and morphism}
 \begin{proof}
-    do later
+    do later, but similar to \cref{prop:coisotropic_relation}, done in p47 of \citep{Zapata-Carratala2019}.
 \end{proof}
 
+\definition{
+    The category of exact Courant spaces $\mathbf{Crnt}$ is the category whose objects are exact Courant spaces $C \rightarrow V$ and morphisms are Courant morphisms defined in \cref{def:Courant morphism} that extend linear maps between vector spaces.
+}\label{def:Courant category}
 
+\remark{
+    It's easy to see that a linear map $\Psi: C \rightarrow D$ is Courant for some linear map $\psi : V \rightarrow W$ (\cref{def:Courant map}) if and only if $\mathrm{grph}(\psi) \subset D \oplus \overline{C}$.
+}\label{rem:linear maps as Courant maps}
+
+\remark{
+    Since Courant morphisms $\Gamma: A \dashrightarrow B$ between exact Courant spaces $(A \rightarrow V), (B \rightarrow W)$ define a Dirac space $\Gamma_\gamma \subset B \oplus \overline{A}$ (\cref{rem:Courant morphism induces Dirac}), and Dirac spaces specify a 2-form on the range of the anchor, we have a the fibration:
+    \begin{equation}
+        \Lambda^2 V^* \rightarrow \mathrm{Crnt}(A,B) \rightarrow \mathrm{Vect}(V,W).
+    \end{equation}
+    Furthermore, by considering Courant automorphisms, we abelianise this fibration to make the following short exact sequence exact:
+    \begin{equation}
+        0 \rightarrow (\Lambda^2 V^*, +) \rightarrow \mathrm{Aut}_\mathrm{Crnt}(A) \rightarrow \mathrm{GL}(V) \rightarrow 0.
+    \end{equation}
+}\label{rem:fibration}
+% 
+It's probably a good idea to stop and think about what this means. By considering Courant algebroids over a vector space, we have extended the available symmetries by 2-forms on said vector space.
+% 
+\definition{
+    An \textbf{isotropic splitting} of an exact Courant space is a map $\nabla$ such that the short exact sequence splits:
+    \begin{equation*}
+        \begin{tikzcd}
+            0 \arrow[]{r}& V^* \arrow["j"]{r}& C \arrow["\rho"]{r}& V \arrow[]{r} \arrow[bend left = 45, color = red, "\nabla", line width=0.25mm]{l} & 0,
+        \end{tikzcd}
+    \end{equation*}
+    with $ \rho \circ \nabla = \mathrm{id}_V$, and the distribution $\nabla(V)$ is isotropic in C with respect to the bilinear form $\langle \cdot, \cdot \rangle$.
+}\label{def:Isotropic splitting}
+% 
+\proposition{
+    Exact Courant Spaces always admit an isotropic split. Furthermore, given $\nabla,\nabla' : V \rightarrow C$ two isotropic splits, there exists a 2-form $B \in \Lambda^2 V^*$ such that
+    \begin{equation}
+        \nabla - \nabla' = j \circ B^\flat
+    \end{equation}
+    The following proof follows \citep{Zapata-Carratala2019}.
+}\label{prop:uniqueness of isotropic splitting up to 2-form}
+% 
+\begin{proof}
+    Consider two not necessarily isotropic sections $\nabla, \nabla' : V \rightarrow C$ such that $\rho \circ \nabla = \mathrm{id}_V = \rho \circ \nabla'$, we can construct the map $\nabla - \nabla' = \gamma$ such that
+    \begin{align*}
+        \nabla - \nabla' &: V \rightarrow \mathrm{ker}(\rho)
+    \end{align*} 
+    Since the sequence is exact, then $\gamma(v) \in \mathrm{im}(j)$, so there must  $B \in V^* \otimes V^*$ such that $B^\flat : V \rightarrow V^*$ and
+    \begin{equation}
+        \gamma = j \circ B^\flat.
+    \end{equation}
+    In summary we have shown that general sections differ by elements in the Lagrangian subspace $\mathrm{im}(j) = \mathrm{ker}(\rho)$.
+    \begin{equation*}
+        \begin{tikzcd}
+            0 \arrow[]{r}& V^* \arrow["j"]{r}& C \arrow["\rho"]{r}& V \arrow[]{r} \arrow[bend left = 45, color = red, "\gamma", thick]{l} \arrow[bend right = 50, "B^\flat", thick]{ll} & 0.
+        \end{tikzcd}
+    \end{equation*}
+    Now fix a non-isotropic section $\nabla_0$, we show that we can define an isotropic section $\nabla$, we show that defining implicitly
+    \begin{equation}
+        B_{\nabla_0}(v,w) = -\frac{1}{2}\langle \nabla_0(v), \nabla_0(w) \rangle
+    \end{equation}
+    allows us to make $\nabla = \nabla_0 + j \circ B^\flat$ into an isotropic map, in the sense
+    \begin{equation}
+        \langle   \nabla(v), \nabla(w)\rangle = 0.
+    \end{equation}
+\end{proof}
+% 
+We note that just like any split short exact sequence, a choice of isotropic section $\nabla$ induces a Courant isomorphism with the standard Courant space,
+\begin{equation}
+    (C,\langle \cdot,\cdot \rangle, V) \:\overset{\nabla}{\cong} \:(V \oplus V', \langle \cdot,\cdot \rangle, \mathrm{pr}_1).
+\end{equation}
+
+EXPAND BELOW, do diagram etc...
+Further to \cref{rem:fibration}, the category of exact Courant spaces is explicitly given by $\mathbf{Crnt}(\mathbbm{V,W}) \cong \Lambda^2 V^* \times \mathbf{Vect}(V)$, where morphisms
+\begin{align*}
+    (B, \phi) : \mathbbm{V} \dashrightarrow \mathbbm{W}
+\end{align*}
+are both given by an isotropic relation (as defined in \cref{def:Isotropy_relation}) and related by a 2-form.
+So
+\begin{equation}
+    v \oplus \alpha\:  \sim_\psi^B \: w \oplus \beta \qquad \Leftrightarrow \qquad
+    \psi(v) = w \quad \mathrm{ and } \quad \alpha + \iota_v B = \psi^* \beta.
+\end{equation}
+Composition of morphism are given just like a semi-direct product:
+\begin{equation}
+    (B', \varphi) \circ (B, \psi) = (B' + \psi^* B \:,\: \varphi \circ \psi).
+\end{equation}
+Finally, by considering automorphisms of Courant spaces, the above argument reduces to
+\begin{equation}
+    \mathrm{Aut}_{\mathbf{Crnt}}(\mathbbm{V}) = \Lambda^2 V^* \rtimes \mathrm{GL}(V).
+\end{equation}
 % subsection courant_spaces (end)
+% ------------------------------------------------------------------------------------------
+\subsection{Dorfman Algebras} % (fold)
+\label{sub:dorfman_algebras}
+\definition{
+    A \textbf{Leibniz algebra} $(\mathfrak{a}, [\cdot,\cdot])$ over $\mathbbm{R}$ is a module with an $\mathbbm{R}$-linear bracket that is \textbf{NOT} skew-symmetric, such that the bracket is a derivation.
+    \begin{equation}
+        [a, [b,c]] = \left[ [a,b], c\right] + \left[ b,[a,c] \right]
+    \end{equation}
+    for $a,b,c \in \mathfrak{a}$. 
+    Of importance is to note that because the bracket is not antisymmetric, the right/left adjoint maps are not related, i.e:
+    \begin{equation}
+        \mathrm{ad}^L_a =[a,\cdot] \neq [\cdot, a] = \mathrm{ad}^R_a 
+    \end{equation}
+}\label{def:Liebniz algebra}
+In particular, Lie algebras are Leibniz algebras over $\mathbbm{R}$ with skew-symmetric brackets.
+% 
+\definition{
+    A map $\Psi: \mathfrak{a} \rightarrow \mathfrak{b}$ is a Leibniz morphism if
+    \begin{equation}
+        \Psi([a,b]_{\mathfrak{a}}) = [\Psi(a), \Psi(b)]_\mathfrak{b}.
+    \end{equation}
+}\label{def:Liebniz morphism}
+% 
+\definition{
+    Let $\mathfrak{a}$ be a Leibniz algebra and $\mathfrak{h}$ a vector space. A \textbf{Leibniz representation} of $\mathfrak{a}$ over $\mathfrak{h}$ is a pair of maps (or equivalently right and left $\mathfrak{a}$-modules)
+    \begin{align*}
+        [\cdot,\cdot]_L &: \mathfrak{a} \times \mathfrak{h} \rightarrow \mathfrak{h}\\
+        [\cdot,\cdot]_R &: \mathfrak{h} \times \mathfrak{a} \rightarrow \mathfrak{h}
+    \end{align*}
+    such that all possible combination of Leibniz identities hold.
+}\label{def:Liebniz representation}
+% 
+\definition{
+    Given a Leibniz algebra $\mathfrak{a}$ and an Leibniz $\mathfrak{h}$-representation, we define the Leibniz cochain complex $ C^k(\mathfrak{a,h}):= \bigotimes^k \mathfrak{a}^* \otimes \mathfrak{h}$
+    \begin{align*}
+        \delta^k : C^k(\mathfrak{a,h})& \rightarrow C^{k+1}(\mathfrak{a,h})\\
+        h &\mapsto [\cdot, h]_L - [h, \cdot]_R
+    \end{align*}
+}\label{def:Leibniz cochain complex}
+% 
+We check explicitly that this exact forms are indeed closed in with this differential.
+Let $a,b \in \mathfrak{a}, h \in \mathfrak{h}$ then
+\begin{align*}
+    \delta^0 h(a) &= [a,h]_L - [h,a]_R \\
+    \Rightarrow \qquad \delta^1 \circ \delta^0h (a,b)& = [a, [b, h]_L]_L - [[b,h]_L , a]_R
+    - [b, [h,a]_R]_L + [ [h,a]_R, b]_R - \left( [ [a,b],h]_L - [h, [a,b]]_R \right)
+    \\
+    \qquad &= 0 \qquad \textrm{ using all the Leibniz identities.}
+\end{align*}
+We extend the differential maps to higher powers and construct a cohomology.
+% 
+\definition{
+    Given a Leibniz algebra $\mathfrak{a}$ and an Leibniz $\mathfrak{h}$-representation, we denote $\mathrm{H}^\bullet(\mathfrak{a,h})$ the Leibniz cohomology of the cochain complex $ (C^k(\mathfrak{a,h}), \delta)$, with differential maps $\delta^2 = 0$.
+}\label{def:Leibniz cohomology}
+% 
+\definition{
+    A \textbf{Dorfman Algebra} (or Courant algebra) $(\mathfrak{a}, [\cdot,\cdot])$ over a Lie algebra $\mathfrak{g}$ is a Leibniz algebra $\mathfrak{a}$, together with a morphism of Leibniz algebra
+    \begin{equation}
+        \rho: (\mathfrak{a}, [\cdot,\cdot]) \rightarrow (\mathfrak{g},[\cdot,\cdot]).
+    \end{equation}
+}\label{def:Dorfman algebra}
+% 
+Since $\rho$ is a homomorphism, $\mathrm{ker}(\rho)$ is a 2-sided Leibniz ideal and $\rho(\mathfrak{a}) \subset \mathfrak{g}$ is a Lie subalgebra.
+It's probably good to underline that the bracket over the Lie algebra is antisymmetric.
+% 
+\definition{
+    A Dorfman algebra $(\mathfrak{a}, [\cdot,\cdot])$ over a Lie algebra $\mathfrak{g}$ is called \textit{exact} if 
+    \begin{equation}
+         0\rightarrow \mathfrak{h} \rightarrow \mathfrak{a} \xrightarrow{\rho} \mathfrak{g} \rightarrow 0
+    \end{equation}
+    with $\mathrm{ker}(\rho) = \mathfrak{h}$ \textbf{and} $\mathfrak{h}$ is an abelian subalgebra of $\mathfrak{a}$, so
+    \begin{equation}
+        [\mathfrak{h}, \mathfrak{h}] = 0.
+    \end{equation}
+}\label{def:Exact Dorfman algebra}
+We can always build such a sequence but the extra data comes from the fact that $\mathfrak{h}$ is abelian.
+% 
+\example{
+    Consider a right $\mathfrak{g}$-module R over $\mathfrak{h}$ when $\mathfrak{g}$ is Lie
+    \begin{equation}
+        R : \mathfrak{g} \times \mathfrak{h} \rightarrow \mathfrak{h}.
+    \end{equation}  
+    Denote the \textit{hemisemidirect product} \footnotemark
+    between a Lie algebra and a representation space by $\mathfrak{a} = \mathfrak{h} \oplus \mathfrak{g}$ with bracket
+    \begin{equation}
+        [h_1 \oplus g_1, h_2 \oplus g_2]_\mathfrak{a} := R(g_1, h_2) \oplus [g_1, g_2]_\mathfrak{g}
+    \end{equation}
+    for $g_1,g_2 \in \mathfrak{g}$ and $h_1, h_2 \in \mathfrak{h}$.
+    We claim that $\mathfrak{a}$ is a Leibniz (in particular Dorfman) algebra if and only if R is a Leibniz representation.
+}
+\footnotetext{
+    Hemi: because we take only the right representation and discard the left.
+}
+\begin{proof}
+    $\bullet$ Suppose $\mathfrak{a}$ is a Leibniz algebra, then the bracket over $\mathfrak{a}$ is a derivation, so by considering the bracket between $a_1,a_2,a_3 \in \mathfrak{a}$,
+    \begin{align*}
+        [a_1, [a_2,a_3]] = R(g_1, R(g_2,h_3)) \oplus [g_1, [g_2,g_3]].
+    \end{align*}
+    We use the Leibniz identity for the Lie algebra part and we expand the LHS that also follows Leibniz and match with the $\mathfrak{h}$ part of the RHS.
+    Therefore
+    \begin{equation}
+        R([g_1,g_2], h_3) + R(g_2, R(g_1, h_3)) = R(g_1, R(g_2,h_3))
+    \end{equation}
+    is a \textit{right} Leibniz representation of $\mathfrak{g}$ on $\mathfrak{h}$.\\
+    $\bullet$ Conversely, if R is a Leibniz representation, we can split the brackets and set the left one to zero?
+\end{proof}
+% 
+\definition{
+    A Dorfman morphism $ \Psi: \mathfrak{a} \rightarrow \mathfrak{a'}$ is a Leibniz morphism covering the map of algebras $\psi: \mathfrak{g} \rightarrow \mathfrak{g}$ such that
+    \begin{equation}
+        \rho' \circ \Psi = \psi \circ \rho.
+    \end{equation}
+}\label{def:Dorfman morphism}
+% 
+\proposition{
+    Let $\mathfrak{a}$ be an exact Dorfman algebra over $\mathfrak{g}$ with anchor $\rho$ and abelian subalgebra $\mathfrak{h} = \mathrm{ker}(\rho)$, then $\mathfrak{a}$ carries a Leibniz representation on $\mathfrak{h}$.
+}\label{prop:Exact dorfman implies Leibniz rep}
+\begin{proof}
+    DO LATER
+\end{proof}
+% 
+If we split the sequence of an exact Dorfman algebra 
+\definition{
+    Let $\nabla: \mathfrak{g} \rightarrow \mathfrak{a}$ be a section of the following Dorfman algebra with $\mathfrak{g}$-representation
+    \begin{equation*}
+        \begin{tikzcd}
+            0 \arrow[]{r}& \mathfrak{h} \arrow[]{r}& \mathfrak{a} \arrow["\rho"]{r}& \mathfrak{g} \arrow[]{r} \arrow[bend left = 45, color = red, "\nabla", thick]{l} & 0,
+        \end{tikzcd}
+    \end{equation*}
+    with $[\mathfrak{h,h}] = 0$.
+    Moreover, sections of the Dorfman algebra provide a lift of the right/left Leibniz representation as
+    \begin{align*}
+        [\cdot,\cdot ]_L &: \mathfrak{a} \times \mathfrak{g} \rightarrow \mathfrak{g}\\
+        [a,g]_L &= [a, \nabla(g)]_\mathfrak{a} \\
+        [\cdot,\cdot]_R &: \mathfrak{g} \times \mathfrak{a} \rightarrow \mathfrak{g}\\
+        [g,a]_R &= [\nabla(g), a]_\mathfrak{a}
+    \end{align*}
+    for $a \in \mathfrak{a}, g \in \mathfrak{g}$.
+    The \textbf{Leibniz Curvature} of $\nabla$ is
+    \begin{align}
+        C_\nabla &\in C^2(\mathfrak{g,h}) \nonumber\\
+        C_\nabla(g,g') &:= [\nabla(g), \nabla(g')]_\mathfrak{a} - \nabla([g,g']_\mathfrak{g}).
+    \end{align}
+    We note that $C_\nabla \in \mathrm{ker}(\rho)$ so it takes values in the representation space $\mathfrak{h}$.
+    Important to note that $C_\nabla(g,g') \neq C_\nabla(g',g)$.
+}\label{def:Leibniz curvature}
+% 
+\proposition{
+    The Leibniz curvature defined above is a cocycle under the differential of Leibniz cohomology defined in \cref{def:Leibniz cohomology},
+    \begin{equation}
+        \delta C_\nabla = 0.
+    \end{equation}
+}\label{prop:Leibniz curvature is cocycle}
+\begin{proof}
+    For $a,b,c \in \mathfrak{g}$,
+    \begin{align*}
+        \delta C_\nabla(a,b,c) &= [a, C_\nabla(b,c)]_L - [C_\nabla(b,a), c]_R + [C_\nabla(c,a),b]_R \\
+        & \qquad + C_\nabla( [a,b]_\mathfrak{g}, c ) - C_\nabla([a,c]_\mathfrak{g},b)
+        + C_\nabla(a, [b,c])\\
+    \end{align*}
+    We then use the section $\nabla$ to lift right and left representations on the Dorfman algebra to find
+    \begin{align*}
+        \delta C_\nabla(a,b,c) &= \left[\nabla(a) , [\nabla(b), \nabla(c)] \right] - 
+        \left[\nabla(a), \nabla([b,c])\right]\\
+        & \qquad - \left[ [\nabla(b), \nabla(a)], \nabla(c)\right] +
+        \left[\nabla([b,a]), \nabla(c)\right]\\
+        & \qquad +\left[[\nabla(c), \nabla(a)], \nabla(b)\right] 
+        - \left[\nabla([c,a]), \nabla(b)\right]\\
+        & \qquad + \left[\nabla([a,b]), \nabla(c)\right]
+        - \nabla\left( \left[ [a,b], c\right]\right)\\
+        & \qquad - \left[ \nabla([a,c]), \nabla(b)\right]
+        + \nabla\left( \left[ [a,c],b\right]\right)\\
+        & \qquad + C_\nabla(a,[b,c])\\
+        &=0 
+    \end{align*}
+    by collecting some terms, using Leibniz everywhere and identifying terms with the last line.
+\end{proof}
+% 
+Since the Leibniz curvature is a cocycle in $C^2(\mathfrak{g,h})$, and the Leibniz differential is closed, we define:
+\definition{
+    The \textit{Characteristic class} of an exact Dorfman algebra is the 2nd cohomology class $[C_\nabla] \in H^2(\mathfrak{a,g})$.
+    This is invariant under different splits since upon choosing a different $\nabla' = \nabla + \eta$ for $\eta : \mathfrak{g} \rightarrow \mathfrak{a}$, a short computation shows
+    \begin{equation}
+        C_{\nabla'} = C_\nabla + \delta \eta.
+    \end{equation}
+    Therefore an exact Dorfman algebra carries a Characteristic class 
+    \begin{equation}
+        [C_\nabla] = [C_{\nabla'}] \in H^2(\mathfrak{a,g}).
+    \end{equation}
+}\label{def:Characteristic class of Dorfman algebra}
+% 
+\proposition{
+    Two exact Dorfman algebras are isomorphic if and only if their Characteristic classes agree.
+    Proof in \citep{Zapata-Carratala2019}, prop 2.5.7
+}\label{prop:Isomorphism of Dorfam Algebras}
+% 
+\example{
+    Construct a Dorfman algebra from the Leibniz representation of a Lie algebra $\mathfrak{g}$ over a vector space $\mathfrak{h}$ in the following way. 
+    Let $\rho : \mathfrak{g} \rightarrow \mathfrak{h}$ be a Leibniz representation with 
+    \begin{align*}
+        [\cdot,\cdot]_L : \mathfrak{g} \times \mathfrak{h} &\rightarrow \mathfrak{h}\\
+        [\cdot,\cdot]_R : \mathfrak{h} \times \mathfrak{g} &\rightarrow \mathfrak{h},
+    \end{align*}
+    that can be alternatively be understood as the Dorfman algebra $\mathfrak{w} = \mathfrak{h} \oplus \mathfrak{g}$ with $\rho = \mathrm{pr}_2$.
+    Then the semidirect product Dorfman algebra is given by the bracket on $\mathfrak{w}$ given by
+    \begin{equation}
+        [h \oplus g, h' \oplus g'] = \left([g, h']_L - [h,g']_R + \eta(h,h')\right)
+        \oplus [g,g']_\mathfrak{g}
+    \end{equation}
+    for some bilinear form $\eta: \bigotimes^2 \mathfrak{h} \rightarrow \mathfrak{h}$.
+}\label{ex:semidirect product construction of dorfman algebras}
+% subsection dorfman_algebras (end)
+\subsection{Courant Algebroids} % (fold)
+\label{sub:courant_algebroids}
+To study of Courant algebroids is to look at a structures encompassing vector bundles (\cref{sub:vector_bundles}), Courant spaces (\cref{sub:courant_spaces}) and Dorfman algebras (\cref{sub:dorfman_algebras}).
+Alternatively, one can start from a Lie algebroid and build a Leibniz representation on it, giving a Dorfman structure on it using a semidirect product as in \cref{ex:semidirect product construction of dorfman algebras}.
+\example{
+    Consider a Lie algebroid $(A, \rho, [\cdot,\cdot])$. Sections of this Lie algebroid enjoy the usual rules of Cartan calculus with operators $\iota, \mathcal{L}, d$ of degrees $-1,0,1$.
+    We show that there exists a Leibniz representation of $\Gamma(A)$ on its dual $\Gamma(A^*)$ with the brackets
+    \begin{align*}
+        [\cdot,\cdot]:_L \Gamma(A) \times \Gamma(A^*) &\rightarrow \Gamma(A^*)\\
+        (a, \alpha) &\mapsto \mathcal{L}_a \alpha\\
+        [\cdot,\cdot]:_R \Gamma(A^*) \times \Gamma(A) &\rightarrow \Gamma(A^*)\\
+        (\alpha, a) &\mapsto \iota_a d \alpha.
+    \end{align*}
+    To check that this is indeed a Leibniz representation, we need to check all the Jacobi identities. 
+    For $a,b \in \Gamma(A)$, $\alpha, \beta \in \Gamma(A^*)$, using \cref{fact:Cartan Calculus}
+    \begin{align*}
+        [\alpha, [a,b] ]_R &= \iota_{[a,b]} d \alpha\\
+        &= \mathcal{L}_{[a,b]} \alpha - d \circ \iota_{[a,b]} \alpha\\
+        &= \iota_b \circ d \circ\iota_a \circ d \alpha + \mathcal{L}_a (\iota_b d \alpha)\\
+        &= [ [\alpha,a]_R, b]_R + [a, [\alpha, b]_R]_L
+    \end{align*}
+    and so on...
+    Since we have found a Leibniz representation $\Gamma(A) \rightarrow \Gamma(A^*)$, we construct the semidirect product $\Gamma(A) \oplus \Gamma(A^*)$, that is a Dorfman algebra with bracket
+    \begin{equation}
+        [a \oplus \alpha, b \oplus \beta] = [a,b] \oplus \left( \mathcal{L}_a \beta - \iota_b d \alpha\right).
+    \end{equation}
+    We note that the lack of skew-symmetry is controlled by 
+    \begin{align*}
+        [a \oplus \alpha, a \oplus \alpha] &= \mathcal{L}_a \alpha - \iota_a d \alpha\\
+        &= d \circ \iota_a \alpha
+    \end{align*}
+    % \begin{align*}
+    %     [ [a,\alpha]_L, b ]_R &= \iota_b d (\mathcal{L}_a \alpha)\\
+    %     &= \mathcal{L}_b \mathcal{L}_a \alpha - d (\iota_b \mathcal{L}_a \alpha)\\
+    %     &=\\
+    % \end{align*}
+}\label{ex:Courant algebroid-first example}
+% 
+\definition{
+    A \textbf{Courant algebroid} is the tuple $(E \rightarrow M, \langle \cdot,\cdot \rangle, \rho, [\cdot,\cdot])$ such that $E \rightarrow M$ is a vector bundle, $\langle \cdot,\cdot \rangle$ is a symmetric non-degenerate bilinear form on the fibres. We also ask that the anchor map $\rho: E \rightarrow TM$ is $\mathbbm{R}$-bilinear on sections of the algebroid such that the pushforward of the anchor
+    \begin{equation}
+        \rho_*: \left( \Gamma(E), [\cdot,\cdot]_E\right) \rightarrow \left(\Gamma(TM), [\cdot,\cdot]\right)
+    \end{equation}
+    forms a Dorfman algebra.
+    Asking for a Dorfman structure means that the bracket on sections of the algebroid is non skew-symmetric but still follows Leibniz identity. 
+    So for sections $a,b \in \Gamma(E)$ and $f \in C^\infty(M)$, 
+    \begin{align}
+        [a, f \cdot b]_E &= f \cdot [a,b]_E + \rho_*(a)(f) 
+    \end{align}
+    that adjoint action of $a$ on $f$ descends to the pushforward.
+    Moreover, we ask for compatibility with the bilinear form in the following way
+    \begin{equation}
+        \rho_*(a)(\langle b,c \rangle) = \langle [a,b]_E, c \rangle + \langle b, [a,c]_E \rangle.
+    \end{equation}
+    Finally, we ask for a so called "Tame symmetry", that is failure of the bracket to close is controlled by
+    \begin{equation}
+        [a,a]_E = D \langle a,a \rangle,
+    \end{equation}
+    where $D = \sharp \circ \rho^* \circ d : C^\infty(M) \rightarrow \Gamma(E)$.
+}\label{def:Courant algebroid}
+% 
+
+This definition implies that Courant algebroids are bundles of linear \textit{Courant spaces} (see \cref{def:courant_space})
+\begin{equation}
+    \rho_x : (E_x, \langle \cdot,\cdot \rangle_x) \rightarrow T_xM,
+\end{equation}
+whose sections carry a Dorfman algebra structure.
+
+% 
+\definition{
+    A Courant algebroid $(E \rightarrow M, \langle \cdot,\cdot \rangle, \rho, [\cdot,\cdot])$ is \textit{exact} when it is fibrewise exact.
+    Considering the entire bundle of sections, it is then Dorfman exact.
+    So we have the short exact sequence of Leibniz algebras (\cref{def:Exact Dorfman algebra})
+    \begin{equation}
+         0\rightarrow \Omega^1(M)\xrightarrow{i} \Gamma(E) \xrightarrow{\rho_*} \mathfrak{X}(M) \rightarrow 0,
+    \end{equation}
+    with 
+    \begin{equation}
+        [i(\Omega^1(M)), i(\Omega^1(M))]_E = 0.
+    \end{equation}
+}\label{def:Exact Courant algebroid}
+% 
+The upshot is that all structure introduced in \cref{sub:courant_spaces} and \cref{sub:dorfman_algebras} applies here. 
+In particular we recall that exact Dorfman algebras $\mathfrak{h} \oplus \mathfrak{g}  \rightarrow \mathfrak{g}$ are represented by their characteristic classes $[C_\nabla] \in H^2(\mathfrak{g,h})$.
+
+\definition{
+    Let $E \rightarrow M$ be an exact Courant algebroid, such that $\left( \Gamma(E), [\cdot,\cdot]_E\right) \rightarrow \left(\Gamma(TM), [\cdot,\cdot]\right)$ is an exact Dorfman algebra, then this algebra is represented by an element 
+    \begin{equation}
+        [\eta] \in H^2( \mathfrak{X}(M), \Omega^1(M))
+    \end{equation}
+    called the \textbf{\v{S}evera class} of $E$.
+    Since this cohomology has coefficients in the space of one-forms, it also defines a closed $H$-flux
+    \begin{equation}
+        [H] \in H^3(M).
+    \end{equation}
+    The relation being $\quad \delta \eta = 0\: \Leftrightarrow \: d H = 0$.
+}\label{def:Severa class}
+% 
+\example{
+    The \textit{Standard Courant algebroid}, found when describing Supergravity is \\ 
+    $T \mathbbm{M} = TM \oplus_M T^*M$.
+    It has inner Courant bracket and Dorfman bracket given by
+    \begin{align*}
+        \langle X \oplus \alpha, Y \oplus \beta \rangle &= \frac{1}{2} (\alpha(Y) + \beta(X))\\
+        [X \oplus \alpha, Y \oplus \beta] &= [X,Y] \oplus \left( \mathcal{L}_X \beta - \iota_Y d \alpha \: {\color{red} + \iota_X \iota_Y H}\right).
+    \end{align*}
+    The standard bracket can be twisted by an H-flux. This standard result is made more clear in \citep[section 2.5.2]{Zapata-Carratala2019}.
+}\label{ex:Standard Courant algebroid, supergravity}
+% 
+\definition{
+    Let $(E \rightarrow M, \langle \cdot,\cdot \rangle, \rho, [\cdot,\cdot])$ be a Courant algebroid, a \textbf{Dirac Structure} supported on submanifold $Q \subset M$ is a subbundle $D \subset E|_Q$, on the restricted support, such that 
+    \begin{itemize}
+        \item $D_q$ is maximally isotropic with respect to $\langle \cdot, \cdot \rangle_q$ for all $q \in Q$
+        \item $\rho : D \rightarrow TQ$ is an anchor over $Q$
+        \item the space of sections on Dirac space $D$ is involutive,
+        \begin{equation}
+            [ \Gamma(D), \Gamma(D)] \subseteq \Gamma(D).
+        \end{equation} 
+    \end{itemize}
+    In other words, the bundle $D$ is fiberwise a \textit{Dirac space} (see \cref{def:Dirac space}).
+}\label{def:Dirac Structure}
+% 
+Since Dirac structures are fiberwise Dirac, extending \cref{prop:2_form_on_dirac_space} to the entire bundle, there exists a 2-form given by \cref{eq: Dirac 2-form}
+\begin{align}
+    \omega_q^D &\in \Lambda^2(\mathrm{im}(\rho_q)) \subset \Lambda^2 T_q^* M\\
+    d \omega_q^D(X_q,Y_q, Z_q) &= \langle [X, Y], Z \rangle \big|_q
+\end{align}
+NEEDS more work up here
+% subsection courant_algebroids (end)
 % section lecture_9 (end)

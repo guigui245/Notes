@@ -234,10 +234,10 @@ Look into spanning functions and restrictions of $C^\infty$ functor.
 \definition{
     A \textbf{Lie Algebroid} $\left\{ A \rightarrow M; \rho: A \rightarrow TM; [\cdot, \cdot] \right\}$
     over smooth manifold $M$ is a vector bundle $A \rightarrow M$ together with a derivative Lie algebra structure on $\left(\Gamma(A), \left[\cdot,\cdot\right]\right)$ and a vector bundle morphism $\rho: A \rightarrow TM$ called the \textit{anchor map}. \\
-    The anchor map induces a Lie algebra homomorphism on modules of sections $\rho_* : \Gamma(A) \rightarrow \Gamma(TM) $ by the \textit{symbol-squiggle theorem} which we will see in \ref{thm:symbol_squiggle}
+    The anchor map induces a Lie algebra homomorphism between modules of sections $\rho_* : \Gamma(A) \rightarrow \Gamma(TM) $ by the \textit{symbol-squiggle theorem} which we will see in \ref{thm:symbol_squiggle}
     with
     \begin{equation}
-        \rho_*[s,s']_E = [\rho(s), \rho(s')]
+        \rho_*[s,s']_E = [\rho(s), \rho(s')]_{TM}
     \end{equation}
     This means that the derivative algebra structure is respected for $s,s' \in \Gamma(A)$ and $f \in C^{\infty}(M)$,
     \begin{equation}
@@ -280,7 +280,7 @@ Look into spanning functions and restrictions of $C^\infty$ functor.
         \begin{equation}
              0\rightarrow VP\rightarrow TP \xrightarrow{\pi_*} TM \rightarrow 0,
         \end{equation}
-        where $VP$ is the \textit{vertical bundle}, the kernel of the differential surjective map. Now the vertical bundle is isomorphic to the trivial bundle $VP \cong \mathfrak{g}\times P$.
+        where $VP$ is the \textit{vertical bundle}, the kernel of the differential surjective map. Now the vertical bundle is isomorphic to the trivial bundle $VP \cong P \otimes \mathfrak{g}$.
         Now since $P$ is a principal bundle, G acts on this short exact sequence yielding the Atiyah sequence as $G$ acts as the adjoint map on the vertical bundle.
         \item The bundle of derivations $DE \rightarrow M$ for a vector bundle $E \rightarrow M$ is a Lie algebroid.
     \end{itemize}
@@ -345,7 +345,7 @@ As usual we find $d_A^2 = 0$ which forms a \textit{de Rham} complex and its coho
 % \end{equation}
 % This is easier to understand upon introducing the notation $\langle \cdot, \cdot \rangle$ for the natural pairing of section of the algebroid and its dual. This definition is extended to recover what we had before. And it's easier to see that this is a nilpotent derivation now.
 % }
-
+% 
 \definition{
     Just like a regular exterior algebra, there are natural notions of \textit{interior product} and \textit{Lie derivatives}, defined for $w \in \Gamma(\bigwedge^{k} A^{*})$ and $a, a_0, \ldots, a_{k-1} \in \Gamma(A)$
     as 
@@ -355,20 +355,25 @@ As usual we find $d_A^2 = 0$ which forms a \textit{de Rham} complex and its coho
         \sum_{i=0}^k \omega(\ldots, a_{i-1}, [a, a_i], \ldots, a_{k-1}) - \rho_*a \omega(a_0, \ldots, a_{k-1}),
     \end{align*}
     with extension by linearity.
-    These follow the usual Cartan calculus identity:
-    \begin{tcolorbox}
-        \begin{align*}
-            \mathcal{L}_a &= \iota_a \circ d_A + d_A \circ \iota_a\\
-            [\mathcal{L}_a, \mathcal{L}_b] &= \mathcal{L}_{[a,b]}\\
-            [\mathcal{L}_a, \iota_b] &= \iota_{[a,b]}\\
-            [\iota_a, \iota_b] &=0
-        \end{align*}
-        So the operators $\iota, \mathcal{L}, d$ have respectively degrees $-1,0, 1$.
-    \end{tcolorbox}
 }\label{def:la_cartan_calculus}
+% 
+\fact{
+These follow the usual Cartan calculus identity:
+\begin{tcolorbox}
+    \begin{align}
+        \mathcal{L}_a &= \iota_a \circ d_A + d_A \circ \iota_a\\
+        [\mathcal{L}_a, \mathcal{L}_b] &= \mathcal{L}_{[a,b]}\\
+        [\mathcal{L}_a, \iota_b] &= \iota_{[a,b]}\\
+        [\iota_a, \iota_b] &=0\\
+        [\mathcal{L}_a, d] &= 0,
+    \end{align}
+    where we consider the commuttators on the graded algebra, so be carefull.
+    So the operators $\iota, \mathcal{L}, d$ have respectively degrees $-1,0, 1$.
+\end{tcolorbox}
+}\label{fact:Cartan Calculus}
 
 \proposition{
-    There is a $1-1$ correspondence between Lie algebroids and \textit{Linear Poisson structures}.
+    There is a 1-1 correspondence between Lie algebroids and \textit{Linear Poisson structures}.
 }\label{prop:correspondance_with_poisson_structures}
 
 Maybe talk about splitting and covariant derivatives?
