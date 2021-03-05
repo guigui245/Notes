@@ -40,12 +40,23 @@ Some examples to illumintes what we mean:
 \end{itemize}
 % 
 \definition{
-    A vector bundle $A \rightarrow M$ is a \textbf{Local Lie Algebra} if the $\mathbb{R}$-linear bracket on the smooth sections is local.
+    A vector bundle $A \rightarrow M$ is a \textbf{local Lie Algebra} if the $\mathbb{R}$-linear bracket on the smooth sections is local, i.e
     \begin{equation}
         \mathrm{supp}([a,b]) \subset \mathrm{supp}(a) \cap \mathrm{supp}(b)
     \end{equation}
     for $a,b \in \Gamma(A)$.
-}
+}\label{def:local lie algebra-historical}
+% 
+Regarding the Lie bracket as a differential operator on smooth sections above prompts us to extend our the historical definition of local Lie algebra to vector bundles with a local differential structure.
+% 
+\definition{
+    A vector bundle $A \rightarrow M$ is said to carry a local lie algebra \textit{structure} on its sections $\Gamma(A)$ if the lie bracket on the space of sections is $\mathbbm{R}$-linear and the adjoint map is a differential operator of degree 1.
+    \begin{align*}
+        \mathrm{ad}_{\cdot} : \Gamma(A) \rightarrow \mathrm{Diff}_1(A)
+    \end{align*}
+    Or in other words, $\mathrm{ad}_\cdot \in \mathrm{Diff}(A, J^1 A^* \otimes A)$, where $J^k A^* \otimes A$ is algebroid-valued k-jet on its dual using \cref{prop: differential operators equivalent to jets on vector bundles}.
+}\label{def:local lie algebra-differential}
+% 
 
 % subsection general_local_lie_algebras (end)
 \theorem{

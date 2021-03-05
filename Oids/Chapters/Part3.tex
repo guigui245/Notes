@@ -4,6 +4,7 @@
 \lhead{\emph{Lecture 3}}
 \section{Lie Algebroids} % (fold)
 \label{sec:lie_algebroids}
+A good reference to add to the mix is \citep{Wright2019}.
 \subsection{Vector Bundles} % (fold)
 \label{sub:vector_bundles}
 Let's first review facts about vector bundles, but with a more `categorical' mindset.
@@ -11,11 +12,13 @@ Let's first review facts about vector bundles, but with a more `categorical' min
 \definition{
     A \textbf{vector bundle} $\pi : E \rightarrow M$ over a smooth manifold $M$ is a fibre bundle whose fibre $E_x$ is a vector space $V \in \mathbf{Vect} \: \forall x \in M$. 
     The dimension of the typical fibre $E_M$ is called the rank and $\mathrm{dim}(E_M) := \mathrm{dim}(E_x) $ for all $x$.
-    A \textit{local trivialisation} is a map $\varphi$ such that on $U \subset M$ open, $\varphi : \pi^{-1}(U) \rightarrow U \times V$ is a diffeomorphism.\\
-    On overlaps $U_1 \cap U_2$, local trivialisations define $\mathrm{GL}(V)$-valued \textit{transition functions}.
-    A basis of sections $\{e_i : U \rightarrow \pi^{-1}(U) \vert \pi \circ e_i = \mathrm{id}_U\}_{i=1}^{\mathrm{rk}(E)}$ defines a local trivialisations as well; if such sections are globally defined, the bundle is trivial (or trivialisable).
 }\label{def:vec_bundle}
-
+% 
+\definition{
+    A \textit{local trivialisation} is a map $\varphi$ such that on $U \subset M$ open, $\varphi : \pi^{-1}(U) \rightarrow U \times V$ is a diffeomorphism.\\
+    On overlaps $U_1 \cap U_2 \subset M$, local trivialisations define $\mathrm{GL}(V)$-valued \textit{transition functions}.
+}\label{def:local trivialisation}
+% 
 \definition{
     A smooth map $F$ between $2$ vector bundles $F: E_1 \rightarrow E_2$ is a bundle \textbf{vector bundle morphism} if there exists smooth map $\phi \in C^{\infty}(M_1, M_2)$ between the bases such that 
     \begin{equation}
@@ -75,15 +78,17 @@ Let's first review facts about vector bundles, but with a more `categorical' min
     \end{equation}
     which is simply $\phi^*E = \{ (p, e) \in N \times E \; | \; \phi(p) = \pi(e)\}$.
 }\label{def:pullback_vb}
-
+% 
 \definition{
     A \textbf{section} $s$ of vector bundle $E \xrightarrow{\pi} M$ is a map $s : M \rightarrow E$ such that $\pi \circ s = \mathrm{id}_M$. 
-    The set of all sections of $E$ is denoted
+    The set of all sections of $E$ forms a $C^\infty(M)$-module and is denoted
     \begin{equation}
         \Gamma(E) = \{s : M \rightarrow E\; |\;\pi \circ s = \mathrm{id}_M\}.
     \end{equation}
+    On an open set $U \subset M$, a basis of sections $\{e_i : U \rightarrow \pi^{-1}(U) \vert \pi \circ e_i = \mathrm{id}_U\}_{i=1}^{\mathrm{rk}(E)}$ defines a local trivialisation (\cref{def:local trivialisation}). 
+    If such sections are globally defined, the bundle is trivial (or trivialisable).
 }\label{def:sections_vb}
-
+% 
 \remark{
     We would naturally guess that the functor $C^\infty : \mathbf{Man} \rightarrow \mathbf{Ring}$ would similarly extend to sections on manifold. 
     But the assignment $\Gamma : \mathbf{Vect}_{\mathrm{Man}} \rightarrow R\textrm{-}\mathbf{Mod}$ fails to be a functor. 
@@ -126,8 +131,11 @@ Let's first review facts about vector bundles, but with a more `categorical' min
         F_*(f \cdot s) &= (\phi^{-1})^*f \cdot F_*(s)
     \end{align}
     for $s,r \in \Gamma(E_1)$ and $f \in C^\infty(M)$. 
-    Note that you can \textit{always} pushforward vector fields via $\phi_*: \mathcal{X}(M) \rightarrow \mathcal{X}(N)$. BUT you can't always pushforward tangent vectors!!
 }\label{def:pushforward_sections}
+% 
+\remark{
+    Note that you can \textit{always} pushforward tangent vectors via the differential map $\phi_*: TM \rightarrow TN$, but to pushforward vector fields, you need $\varphi$ to be a diffeomorphism.
+}
 
 \definition{
     In contrast, $\phi$ need not be a diffeomorphism for the \textbf{pullback} of dual sections (aka: forms) to be well-defined.
@@ -220,12 +228,12 @@ Look into spanning functions and restrictions of $C^\infty$ functor.
 \label{sub:definition_and_examples}
 
 \definition{
-    A \textbf{Derivative Lie algebra} is a vector bundle $\alpha: A \rightarrow M$ whose module of sections with an $\mathbb{R}$-linear structure $(\Gamma(A), [\cdot,\cdot])$ acts as derivations on each of its arguments.
+    A \textbf{Derivative Lie algebra} is a vector bundle $\alpha: A \rightarrow M$ whose $\mathbb{R}$-linear module of sections $(\Gamma(A), [\cdot,\cdot])$ acts as a derivation on each of its arguments.
     That is 
     \begin{equation*}
          \mathrm{ad}_{[\cdot,\cdot]} : \Gamma(A) \rightarrow \mathrm{Der}(A)
     \end{equation*} 
-    is well-defined.
+    is well-defined, which in this case means that the derivation property respects the $C^\infty(M)$-module structure.
 }\label{def:derivative_lie_algebra}
 \example{
     A Poisson algebra is a derivative Lie algebra.
@@ -237,16 +245,32 @@ Look into spanning functions and restrictions of $C^\infty$ functor.
     The anchor map induces a Lie algebra homomorphism between modules of sections $\rho_* : \Gamma(A) \rightarrow \Gamma(TM) $ by the \textit{symbol-squiggle theorem} which we will see in \ref{thm:symbol_squiggle}
     with
     \begin{equation}
-        \rho_*[s,s']_E = [\rho(s), \rho(s')]_{TM}
+        \rho_*[s_1,s_2]_A = [\rho(s_1), \rho(s_2)]_{TM}
     \end{equation}
-    This means that the derivative algebra structure is respected for $s,s' \in \Gamma(A)$ and $f \in C^{\infty}(M)$,
+    Being a \textit{derivative Lie algebra} means that for $s_1,s_2, s_3 \in \Gamma(A)$ and $f \in C^{\infty}(M)$, the following equations are satified:
+    \begin{align}
+        \left[s_1, f \cdot s_2\right]_A &= f  \cdot [s_1,s_2]_A + \rho_*(s_1)[f] \cdot s_2
+        \label{eq:lie algebroid axioms 1}
+        \\
+        \left[s_1, [s_2,s_3]_A\right]_A &= \left[[s_1,s_2]_A, s_3\right]_A + \left[s_2, [s_1, s_3]_A\right]_A   \label{eq:lie algebroid axioms 2}
+    \end{align}
+    Locally, if the algebroid structure is given by structure functions $\tensor{C}{_{ab}^c}(x) \in \Gamma( \Lambda^2 A^* \otimes A)$ in a chart $U_\alpha$ with coordinates $x^i$, we deduce from the above a Jacobi type identity:
     \begin{equation}
-        \left[s, f \cdot s'\right] = f  \cdot [s,s'] + \rho_*(s) f \cdot s'
+        \tensor{C}{_{[ab}^e} \tensor{C}{_{c]e}^d} + \frac{\partial}{\partial x^i}\tensor{C}{_{[ab}^d} \tensor{\rho}{^i_{c]}} = 0,
+        \label{eq:Jacobi identity for Lie algebroids}
     \end{equation}
-
-    In general, vector bundle morphism \textbf{DO NOT} induce well-defined maps between modules of sections. This again will be highlighted in a future section.
+    where we have put $\rho_\star^i(\xi_a) = \tensor{\rho}{^i_a}$ is the components of vector field associated to a local trivialisation when anchored down to the tangent bundle.
+    Unlike Leibniz algebras (\cref{def:Liebniz algebra}), the bracket over sections is skew-symmetric.
 }\label{def:lie_algebroids}
-
+% 
+\remark{
+    In general, vector bundle morphism \textbf{DO NOT} induce well-defined maps between modules of sections. 
+    This is discussed further in \citep{Wright2019} by introducing the notion of double pullback algebroid and probably needs to be understood further here.
+}\label{rem:double pullback lie algebroid}
+% 
+\begin{tcolorbox}
+    could this be related to \cref{rem:duality_not_functor} ?
+\end{tcolorbox}
 \remark{
     The anchor map naturally defines two distributions $\mathrm{ker}(\rho) \subset A$ and $\mathrm{im}(\rho) \subset TM$.
     Now fiberwise, the vector spaces $\mathfrak{g}_x := \mathrm{ker}(\rho_x) \subset A_x$ form a Lie algebra with bracket extending on the fibres $A_x$.
