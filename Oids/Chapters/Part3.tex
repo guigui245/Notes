@@ -69,7 +69,7 @@ Let's first review facts about vector bundles, but with a more `categorical' min
 }\label{def:vb_sum_prod_dual}
 
 \definition{
-    Given a vector bundle $E \xrightarrow{\pi} M$, and a smooth map $\phi:N \rightarrow M$, \textbf{pullback vector bundle} by $\phi$ is defined as the categorical pull-back $\phi^* E = N  \tensor[_\phi]{\times}{_\pi} E$ such that the diagram commutes:
+    Given a vector bundle $E \xrightarrow{\pi} M$, and a smooth map $\phi:N \rightarrow M$, \textbf{categorical pulback} of $E$ by $\phi$ is defined as $\phi^* E = N  \tensor[_\phi]{\times}{_\pi} E$ such that the diagram commutes:
     \begin{equation}
         \begin{tikzcd}
             N \tensor[_\phi]{\times}{_\pi} E \arrow[r, ""] \arrow[d, ""]& E  \arrow[d, "\pi"] \\
@@ -77,7 +77,8 @@ Let's first review facts about vector bundles, but with a more `categorical' min
         \end{tikzcd}
     \end{equation}
     which is simply $\phi^*E = \{ (p, e) \in N \times E \; | \; \phi(p) = \pi(e)\}$.
-}\label{def:pullback_vb}
+    We will see in more detail what it entails shortly.
+}\label{def:categorical pullback of vector bundle}
 % 
 \definition{
     A \textbf{section} $s$ of vector bundle $E \xrightarrow{\pi} M$ is a map $s : M \rightarrow E$ such that $\pi \circ s = \mathrm{id}_M$. 
@@ -85,9 +86,16 @@ Let's first review facts about vector bundles, but with a more `categorical' min
     \begin{equation}
         \Gamma(E) = \{s : M \rightarrow E\; |\;\pi \circ s = \mathrm{id}_M\}.
     \end{equation}
-    On an open set $U \subset M$, a basis of sections $\{e_i : U \rightarrow \pi^{-1}(U) \vert \pi \circ e_i = \mathrm{id}_U\}_{i=1}^{\mathrm{rk}(E)}$ defines a local trivialisation (\cref{def:local trivialisation}). 
-    If such sections are globally defined, the bundle is trivial (or trivialisable).
 }\label{def:sections_vb}
+
+\definition{
+    On an open set $U \subset M$, a basis of sections (or \textbf{frame}) is a set 
+    \begin{equation}
+    \{e_i : U \rightarrow \pi^{-1}(U) \vert \pi \circ e_i = \mathrm{id}_U\}_{i=1}^{\mathrm{rk}(E)}    
+    \end{equation}
+    that defines a local trivialisation (\cref{def:local trivialisation}). 
+    If such sections are globally defined, the bundle is trivial (or trivialisable).
+}\label{def:frame of vector bundle}
 % 
 \remark{
     We would naturally guess that the functor $C^\infty : \mathbf{Man} \rightarrow \mathbf{Ring}$ would similarly extend to sections on manifold. 
@@ -106,18 +114,22 @@ Let's first review facts about vector bundles, but with a more `categorical' min
         \end{tikzcd}
     \end{equation}
     For sections on the vector bundle, we have the maps
-    \begin{align*}
+    \begin{align}
         &\Gamma(E_1) \xrightarrow{F} \Gamma(\phi^*E_2) \xleftarrow{\phi^*} \Gamma(E_2)\\
-        &s_1 \rightarrow F \circ s_1 \;;\; s_2 \circ \phi \leftarrow s_2
-    \end{align*}
-    If $\phi$ is \textbf{not} a diffeomorphism, then one \textit{cannot} in general construct such maps.
+        &s_1 \rightarrow F \circ s_1 \;;\; s_2 \circ \phi \leftarrow s_2. \nonumber
+    \end{align}
+    Meaning that regardless of whether $\phi$ is diffeomorphic, we can push sections $s_1 \in \Gamma(E_1)$ to sections $F(s_1) \in \phi^*E_2$ and sections $s_2 \in \Gamma(E_2)$ can be pullbacked to $\phi^* s_2 \in \Gamma(\phi^* E_2)$.
+    \\If $\phi$ is \textbf{not} a diffeomorphism \footnotemark, then one \textit{cannot} in general construct such maps.
     However, when maps agree
     \begin{equation}
         F \circ s_1 = s_2 \circ \phi \qquad \Leftrightarrow \qquad s_2 \sim_F s_1 
     \end{equation}\label{eqn:F_related}
     we say that the sections are \textbf{F-related}.
 }\label{rem:duality_not_functor}
-
+\footnotetext{
+    which it isn't for sigma models.
+}
+% 
 \definition{
     If $\phi :M \rightarrow N$ \textbf{is} a diffeomorphism, and $F:E_1 \rightarrow E_2$ a covering of vector bundle then the \textbf{pushforward} of sections
     \begin{align}
@@ -136,7 +148,7 @@ Let's first review facts about vector bundles, but with a more `categorical' min
 \remark{
     Note that you can \textit{always} pushforward tangent vectors via the differential map $\phi_*: TM \rightarrow TN$, but to pushforward vector fields, you need $\varphi$ to be a diffeomorphism.
 }
-
+% 
 \definition{
     In contrast, $\phi$ need not be a diffeomorphism for the \textbf{pullback} of dual sections (aka: forms) to be well-defined.
     \begin{align*}
@@ -154,7 +166,7 @@ Let's first review facts about vector bundles, but with a more `categorical' min
     In the case of cotangeant bundle, I should expand on the fact that $\phi$ needs to be diffeomorphism to define pullbacks. See notes on int systems    
     }
 }\label{def:pushforward}
-
+% 
 \definition{
     The pullback naturally extends to all tensor powers of the dual bundles $\bigotimes^{k}E_2^*$, such that for $\eta, \omega \in \Gamma( \bigotimes^\bullet E_2^*)$, and function $f \in \Gamma(\bigotimes^0 E_2) \cong C^\infty(N)$, we have
     \begin{align*}
@@ -163,6 +175,17 @@ Let's first review facts about vector bundles, but with a more `categorical' min
         F^*(f) &= f \circ \phi = \phi^* f.
     \end{align*}
 }\label{def:extensions_to_tensor_duals}
+% 
+Importantly, we can pullback vector bundle through smooth maps by extending the map $\phi^*: \Gamma(E) \rightarrow \Gamma(\phi^* E)$ over the ring of functions of the target $\mathcal{C}^\infty(N)$.
+\proposition{
+    Let $\phi: M \rightarrow N$ a smooth map between manifolds and let $E \rightarrow N$ a vector bundle over $N$.
+    Then the \textbf{pullback vector bundle} is isomorphic to
+    \begin{equation}
+        \Gamma( \phi^*E) = \mathcal{C}^\infty(M) \otimes_{\mathcal{C}^\infty(N)} \Gamma(E),
+    \end{equation}
+    Apparently this is an example of the Serre-Swan theorem but not today.
+}\label{prop:Pullback bundle isomorphism}
+% 
 
 \definition{
     Given vector bundle morphisms $F: E_1 \rightarrow E_2$, $G: E_2 \rightarrow E_3$, we see that on the tensor powers of dual bundles we have the contravariant identity:
@@ -179,13 +202,7 @@ Let's first review facts about vector bundles, but with a more `categorical' min
 Look into spanning functions and restrictions of $C^\infty$ functor.
 
 \definition{
-    Let $E \rightarrow M$ be a smooth vector bundle, a \textbf{connection} is a vector bundle morphism $\nabla: E \rightarrow DE \subset \mathrm{End}(E)$ to its derivation bundle covering the identity.
-    % 
-    \footnote{
-        Derivation bundle will be studied more in \ref{sub:derivations}
-    }
-    % 
-    A \textbf{Koszul connection} is a $\mathbb{R}$-linear map 
+    Let $E \rightarrow M$ be a smooth vector bundle, a \textbf{Koszul connection} on the sections of $E$ is an $\mathbb{R}$-linear map 
     \begin{align*}
         \nabla: \mathfrak{X}(M) \times \Gamma(E) &\rightarrow \Gamma(E)\\
         (X,s) & \mapsto \nabla_X s
@@ -195,6 +212,7 @@ Look into spanning functions and restrictions of $C^\infty$ functor.
         \nabla(f \cdot s) = f \nabla s + df \cdot s
     \end{equation}
 }\label{def:kozul connection}
+% 
 
 \definition{
     Given a vector bundle $E \rightarrow M$, we construct the \textbf{Koszul complex} on sections of the vector bundle.
@@ -242,7 +260,11 @@ Look into spanning functions and restrictions of $C^\infty$ functor.
 \definition{
     A \textbf{Lie Algebroid} $\left\{ A \rightarrow M; \rho: A \rightarrow TM; [\cdot, \cdot] \right\}$
     over smooth manifold $M$ is a vector bundle $A \rightarrow M$ together with a derivative Lie algebra structure on $\left(\Gamma(A), \left[\cdot,\cdot\right]\right)$ and a vector bundle morphism $\rho: A \rightarrow TM$ called the \textit{anchor map}. \\
-    The anchor map induces a Lie algebra homomorphism between modules of sections $\rho_* : \Gamma(A) \rightarrow \Gamma(TM) $ by the \textit{symbol-squiggle theorem} which we will see in \ref{thm:symbol_squiggle}
+    The anchor map induces a Lie algebra homomorphism between $\mathcal{C}^\infty(M)$-modules of sections 
+    \begin{equation}
+        \rho_* : \Gamma(A) \rightarrow \Gamma(TM) 
+    \end{equation}
+    by the \textit{symbol-squiggle theorem} which we will see in \ref{thm:symbol_squiggle}
     with
     \begin{equation}
         \rho_*[s_1,s_2]_A = [\rho(s_1), \rho(s_2)]_{TM}
@@ -254,7 +276,8 @@ Look into spanning functions and restrictions of $C^\infty$ functor.
         \\
         \left[s_1, [s_2,s_3]_A\right]_A &= \left[[s_1,s_2]_A, s_3\right]_A + \left[s_2, [s_1, s_3]_A\right]_A   \label{eq:lie algebroid axioms 2}
     \end{align}
-    Locally, if the algebroid structure is given by structure functions $\tensor{C}{_{ab}^c}(x) \in \Gamma( \Lambda^2 A^* \otimes A)$ in a chart $U_\alpha$ with coordinates $x^i$, we deduce from the above a Jacobi type identity:
+    Locally, if the algebroid structure is given by structure functions $\tensor{C}{_{ab}^c}(x) \in \Gamma( \Lambda^2 A^* \otimes A)$ in a chart $U_\alpha$ with coordinates $x^i$.
+    Considering local structure functions as two-form valued sections on the algebroid, we deduce a Jacobi type identity, with the derivative map given by the pushforward $\rho_*$:
     \begin{equation}
         \tensor{C}{_{[ab}^e} \tensor{C}{_{c]e}^d} + \frac{\partial}{\partial x^i}\tensor{C}{_{[ab}^d} \tensor{\rho}{^i_{c]}} = 0,
         \label{eq:Jacobi identity for Lie algebroids}
@@ -263,14 +286,13 @@ Look into spanning functions and restrictions of $C^\infty$ functor.
     Unlike Leibniz algebras (\cref{def:Liebniz algebra}), the bracket over sections is skew-symmetric.
 }\label{def:lie_algebroids}
 % 
+% 
 \remark{
-    In general, vector bundle morphism \textbf{DO NOT} induce well-defined maps between modules of sections. 
-    This is discussed further in \citep{Wright2019} by introducing the notion of double pullback algebroid and probably needs to be understood further here.
+    In general, vector bundle morphism \textbf{DO NOT} induce well-defined maps between modules of sections because $\Gamma$ fails to be a functor in if the map between spaces is not a diffeomorphic (\cref{rem:duality_not_functor}).
+    We explore this further in \cref{sub:morphisms_of_la}.
 }\label{rem:double pullback lie algebroid}
 % 
-\begin{tcolorbox}
-    could this be related to \cref{rem:duality_not_functor} ?
-\end{tcolorbox}
+% 
 \remark{
     The anchor map naturally defines two distributions $\mathrm{ker}(\rho) \subset A$ and $\mathrm{im}(\rho) \subset TM$.
     Now fiberwise, the vector spaces $\mathfrak{g}_x := \mathrm{ker}(\rho_x) \subset A_x$ form a Lie algebra with bracket extending on the fibres $A_x$.
@@ -311,6 +333,26 @@ Look into spanning functions and restrictions of $C^\infty$ functor.
     % 
 }\label{ex:Examples_of_lie_algebroids}
 % subsection definition_and_examples (end)
+% 
+\subsection{Morphisms of Lie algebroids} % (fold)
+\label{sub:morphisms_of_la}
+
+We will talk about the notion of local Lie algebras later, but in the case of Lie algebroid, the extra structure of a vector bundle constrains morphisms between these algebraic structures.
+We start by considering a general vector bundle morphism $F: A \rightarrow B$, and demand that this map induces a Lie algebra morphism of the modules of sections, which is not always guaranteed.
+% 
+\definition{
+    Let $A \rightarrow M$ and $B \rightarrow M$ be Lie algebroids over the same base. 
+    A \textbf{Lie algebroid morphism over the same base} $\Phi: A \rightarrow B$ is a vector bundle morphism (\cref{sub:morphisms_of_la}) inducing a map between smooth sections $\Gamma(B) \rightarrow \Gamma(A)$ such that the bracket is preserved
+    \begin{equation}
+        \Phi \circ [a_1, a_2]_A = [\Phi \circ a_1, \Phi \circ a_2]_B.
+    \end{equation}
+}\label{def:morphism of Lie algebroids over same base}
+% 
+However, when the base is different, morphism in the category of Lie algebroid are more complicated. 
+But using the notion of \textit{relatedness}, a suitable constrution can be established.
+Originally from \citep{Higgins1990} is presented here.
+
+% subsection morphisms_of_la (end)
 % 
 \subsection{Algebraic structures associated with Lie algebroid} % (fold)
 \label{sub:algebraic_structures_associated_with_la}
@@ -422,34 +464,36 @@ Maybe talk about splitting and covariant derivatives?
 % \end{proof}
 % subsection algebraic_structures_associated_with_la (end)
 
-\subsection{Morphisms of Lie algebroids} % (fold)
-\label{sub:morphisms_of_la}
-
-We will talk about the notion of local Lie algebras later, but in the case of Lie algebroid, the extra structure of a vector bundle constrains morphisms between these algebraic structures.
-We start by considering a general vector bundle morphism $F: A \rightarrow B$, and demand that this map induces a Lie algebra morphism of the modules of sections, which is not always guaranteed.
-% subsection morphisms_of_la (end)
 % 
 \subsection{Connections on Lie algebroids} % (fold)
 \label{sub:connections_on_la}
 A good ref is \citep{Lyakhovich2003}.
 Can view the concept of a Lie algebroid as a tool to transfer the differential geometry of tangent bundles to abstract vector bundles.
+% 
+An important notion to grasp is the extension of the Koszul connection (on vector bundle) to algebroid-valued connection on a vector bundle. This is the so called A-connection defined below.
 \definition{
-    A \textit{A-connection} $~^A\nabla$ on a Lie algebroid $A \rightarrow M$ is an anchor compatible \textit{Kozul connection} on the vector bundle $A \rightarrow M$. \citep{Kotov2019}
-    So it is a bundle morphism $\nabla : A \rightarrow DA$ covering the identity\footnotemark . 
-    Simply put, this is a $C^\infty(M)$-module with values in regular differential operators of order $1$ on M
+    Given a Lie algebroid $A \rightarrow M$, a \textit{A-connection} $~^A\nabla$ \textbf{on} the tangent bundle $TM$ is a \textit{Kozul connection} on $TM$ that is compatible with the anchor map $\rho: A \rightarrow TM$ \citep{Kotov2019}.\\
+    At the level of sections of $A$, the $A$-connection is defined as
     \begin{align*}
         ~^A\nabla: \Gamma(A) \times \Gamma(TM) &\rightarrow \Gamma(TM) \\
         (s, X) & \mapsto ~^A\nabla_s X 
     \end{align*}
     satisfying the Leibniz identity
     \begin{equation}
-        ~^A\nabla_s ( f \cdot X) = \rho_{*}(s)(f) X + f ~^A \nabla_s X
+        ~^A\nabla_s ( f \cdot X) = \rho_{*}(s)(f) X + f ~^A \nabla_s X.
     \end{equation}
-    The compatibility with the anchor is integrated in the Leibniz identity, this is really the only equation we can write down. Below we explore other connections that can be induced on the algebroid itself and the tangent bundle. In some sense the $A$-connection intertwines between connections on an abstract vector bundle and a regular tangent bundle.
-}\label{def:connection on lie algebroid}
-\footnotetext{
-    Some subtleties I don't get here yet.            
-}
+    Alternatively, in the Leibniz characterisation (see later in\cref{prop:Leibniz characterisation} ), the connection $~^A\nabla \in \mathrm{Diff}_1(TM, TM)$ is uniquely defined through maps $~^A \nabla \in \Gamma_\mathbb{R}(T^*M \otimes TM)$ and $\mathcal{C}^\infty(M)$-linear symbol map 
+    $\delta : T^*M \rightarrow \Gamma(T^*M \otimes TM)$  by
+    \begin{equation}
+        \rho_*(s)(f) = \delta (df) (\rho_*(s))
+    \end{equation}
+}\label{def:algebroid valued connection on a vector space}
+
+The compatibility with the anchor is integrated in the Leibniz identity, this is really the only equation we can write down. Below we explore other connections that can be induced on the algebroid itself and the tangent bundle. In some sense the $A$-connection intertwines between connections on an abstract vector bundle and a regular tangent bundle.
+% \footnotetext{
+%     delete part about the der bundle
+%     Some subtleties I don't get here yet.            
+% }
 % 
 \definition{
     The \textbf{curvature} $R_\nabla \in \Omega^2(A)$ of $A$-connection $\nabla$ of a Lie algebroid $A \rightarrow M$ 

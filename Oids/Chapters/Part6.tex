@@ -16,6 +16,10 @@ We will now explore the important notion of \textbf{locality}, which we formalis
         \mathrm{supp}(f) = \left\{ x \in X \big | x \notin \mathrm{ker}(f)  \right\}
     \end{equation}
 }\label{def:support}
+
+\begin{tcolorbox}
+    discuss support of a module at some point?
+\end{tcolorbox}
 \definition{
     A structure is \textbf{local}, if for any two maps $f,g: X \rightarrow Y$
     \begin{equation}
@@ -57,9 +61,40 @@ Regarding the Lie bracket as a differential operator on smooth sections above pr
     Or in other words, $\mathrm{ad}_\cdot \in \mathrm{Diff}(A, J^1 A^* \otimes A)$, where $J^k A^* \otimes A$ is algebroid-valued k-jet on its dual using \cref{prop: differential operators equivalent to jets on vector bundles}.
 }\label{def:local lie algebra-differential}
 % 
-
+\example{
+    A first example of a local Lie algebra is the algebra of first order differential operators $\mathrm{Diff}_1(A)$ over a vector bundle $A \rightarrow M$.
+    Consider the operators; using the Leibniz characterisation (\cref{prop:Leibniz characterisation}), $\Delta, \nabla \in \mathrm{Diff}_1(A)$ with respective symbol maps $\delta_\Delta, \delta_\nabla \in \Gamma(T^*M \otimes \mathrm{End}(A))$, where
+    \begin{equation}
+        \mathrm{Diff}_1(A) = \left\{ \Delta \in \mathrm{End}_{\mathcal{C}^\infty(M)}(\Gamma(A))\: \vert \:
+        c_{a_0} \circ c_{a_1} (\Delta) = 0 \; \forall  a_i \in \mathcal{C}^\infty(M)
+        \right\}
+    \end{equation}
+    In a similar fashion to \cref{lem:commutatot_of_diff_op}, we have that $[\Delta, \nabla] \in \mathrm{Diff}_1(A)$ from
+    \begin{align*}
+        [\Delta, \nabla](f \cdot s) &= \Delta \bigg( f \cdot \nabla (s) + \delta_\nabla(df)(s)\bigg) 
+        - \nabla \bigg(
+        f \cdot \Delta(s) + \delta_\Delta(df)(s)
+        \bigg)\\
+        &= f \cdot [\Delta, \nabla](s) + 
+        \bigg(
+        [\delta_\Delta(df), \nabla] + [\Delta, \delta_\nabla(df)]
+        \bigg)(s)
+    \end{align*}
+    In the second line above, we have used the definition of the symbol map from \cref{eq:symbol map}, $\delta_\Delta(df) = \Delta(f) = [\Delta, f]$.
+    Rewriting the last equation in terms of the symbol of the commutator $[\Delta, \nabla]$, we find
+    \begin{equation}
+        [\Delta, \nabla](f \cdot s) = f \cdot [\Delta, \nabla](s) + \delta_{\Delta \nabla}(df)(s).
+    \end{equation}
+    Therefore $[\Delta,\nabla] \in \mathrm{Diff}_1(A) \Leftrightarrow \delta_{\Delta \nabla}(df)$ is $\mathcal{C}^\infty(M)$-linear.
+    We can further check that for this map to be linear, leads to another messy equation that measures the failure of differential operators to close under commutation. (as expected)
+}\label{ex:Differential operators as local Lie algebra}
+% 
 % subsection general_local_lie_algebras (end)
+\subsection{Derivative Lie algebras} % (fold)
+\label{sub:derivative_lie_algebras}
+% 
 \theorem{
     test
 }\label{thm:symbol_squiggle}
+% subsection derivative_lie_algebras (end)
 % section lecture_6_local_lie_algebras (end)

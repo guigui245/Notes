@@ -46,11 +46,20 @@ We sometimes denote $\mathrm{Diff}_p(M) = D^p(C^\infty(M))$ for simplicity.
 }
 % subsection differential_operators_on_manifolds (end)
 % 
+
 A useful equivalence between elements of the algebra of smooth functions on a manifold, relating to differential operators is the following local relation.
+% 
+\definition{
+    Let $f \in \mathcal{C}^\infty(M)$, the k-jet of $f$ at $x_0 \in M$ is the a coordinate-free truncation of the taylor expansion of to k-th order.
+    \begin{equation}
+        (j^k_{x_0} f)(z) = \sum_{i=0}^k \frac{\partial^i}{\partial x^i} f(x_0) \cdot \frac{z^i}{i!}
+    \end{equation}
+}\label{def:jet}
+We can define an equivalence relation of jets in the algebra of smooth functions.
 For $f,g \in C^\infty(M)$
 \begin{align*}
     f &\sim_x^k g\\
-    \Leftrightarrow \qquad f(x) &= g(x), \quad \partial^{|k|} f (x) = \partial^{|k|} g(x),
+    \Leftrightarrow \qquad f(x) &= g(x), \quad \partial^{|i|} f (x) = \partial^{|i|} g(x) \textrm{ for } i \leq k
 \end{align*}
 where $|k|$ is the order of the differential operator (potentially the sum of integers).
 This equivalence relation can be globalised into a vector bundle.
@@ -73,12 +82,12 @@ This equivalence relation can be globalised into a vector bundle.
         j^k: C^\infty(M) &\rightarrow \Gamma(J^k M)\\
         f &\mapsto j^k f(x) := [f]^k_x
     \end{align*}
-    sending functions to their $k-$jet.
+    sending functions to their $k-$jet by just truncation of the Taylor expansion.
 }\label{def:jet bundle for manifold}
 % 
 \proposition{
     \begin{equation}
-        \mathrm{Diff}_k(M) \cong \Gamma(J^k M ^*)
+        \mathrm{Diff}_k(M) \cong \Gamma((J^k M )^*)
     \end{equation}
 }
 \begin{proof}{(Sketch)\\}
@@ -95,6 +104,18 @@ This equivalence relation can be globalised into a vector bundle.
     \end{equation}
     where the pushforward $\delta_*: \Gamma(J^k M ^*) \rightarrow C^\infty(M)$ makes the diagram commute.
 \end{proof}
+% 
+
+\example{
+    For example, consider a first order differential operator treated as a regular differential operator over the ring of smooth functions, 
+    \begin{equation}
+        \Delta \in \mathrm{Diff}_1(M) = \{ \Delta \in \mathrm{End}_\mathbb{C}(\mathcal{C}^\infty(M)) \quad \big \vert \quad \Delta a - a  \Delta =  \Delta(a) \in D^{0}(\mathcal{C}^\infty(M)) \quad \forall a \in \mathcal{C}^\infty(M) \}.
+    \end{equation}
+    Then 
+\begin{tcolorbox}
+    Really not sure here, but this all relates to the fact that the jet of a functions factorises and that $\delta$ is a derivation.
+\end{tcolorbox}
+}
 \subsection{Differential operators on Vector Bundles} % (fold)
 \label{sub:differential_operators_on_vector_bundles}
 % 
@@ -112,7 +133,7 @@ This equivalence relation can be globalised into a vector bundle.
     \end{align}
 }
 \definition{
-    The \textbf{Differential Operators} of order less than $n$ between the $\mathcal{A}$-modules $\mathcal{P}, \mathcal{Q}$ is
+    The set of \textbf{Differential Operator} of order less than $n$  \textit{between the $\mathcal{A}$-modules $\mathcal{P}, \mathcal{Q}$} is
     \begin{equation}
         D^n(\mathcal{P}, \mathcal{Q}) := \left\{ 
         \Delta \in \mathrm{Hom}_\mathbb{K}(\mathcal{P}, \mathcal{Q}) \:\big \vert \:
@@ -124,40 +145,47 @@ Making the connection with regular differential operators on an algebra $A$ over
 
 We previously identified geometric/continuous/smooth algebras with sets/topological spaces/manifolds. 
 Similarly, there is an equivalence between vector bundles and finitely generated projective modules over smooth algebras.
+Building upon the previous definition, we define what a differential operator on vector bundle means.
+% 
 \definition{
-    A \textit{Differential operator} between two vector bundles over the same manifold $A,B \rightarrow M$ are defined as
+    A \textbf{Differential Operator}  \textit{between vector bundles $A,B \rightarrow M$} is defined as
     \begin{equation}
         \mathrm{Diff}(A,B) := \bigcup_k \mathrm{Diff}_k(A,B),
     \end{equation}
-    where $\mathrm{Diff}_k(A,B) := D^k(\Gamma(A), \Gamma(B))$ the set of $k$ differential operators on sections of vector bundles.
+    where $\mathrm{Diff}_k(A,B) := D^k(\Gamma(A), \Gamma(B))$ is the set of k-differential operators on sections of vector bundles, treated as $\mathcal{C}^\infty(M)$-modules.
 }\label{def:differential operators between two vector bundles}
 % 
-\remark{
-    As we have seen, differential operators form a filtered structure and we now show that this gives the \textit{symbol short exact sequence}
+\proposition{
+    As we have seen, differential operators form a filtered structure and we now show that this gives the \textbf{symbol short exact sequence} of $\mathcal{C}^\infty(M)$-modules.
     \begin{equation}
            0\rightarrow \mathrm{Diff}_{k-1}(A,B)\rightarrow \mathrm{Diff}_k(A,B)  \xrightarrow{\sigma}
            \Gamma(\bigodot^k TM \otimes A^* \otimes B)  \rightarrow 0
-      \end{equation}
-    Note that since vector bundles are commutative algebras that respect the Jacobi identity, we have 
-    \begin{equation}
-        c_f \circ c_g = c_g \circ c_f
+           \label{eq:symbol ses}
     \end{equation}
-    for $f,g \in  C^\infty(M)$. 
-    The map $\sigma$ is called the \textbf{symbol} and completes this sequence in the following way. 
-    For $f_i \in C^\infty(M)$,
-    \begin{align*}
-        \sigma: \Delta &\mapsto \sigma_\Delta \\
-        \sigma_\Delta(df_1,\ldots,df_k) &:= c_{f_1} \circ \ldots \circ c_{f_k} (\Delta)
-    \end{align*}
-    We prove this is a multiderivation by considering the case $k=1$ and extending linearly.
-    Acting on $a \in \Gamma(A)$, for $df \in T^*M$
-    \begin{align*}
-        \sigma_\Delta(df) (a) &= [\Delta, f] (a)\\
-        &= \Delta (f \cdot a) - f \cdot \Delta(a)
-    \end{align*}
-    It is also easy to show that for any $a \in \Gamma(A)$, this acts as a derivation on functions on the manifold $M$, therefore
-    $[\Delta, \cdot](a) \in \Gamma(TM)$.    
-}
+    \begin{proof} 
+        Note that since vector bundles are commutative algebras that respect the Jacobi identity, we have 
+        \begin{equation}
+            c_f \circ c_g = c_g \circ c_f
+        \end{equation}
+        for $f,g \in  C^\infty(M)$. 
+        The map $\sigma$ is called the \textbf{symbol} and completes this sequence in the following way. 
+        For $f_i \in C^\infty(M)$,
+        \begin{align}
+            \sigma: \Delta &\mapsto \sigma_\Delta \\
+            \sigma_\Delta(df_1,\ldots,df_k) &:= c_{f_1} \circ \ldots \circ c_{f_k} (\Delta)
+            \label{eq:symbol map}
+        \end{align}
+        We prove this is a multiderivation by considering the case $k=1$ and extending linearly.
+        Acting on $a \in \Gamma(A)$, for $df \in T^*M$, 
+        \begin{align*}
+            \sigma_\Delta(df) (a) &= [\Delta, f] (a)\\
+            &= \Delta (f \cdot a) - f \cdot \Delta(a) \in \Gamma(B)
+        \end{align*}
+        Now suppose $\Delta \in \mathrm{Diff}_0(A,B)$, then $c_{a}(\Delta) = 0 $ for all $a \in \Gamma(A)$, and so the image of $\Delta$ in the set of differential operators (between vector bundle) of order 1, is the kernel of the symbol map.\\
+        It is also easy to show that for any $a \in \Gamma(A)$, this acts as a derivation on functions on the manifold $M$, therefore
+        $[\Delta, \cdot](a) \in \Gamma(TM)$.    
+    \end{proof}
+}\label{prop: symbol ses}
 % 
 \definition{
     The \textbf{k-jet bundle} of a vector bundle $A \rightarrow M$ is
@@ -180,12 +208,37 @@ Similarly, there is an equivalence between vector bundles and finitely generated
         \mathrm{Diff}_k(A,B) \cong \Gamma( (J^k A)^* \otimes B)
     \end{equation}
 }\label{prop: differential operators equivalent to jets on vector bundles}
+
+In particular, let us think about differential operators of degree less than $1$ between vector bundles $A,B \rightarrow M$.
+\proposition{
+    A first order differential operator $\Delta \in \mathrm{Diff}_1(A,B)$ between sections of vector bundles $A,B \rightarrow M$ is uniquely determined by a pair of maps $(\Delta, \delta)$ where
+    \begin{align*}
+        \Delta : \Gamma(A) &\rightarrow \Gamma(B) \qquad \textrm{is} \:\mathbb{R} \textrm{-linear} \\ 
+        \delta : \Gamma(T^*M) &\rightarrow \Gamma(A^* \otimes B) \qquad \textrm{is} \: \mathcal{C}^\infty(M) \textrm{-linear}
+    \end{align*}
+    such that the Leibniz property holds
+    \begin{equation}
+        \Delta( f \cdot s) = f \cdot \Delta(s) + \delta(df)(s).
+    \end{equation}
+    We call this definition of first order differential operator the \textbf{Leibniz Characterisation}.
+}\label{prop:Leibniz characterisation}
+% 
+For example, in the case of 
+
+Considering the differential operator of order 1 in the \cref{eq:symbol ses}, 
+\begin{equation}
+     0\rightarrow \Gamma(\mathrm{End}(A))\rightarrow \mathrm{Diff}_1(A) \rightarrow \Gamma(TM \otimes \mathrm{End}(A))  \rightarrow 0,
+\end{equation}
+which is the induced short exact sequence of $\mathcal{C}^\infty(M)$-modules by taking section on 
+\begin{equation}
+    0\rightarrow \mathrm{End}(A)\rightarrow (J^1 A)^* \otimes A \rightarrow TM \otimes \mathrm{End}(A)  \rightarrow 0,
+\end{equation}
+
+
 % subsection differential_operators_on_vector_bundles (end)
 % ------------------------------------------------------------------------------------------
 \subsection{Derivations on Vector Bundles} % (fold)
 \label{sub:derivations_on_vector_bundles}
-\begin{tcolorbox}
-    finish this section
-\end{tcolorbox}
-% subsection derivations_on_vector_bundles (end)
-% section lecture_5_differential_operators_ii (end)
+
+% derivations_on_vector_bundles (end)
+% section lecture_5_differential_operators_ii (end){}
