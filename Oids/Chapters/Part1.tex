@@ -10,18 +10,18 @@ The first lecture is mostly based on section $2.4$ of \citep{Zapata-Carratala201
 \definition{
     A \textbf{Poisson Algebra} is a triple $(A, \cdot, \{ , \})$ such that
     \begin{enumerate}
-        \item $(A, \cdot)$ is a commuttative, associative and unital $\mathbbm{R}$-algebra (or $\mathbb{C}$ algebra maybe?)
+        \item $(A, \cdot)$ is a commutative, associative and unital $\mathbbm{R}$-algebra (or $\mathbb{C}$ algebra maybe?)
         \item $(A, \{ , \})$ is a Lie $\mathbbm{R}$-algebra, which means that the bracket follows the Jacobi identity:
         \begin{equation}
             \{ \{ a, b \},c \} + \{ \{ b,c \},a \} + \{ \{ c,a \},b \} = 0 
         \end{equation}
-        \item The Poisson bracket follows the Libeniz identity in the sense that for $a,b,c \in A$,
+        \item The Poisson bracket follows the Leibniz identity in the sense that for $a,b,c \in A$,
         \begin{align}
             \{a,b\cdot c\} &= \{a,b\} \cdot c + b\cdot \{a,c\}\\
             &:= \mathrm{ad}_{a} \, (b\cdot c)
         \end{align}
         where we have defined the adjoint map of the Lie algebra.
-        \item Equivalently to $3$, the $\mathrm{ad}_{\{ , \}} : A \rightarrow \mathrm{Der}(A, \cdot)$, which takes an element of the algebra to a derivation on the commuttative algebra $(A, \cdot)$.
+        \item Equivalently to $3$, the $\mathrm{ad}_{\{ , \}} : A \rightarrow \mathrm{Der}(A, \cdot)$, which takes an element of the algebra to a derivation on the commutative algebra $(A, \cdot)$.
         We also see that the $\mathrm{ad}_{\{  \}}$ induces a derivation on $(A, \{ , \})$ using the Jacobi identity.
     \end{enumerate}
     Therefore the adjoint map of a Lie Algebra is a morphism from $A$ to $\mathrm{Der}(A, \cdot) \cap \mathrm{Der}(A, \{ , \})$, the derivations of both bilinear structures of a Poisson algebra.
@@ -56,13 +56,13 @@ The first lecture is mostly based on section $2.4$ of \citep{Zapata-Carratala201
     We claim that $A' := \faktor{N(I)}{I} \,$ inherits a Poisson algebra structure.
 }
 \begin{proof}
-    Condition 1 is automatically satisfied as $A'$ is a subalgebra of $A$, with a Lie algebra structure given by the same bracket. For $a',b',c' \in A'$, consider the adjoint action of $a'$ on $b'\cdot c'$ and look at coset representatirve $a,b,c$ of $N(I)$. Using the fact that $I$ is coisotrope, we see that
+    Condition 1 is automatically satisfied as $A'$ is a subalgebra of $A$, with a Lie algebra structure given by the same bracket. For $a',b',c' \in A'$, consider the adjoint action of $a'$ on $b'\cdot c'$ and look at coset representative $a,b,c$ of $N(I)$. Using the fact that $I$ is coisotrope, we see that
     \begin{align*}
         \{ a + I, (b +I)\cdot (c + I)\} &= \{ a+I, b\cdot c + I \}\\
         &= \{ a, b \cdot c \} + I
     \end{align*}
     by linearity of the bracket and closure of elements in $N(I)$ w.r.t $I$.
-    The jacobi identity is checked by similar arguments.
+    The Jacobi identity is checked by similar arguments.
 \end{proof}
 \definition{
     The \textit{reduced Poisson structure} is characterised by the projection map
@@ -324,7 +324,7 @@ We say that $C$ is the zero locus of an \textit{equivariant moment map}.
 An important consequence is that if the Poisson action is free and proper, then $\mathrm{ker}(\mu)/G$ is the coisotropic reduction of $(P, \Pi)$, and in this case this is an \textit{Hamiltonian reduction}.
 % 
 \begin{tcolorbox}
-    Add example on 2d chern simons from geometry of gauge fields here
+    Add example on 2d Chern-Simmons from geometry of gauge fields here
 \end{tcolorbox}
 % 
 Question:
@@ -352,19 +352,20 @@ Question:
     \begin{equation}
         \mathcal{L}_X \omega_1 = 0. 
     \end{equation}
-    In this case, we say that $X \in \Gamma(TS_1)$ is a \textit{symplectic vector field}.
+    In this case, we say that $X \in \Gamma(TS_1)$ is a \textbf{symplectic vector field}.
     Notice that a symplectic vector field $X \in \Gamma(TS)$ has by Cartan's magic formula
     \begin{equation}
         d \omega^\flat(X) = 0
+        \label{eq:symplectic vector field}
     \end{equation}
 }\label{def:symplectomorphism}
 % 
 \definition{
     Given a presymplectic manifold $(S,\omega)$, we define the flat \textit{musical map} $\cdot^\flat$ as
-    \begin{align*}
+    \begin{align}
         \omega^\flat &: TS \rightarrow T^*S\\
-        X & \mapsto \omega(X, \cdot) := \iota_X \omega.
-    \end{align*}
+        X & \mapsto \omega(X, \cdot) := \iota_X \omega. \nonumber
+    \end{align}
     The kernel of this map is called its characteristic distribution $\mathrm{ker}(\omega^\flat) \subset TS$.   
     A standard calculation in (pre)symplectic geometry is to show that vector field in the characteristic distribution are in involution. For $X,Y \in \mathrm{ker}(\omega^\flat)$, $Z \in TS$,
     \begin{align*}
@@ -374,17 +375,20 @@ Question:
     \end{align*}
     which implies $\omega([X,Y],Z) = 0$ for all $Z \in TS$, or in other words $[X,Y] \in \mathrm{ker}(\omega^\flat)$ is involutive.
 }\label{def:symplectic musical map}
-
-Unlike Poisson manifold, we can't always cook up Hamiltonian distributions on presymplectic manifolds. We can however do so on a subset of $C^\infty(S)$.
+% 
+\remark{
+    Unlike Poisson manifold, we can't always cook up Hamiltonian distributions on presymplectic manifolds. We can however do so on a subset of $C^\infty(S)$.
+}
 \definition{
     A vector field $\zeta \in \Gamma(TS)$ on a presymplectic manifold $(S,\omega)$ is said to be \textbf{Hamiltonian} if there exists some $f \in C^\infty(S)$ such that
     \begin{equation}
         \omega^\flat(\zeta) = - df.
     \end{equation}
-    The notation $\chi_f$ for associated Hamiltonian vector field is sometimes used.
+    The notation $\zeta = \chi_f$ for associated Hamiltonian vector field is sometimes used.
     The set of \textit{Admissible functions} on $(S, \omega)$ is the subring of $C^\infty(S)$ such that there exists associated Hamiltonian vector fields, i.e:
     \begin{equation}
         C^\infty(S)_\omega = \left\{ f \in C^\infty(S) \big\vert \: \exists \: \chi_f \in \Gamma(TS) \textrm{ is Hamiltonian}\right\}
+        \label{eq:admissible function}
     \end{equation}
 }\label{def:Hamiltonian vector fiedls and admissible functions for symp}
 % 
@@ -395,19 +399,19 @@ We sign convention chosen will be made clear in the following proposition.
         [\zeta, \xi] = \chi_{\omega(\zeta, \xi)}.
         \label{eq:bracket of symp}
     \end{equation}
-    To prove this, we use Cartan's second fomula $\iota_{[X,Y]} = [\mathcal{L}_X, \iota_Y]$ for $X,Y \in \Gamma(TS)$, then
+    To prove this, we use Cartan's second formula $\iota_{[X,Y]} = [\mathcal{L}_X, \iota_Y]$ for $X,Y \in \Gamma(TS)$, then
     \begin{align*}
         \iota_{[\zeta,\xi]} \omega &= [\mathcal{L}_\zeta, \iota_\xi] \omega\\
         &= -d\left( \omega(\zeta, \xi)\right)\\
         &= \iota_{\chi_{\omega(\zeta,\xi)}}.
     \end{align*}
-    We identify the Hamiltonian function tabove o be $\omega(\zeta,\xi)$ and so \cref{eq:bracket of symp} is verified.
+    We identify the Hamiltonian function above o be $\omega(\zeta,\xi)$ and so \cref{eq:bracket of symp} is verified.
 }\label{lem:bracket of symplectic vf}
 % 
 \proposition{
     The subring of admissible function $C^\infty(S)$ on a presymplectic manifold forms a Poisson Algebra (\cref{def:Poisson algebra}) with
     \begin{equation}
-        \left\{ f,g \right\} = \omega(\chi_f, \chi_g).
+        \left\{ f,g \right\}_\omega = \omega(\chi_f, \chi_g).
     \end{equation}
     The sign convention is such that $\omega(\chi_f, \chi_g) = dg (\chi_f) = - df(\chi_g)$
 }\label{prop:admissible functions form a Poisson algebra}
@@ -417,7 +421,7 @@ We sign convention chosen will be made clear in the following proposition.
     \begin{equation}
         \omega(\chi_f, \chi_{gh}) = \omega(\chi_f, \chi_g)\cdot h + g \cdot \omega(\chi_f, \chi_h).
     \end{equation}
-    To check the Jacobi identity, we consider Hamiltonian vector field (which are symplectic) and using vector fields \cref{lem:bracket of symplectic vf}, denote
+    To check the Jacobi identity, we consider Hamiltonian vector field (which are symplectic) and using the fact that brackets of symplectic vector field are Hamiltonian \cref{lem:bracket of symplectic vf}, denote
     \begin{equation}
         [\chi_f, \chi_g] = \chi_{\omega(\chi_f, \chi_g)} = \chi_{\left\{ f,g \right\}}.
     \end{equation}
@@ -426,34 +430,85 @@ We sign convention chosen will be made clear in the following proposition.
 \end{proof}
 % 
 \definition{
-    A submanifold $C \hookrightarrow S$ of a presymplectic manifold is \textbf{isotropic} the presymplectic form is zero on $C$, ie:
+    A submanifold $C \hookrightarrow S$ of a presymplectic manifold is \textbf{isotropic} if the presymplectic form is zero when restricted to $C$, ie:
     \begin{equation}
         i^* \omega = 0
     \end{equation}
 }\label{def:Isotropic presymplectic submanifold}
+% 
 
-Let's now have a look at the reduction of presymplectic manifolds.
-Consider a Lie group action on presymplectic manifold $(S,\omega)$ that preserves the form.
-\begin{align}
-    \phi : G \times S &\rightarrow S\\
-    \phi^*_g \omega &= \omega \quad \forall g \in G
-\end{align}
+Let's now walk through the reduction of presymplectic manifolds, providing ample details.
+\remark{
+        
+    Consider a Lie group action on presymplectic manifold $(S,\omega)$ that preserves the form.
+    The presymplectic action 
+    \begin{align*}
+        \phi : G \times S &\rightarrow S\\
+        \phi^*_g \omega &= \omega \quad \forall g \in G
+    \end{align*}
+    induces an infinitesimal action on vector fields
+    \begin{align*}
+        \psi : \mathfrak{g} &\rightarrow \Gamma(TS)\\
+        \Rightarrow \qquad &\mathcal{L}_{\psi(X)} \omega = 0 \quad \textrm{for all}\: X \in \mathfrak{g}.
+    \end{align*}
+    A necessary condition for the action to be presymplectic is then \cref{eq:symplectic vector field}
+    \begin{equation}
+        d \omega^\flat(\psi(X)) = 0
+    \end{equation}
+    for all $X \in \mathfrak{g}$, the set of symplectic vector field contains the image of the  infinitesimal action.
+% 
 
+    However, we now show that Hamiltonian vector field induce presymplectic actions.
+    For this, consider an admissible function $f \in \mathcal{C}^\infty(S)_\omega$ as defined in \cref{eq:admissible function} to be the set of function admitting an Hamiltonian vector field $X_f$, then 
+    \begin{align}
+        \omega^\flat(X_f) = -df \qquad
+        \Rightarrow \qquad d \omega^\flat (X_f) = 0.
+    \end{align}
+    So at least on the set of admissible functions of a presymplectic manifold, Hamiltonian and Symplectic vector field define the first de Rham cohomology group.
+% 
+}\label{rmk: group action on symplectic manifold}
+
+\definition{
+    Going back to the problem at hand, we see that pulling back the problem to the algebra of symmetries, and using the infinitesimal action, we define the \textbf{comoment} map of presymplectic action as the linear map $\overline{\mu} : \mathfrak{g} \rightarrow \mathcal{C}^\infty(S)_\omega$ such that
+    \begin{equation}
+        \omega^\flat(\psi(X)) = -d \,\overline{\mu}(X).
+    \end{equation}
+    Since admissible functions forms a Poisson algebra \cref{prop:admissible functions form a Poisson algebra},contracting by another comoment map with values in the admissible functions yields the condition
+    \begin{align*}
+        \omega( \psi(X), \psi(Y)) &= -d\, \overline{\mu}(\psi(X)) \, (\psi(Y)) \\
+        &= \left\{ \overline{\mu}(X), \overline{\mu}(Y) \right\}_\omega \\
+        &= \overline{\mu}([X,Y]).
+    \end{align*}
+    Strictly speaking the last line is true up to a locally constant function. Should write something about Whitehead's lemma here.
+}\label{def:presymplectic moment and comoment maps}
+% -------------------------------------------------------------------------------------------
 % -------------------------------------------------------------------------------------------
 % subsection presymplectic_mfd (end)
 \subsection{Symplectic manifold} % (fold)
 \label{sub:symplectic_mfd}
 \definition{
-    A \textbf{Symplectic manifold} $(S, \omega)$ is a smooth manifold $M$ with a closed \textit{non-degenerate} 2-form $\omega \in \Omega^2(S)$.
-}
-
-\definition{
-    Symplectic vf and short exact sequence..
-
+    A \textbf{Symplectic manifold} $(S, \omega)$ is a smooth manifold $S$ with a closed \textit{non-degenerate} 2-form $\omega \in \Omega^2(S)$.
+    In other words, the characteristic distribution $\mathrm{ker}(\omega^\flat) \subset TS$ is trivial and this induces a bundle isomorphism by the contraction map
     \begin{equation}
-         0\rightarrow \mathfrak{X}_{\mathrm{Ham}}(S)\rightarrow \mathfrak{X}_{\mathrm{Symp}}(S) \rightarrow \mathrm{H}_{\mathrm{dR}}^1(S, \mathbbm{R}) \rightarrow 0
+        \omega^\flat :TS \rightarrow T^*S.
     \end{equation}
-    
+    A symplectic manifold is also a presymplectic manifold whose set of admissible function is maximal.
+}
+% 
+\definition{
+    A submanifold $\iota :L \hookrightarrow  S$ of symplectic manifold $(S, \omega)$ is Lagrangian if
+    \begin{itemize}
+        \item it is isotropic: $\iota^* \omega = 0 $ on $TL$.
+        \item it is non-degenerate: the induced map $\omega^\flat : TL \rightarrow N^*(L)$, where $N^*(L)$ is the Conormal bundle to $L$ (see \cref{def:Conormal bundle}) is a bundle isomorphism.
+    \end{itemize}
+}\label{def:Lagrangian submanifold in symplectic mfd}
+% 
+
+\remark{
+    If $S$ is a symplectic manifold, then the set of admissible function is maximal and our discussion in \cref{rmk: group action on symplectic manifold} gives us the following short exact sequence
+    \begin{equation}
+         0\rightarrow \mathfrak{X}_{\mathrm{Ham}}(S)\rightarrow \mathfrak{X}_{\mathrm{Symp}}(S) \rightarrow \mathrm{H}_{\mathrm{dR}}^1(S, \mathbbm{R}) \rightarrow 0.
+    \end{equation}
 }
 % 
 \definition{
@@ -461,7 +516,7 @@ Consider a Lie group action on presymplectic manifold $(S,\omega)$ that preserve
 }\label{def:symplectic map}
 % 
 \definition{
-    
+    Lagrangian relations
 }\label{def:lagrangian relations}
 % 
 \definition{

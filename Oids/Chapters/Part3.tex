@@ -69,7 +69,7 @@ Let's first review facts about vector bundles, but with a more `categorical' min
 }\label{def:vb_sum_prod_dual}
 
 \definition{
-    Given a vector bundle $E \xrightarrow{\pi} M$, and a smooth map $\phi:N \rightarrow M$, \textbf{categorical pulback} of $E$ by $\phi$ is defined as $\phi^* E = N  \tensor[_\phi]{\times}{_\pi} E$ such that the diagram commutes:
+    Given a vector bundle $E \xrightarrow{\pi} M$, and a smooth map $\phi:N \rightarrow M$, \textbf{categorical pullback} of $E$ by $\phi$ is defined as $\phi^* E = N  \tensor[_\phi]{\times}{_\pi} E$ such that the diagram commutes:
     \begin{equation}
         \begin{tikzcd}
             N \tensor[_\phi]{\times}{_\pi} E \arrow[r, ""] \arrow[d, ""]& E  \arrow[d, "\pi"] \\
@@ -163,7 +163,7 @@ Let's first review facts about vector bundles, but with a more `categorical' min
     % Meaning that F-relatedness is not necessary to construct well-defined forms since we need only pushforward
     % We see that that the notion of pullback and pushforward allows us to extend to notion of F-relatedness as in \eqref{eqn:F_related}
     \footnote{
-    In the case of cotangeant bundle, I should expand on the fact that $\phi$ needs to be diffeomorphism to define pullbacks. See notes on int systems    
+    In the case of cotangent bundle, I should expand on the fact that $\phi$ needs to be diffeomorphism to define pullbacks. See notes on int systems    
     }
 }\label{def:pushforward}
 % 
@@ -200,6 +200,29 @@ Importantly, we can pullback vector bundle through smooth maps by extending the 
     \end{align*}
 }\label{def:tensor_functor}
 Look into spanning functions and restrictions of $C^\infty$ functor.
+% 
+
+Before continuing with the definition of connections on vector bundle, we will spend a little bit of time exploring the subbundles arising in the case of a submersion $f : Z \hookrightarrow M$.
+% 
+\definition{
+    Let N be a smooth manifold and $f : Z \hookrightarrow M$ be a smooth immersion (that is the map $df$ is also injective), the \textbf{Normal bundle} $N(Z) = T_{M/Z}$ to Z is the quotient bundle defined by the identification of tangent vector to $Z$ in the pullback bundle $f^*TM$.\\
+    That is $N(Z)$ is defined such that the following sequence is exact
+    \begin{equation}
+         0\rightarrow TZ\rightarrow f^*TM \rightarrow N_f(Z)  \rightarrow 0.
+    \end{equation}
+}\label{def:Normal bundles}
+% 
+\definition{
+    Dually, the \textbf{Conormal bundle} $N_f^*(Z) \subset f^* T^*M$ must be the annihilator $\mathrm{Ann}_{f^*T^*M}(TZ)$ of vector field tangent to the embedded surface, since the dual short exact sequence yields
+    \begin{equation}
+        T^*Z \cong  \faktor{f^*T^*M}{N^*_f(Z)}
+    \end{equation}
+    In summary, thinking of the differential map as the pushforward $df : TZ \rightarrow TM$, 
+    \begin{equation}
+        N^*_f(Z) = \left\{ (z,\alpha) \in Z \times T^* X \mid \alpha \in T^*_{f(z)} X \text{ such that } \alpha\big( df_z (v)\big)=0 \text{ for all } v \in T_z Z \right\}
+    \end{equation}
+}\label{def:Conormal bundle}
+    
 
 \definition{
     Let $E \rightarrow M$ be a smooth vector bundle, a \textbf{Koszul connection} on the sections of $E$ is an $\mathbb{R}$-linear map 
@@ -269,7 +292,7 @@ Look into spanning functions and restrictions of $C^\infty$ functor.
     \begin{equation}
         \rho_*[s_1,s_2]_A = [\rho(s_1), \rho(s_2)]_{TM}
     \end{equation}
-    Being a \textit{derivative Lie algebra} means that for $s_1,s_2, s_3 \in \Gamma(A)$ and $f \in C^{\infty}(M)$, the following equations are satified:
+    Being a \textit{derivative Lie algebra} means that for $s_1,s_2, s_3 \in \Gamma(A)$ and $f \in C^{\infty}(M)$, the following equations are satisfied:
     \begin{align}
         \left[s_1, f \cdot s_2\right]_A &= f  \cdot [s_1,s_2]_A + \rho_*(s_1)[f] \cdot s_2
         \label{eq:lie algebroid axioms 1}
@@ -349,7 +372,7 @@ We start by considering a general vector bundle morphism $F: A \rightarrow B$, a
 }\label{def:morphism of Lie algebroids over same base}
 % 
 However, when the base is different, morphism in the category of Lie algebroid are more complicated. 
-But using the notion of \textit{relatedness}, a suitable constrution can be established.
+But using the notion of \textit{relatedness}, a suitable construction can be established.
 Originally from \citep{Higgins1990} is presented here.
 
 % subsection morphisms_of_la (end)
@@ -433,7 +456,7 @@ These follow the usual Cartan calculus identity:
         [\iota_a, \iota_b] &=0\\
         [\mathcal{L}_a, d] &= 0,
     \end{align}
-    where we consider the commuttators on the graded algebra, so be carefull.
+    where we consider the commutators on the graded algebra, so be careful.
     So the operators $\iota, \mathcal{L}, d$ have respectively degrees $-1,0, 1$.
 \end{tcolorbox}
 }\label{fact:Cartan Calculus}
@@ -472,13 +495,15 @@ Can view the concept of a Lie algebroid as a tool to transfer the differential g
 % 
 An important notion to grasp is the extension of the Koszul connection (on vector bundle) to algebroid-valued connection on a vector bundle. This is the so called A-connection defined below.
 \definition{
-    Given a Lie algebroid $A \rightarrow M$, a \textit{A-connection} $~^A\nabla$ \textbf{on} the tangent bundle $TM$ is a \textit{Kozul connection} on $TM$ that is compatible with the anchor map $\rho: A \rightarrow TM$ \citep{Kotov2019}.\\
+    Given a Lie algebroid $A \rightarrow M$, a \textit{A-connection} $~^A\nabla$ \textbf{on} the tangent bundle $TM$ is a \textit{Koszul connection} on $TM$ that is compatible with the anchor map $\rho: A \rightarrow TM$ \citep{Kotov2019}.\\
     At the level of sections of $A$, the $A$-connection is defined as
     \begin{align*}
         ~^A\nabla: \Gamma(A) \times \Gamma(TM) &\rightarrow \Gamma(TM) \\
-        (s, X) & \mapsto ~^A\nabla_s X 
+        (s, X) & \mapsto ~^A\nabla_s X,
     \end{align*}
-    satisfying the Leibniz identity
+    which can be thought of as the lift of a $TM$-connection by the anchor 
+    $^A\nabla_s = ^\tau\nabla_{\rho_*(s)}$.
+    Further, it has to satisfy the Leibniz identity
     \begin{equation}
         ~^A\nabla_s ( f \cdot X) = \rho_{*}(s)(f) X + f ~^A \nabla_s X.
     \end{equation}
@@ -511,6 +536,10 @@ You can play the same game with $\Omega_E^\bullet(A) = (\Gamma(\bigwedge^{\bulle
 % subsection connections_on_la (end)
 \subsection{Lie integration of Algebroids} % (fold)
 \label{sub:lie_integration_of_algebroids}
+
+
+
+
 
 % subsection lie_integration_of_algebroids (end)
 % section lie_algebroids (end)
